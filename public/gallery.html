@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08080a" />
+  <meta name="description" content="Mia's galleries: Instagram, MMO memories, and Beside." />
+  <title>Mia · Gallery</title>
+  <style>
+    :root{--bg:#08080a;--panel:#111116;--panel2:#15151b;--text:#f5f0ee;--muted:#aaa2a0;--line:rgba(255,255,255,.10);--accent:#d4145a;--accent2:#8f153d;--soft:rgba(212,20,90,.16);--radius:22px;--shadow:0 30px 90px rgba(0,0,0,.48)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(circle at 14% 4%,rgba(212,20,90,.16),transparent 28rem),radial-gradient(circle at 88% 18%,rgba(255,255,255,.04),transparent 26rem),var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:inherit;text-decoration:none}
+    .shell{width:min(1180px,calc(100% - 36px));margin:0 auto}
+    header{position:sticky;top:0;z-index:30;backdrop-filter:blur(18px);background:linear-gradient(to bottom,rgba(8,8,10,.94),rgba(8,8,10,.66));border-bottom:1px solid var(--line)}
+    .nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+    .brand{font-size:.92rem;font-weight:900;letter-spacing:.36em}
+    .nav-links{display:flex;gap:22px;color:var(--muted);font-size:.88rem}.nav-links a:hover{color:var(--text)}
+    .intro{padding:88px 0 52px}.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;color:#ddd4d2;font-size:.74rem;font-weight:800;letter-spacing:.19em;text-transform:uppercase}.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);box-shadow:0 0 18px rgba(212,20,90,.75)}
+    h1{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(4.4rem,13vw,9rem);font-weight:500;line-height:.88;letter-spacing:-.05em}
+    .intro p{max-width:760px;margin:26px 0 0;color:#c9c1bf;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.7}
+    .albums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:12px 0 92px}
+    .album,.album-group{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(22,22,28,.9),rgba(13,13,17,.94));overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.17)}
+    .album summary{list-style:none;cursor:pointer;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px}.album summary::-webkit-details-marker{display:none}.album summary::after{content:"+";font-size:1.45rem;color:#a79da0}.album[open] summary::after{content:"×"}.album[open] summary{border-bottom:1px solid var(--line)}
+    .album-title{display:grid;gap:6px}.album-title strong,.group-title{font-family:Georgia,"Times New Roman",serif;font-size:1.75rem;font-weight:500}.album-title small,.group-kicker{color:var(--muted);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
+    .album-body{padding:22px 24px 26px;min-height:90px}.empty,.loading,.error{margin:0;color:var(--muted);line-height:1.65}.error{color:#d9a1b6}
+    .album-group{grid-column:1/-1;padding:26px}.group-head{display:flex;justify-content:space-between;align-items:end;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:18px}.group-kicker{display:block;margin-bottom:7px}.group-note{color:var(--muted);font-size:.82rem}.subalbums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subalbums .album{background:rgba(255,255,255,.02)}
+    .image-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.image-button{padding:0;border:0;border-radius:16px;overflow:hidden;background:#0b0b0e;cursor:zoom-in;aspect-ratio:1;color:inherit}.image-button img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .28s ease}.image-button:hover img{transform:scale(1.025)}
+    .pending{padding:22px 24px 26px;color:var(--muted);line-height:1.65;border-top:1px solid var(--line)}
+    .lightbox{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:28px;background:rgba(4,4,6,.94);backdrop-filter:blur(16px)}.lightbox.open{display:grid}.lightbox img{max-width:min(94vw,1500px);max-height:88vh;object-fit:contain;border-radius:16px;box-shadow:0 30px 120px rgba(0,0,0,.7)}.close{position:fixed;top:20px;right:20px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(18,18,22,.8);color:var(--text);font-size:1.35rem;cursor:pointer}
+    footer{border-top:1px solid var(--line);padding:30px 0 40px;color:#7f7977;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+    @media(max-width:800px){.albums,.subalbums{grid-template-columns:1fr}.album-group{grid-column:auto}.image-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:520px){.shell{width:min(100% - 24px,1180px)}.nav-links{gap:12px;font-size:.8rem}.intro{padding-top:58px}.albums{padding-bottom:72px}.album summary,.album-group{padding-left:20px;padding-right:20px}.album-body{padding-left:20px;padding-right:20px}.image-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="/">MIA</a>
+      <nav class="nav-links" aria-label="Gallery navigation">
+        <a href="/">Home</a>
+        <a href="/#about">About</a>
+        <a href="/#links">Links</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="intro">
+      <div class="eyebrow">Archive</div>
+      <h1>Gallery.</h1>
+      <p>Drop images into the matching GitHub folder and they appear here automatically. No gallery code editing required.</p>
+    </section>
+
+    <section class="albums" aria-label="Galleries">
+      <details class="album">
+        <summary><span class="album-title"><small>Integration pending</small><strong>Instagram</strong></span></summary>
+        <div class="pending">This gallery is intentionally empty until Instagram integration is connected.</div>
+      </details>
+
+      <details class="album" data-path="RS2">
+        <summary><span class="album-title"><small>RuneScape 2</small><strong>RS2</strong></span></summary>
+        <div class="album-body"><p class="loading">Open to load images.</p></div>
+      </details>
+
+      <details class="album" data-path="SWG">
+        <summary><span class="album-title"><small>Star Wars Galaxies</small><strong>SWG</strong></span></summary>
+        <div class="album-body"><p class="loading">Open to load images.</p></div>
+      </details>
+
+      <section class="album-group">
+        <div class="group-head"><div><span class="group-kicker">Star Wars: The Old Republic</span><div class="group-title">SWTOR</div></div><div class="group-note">Two archives</div></div>
+        <div class="subalbums">
+          <details class="album" data-path="SWTOR/Memories">
+            <summary><span class="album-title"><small>SWTOR</small><strong>Memories</strong></span></summary>
+            <div class="album-body"><p class="loading">Open to load images.</p></div>
+          </details>
+          <details class="album" data-path="SWTOR/Flagship">
+            <summary><span class="album-title"><small>SWTOR</small><strong>Flagship</strong></span></summary>
+            <div class="album-body"><p class="loading">Open to load images.</p></div>
+          </details>
+        </div>
+      </section>
+
+      <details class="album" data-path="WoW">
+        <summary><span class="album-title"><small>World of Warcraft</small><strong>WoW</strong></span></summary>
+        <div class="album-body"><p class="loading">Open to load images.</p></div>
+      </details>
+
+      <details class="album" data-path="BDO">
+        <summary><span class="album-title"><small>Black Desert Online</small><strong>BDO</strong></span></summary>
+        <div class="album-body"><p class="loading">Open to load images.</p></div>
+      </details>
+
+      <details class="album" data-path="Beside">
+        <summary><span class="album-title"><small>Human + AI</small><strong>Beside</strong></span></summary>
+        <div class="album-body"><p class="loading">Open to load images.</p></div>
+      </details>
+    </section>
+  </main>
+
+  <footer><div class="shell">Mia · Built from scratch · No beige allowed</div></footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="close" type="button" aria-label="Close image">×</button>
+    <img id="lightbox-image" src="" alt="" />
+  </div>
+
+  <script>
+    const repo='morteva/Website-Of-Mia';
+    const branch='main';
+    const galleryRoot='public/galleries';
+    const imagePattern=/\.(avif|gif|jpe?g|png|webp)$/i;
+    const lightbox=document.getElementById('lightbox');
+    const lightboxImage=document.getElementById('lightbox-image');
+    const closeButton=document.querySelector('.close');
+
+    function apiPath(path){
+      const encoded=[galleryRoot,...path.split('/')].map(encodeURIComponent).join('/');
+      return `https://api.github.com/repos/${repo}/contents/${encoded}?ref=${encodeURIComponent(branch)}`;
+    }
+
+    async function loadAlbum(album){
+      if(album.dataset.loaded==='true') return;
+      const body=album.querySelector('.album-body');
+      body.replaceChildren();
+      const loading=document.createElement('p');
+      loading.className='loading';
+      loading.textContent='Loading images…';
+      body.appendChild(loading);
+      try{
+        const response=await fetch(apiPath(album.dataset.path),{headers:{Accept:'application/vnd.github+json'}});
+        if(!response.ok) throw new Error(`GitHub returned ${response.status}`);
+        const entries=await response.json();
+        const images=entries.filter(item=>item.type==='file'&&imagePattern.test(item.name)&&item.download_url);
+        body.replaceChildren();
+        if(!images.length){
+          const empty=document.createElement('p');
+          empty.className='empty';
+          empty.textContent=`No images yet. Add files to public/galleries/${album.dataset.path} in GitHub.`;
+          body.appendChild(empty);
+        }else{
+          const grid=document.createElement('div');
+          grid.className='image-grid';
+          images.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'}));
+          for(const item of images){
+            const button=document.createElement('button');
+            button.className='image-button';
+            button.type='button';
+            button.setAttribute('aria-label',`Open ${item.name}`);
+            const img=document.createElement('img');
+            img.src=item.download_url;
+            img.alt=item.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ');
+            img.loading='lazy';
+            button.appendChild(img);
+            button.addEventListener('click',()=>openLightbox(img.src,img.alt));
+            grid.appendChild(button);
+          }
+          body.appendChild(grid);
+        }
+        album.dataset.loaded='true';
+      }catch(error){
+        body.replaceChildren();
+        const message=document.createElement('p');
+        message.className='error';
+        message.textContent='Could not load this gallery from GitHub right now. Try again in a moment.';
+        body.appendChild(message);
+      }
+    }
+
+    document.querySelectorAll('details.album[data-path]').forEach(album=>{
+      album.addEventListener('toggle',()=>{if(album.open) loadAlbum(album)});
+    });
+
+    function openLightbox(src,alt){lightboxImage.src=src;lightboxImage.alt=alt;lightbox.classList.add('open');document.body.style.overflow='hidden';closeButton.focus()}
+    function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';lightboxImage.src=''}
+    closeButton.addEventListener('click',closeLightbox);
+    lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox()});
+  </script>
+</body>
+</html>
