@@ -75,6 +75,10 @@
     .bio-details summary::after{content:"+";font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:1.5rem;color:#d6c8cb}
     .bio-details[open] summary::after{content:"×"}
     .bio-details[open] summary{border-bottom:1px solid var(--line)}
+    .gallery-callout{margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(145deg,rgba(20,20,25,.94),rgba(10,10,13,.96));box-shadow:0 12px 38px rgba(0,0,0,.2)}
+    .gallery-callout a{padding:22px 26px;font-family:Georgia,"Times New Roman",serif;font-size:1.35rem;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg,var(--soft),transparent)}
+    .gallery-callout a::after{content:"→";font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:1.35rem;color:#d6c8cb;transition:transform .2s ease}
+    .gallery-callout a:hover::after{transform:translateX(4px)}
     .full-bio{padding:8px 30px 38px;max-width:900px}
     .bio-section{padding:26px 0;border-bottom:1px solid rgba(255,255,255,.07)}
     .bio-section:last-child{border-bottom:0}
@@ -108,7 +112,7 @@
       .section-head{align-items:start;flex-direction:column;gap:8px}
       .links-grid{grid-template-columns:1fr}
       .full-bio{padding:4px 20px 28px}
-      .bio-details summary{padding:20px;font-size:1.16rem}
+      .bio-details summary,.gallery-callout a{padding:20px;font-size:1.16rem}
     }
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
   </style>
@@ -296,6 +300,9 @@
         <a class="link-card" href="https://www.youtube.com/@ctyxia" target="_blank" rel="noopener noreferrer"><small>Videos</small><strong>YouTube</strong></a>
         <a class="link-card" href="https://www.twitch.tv/mmorteva/about" target="_blank" rel="noopener noreferrer"><small>Streams</small><strong>Twitch</strong></a>
         <a class="link-card beside" href="https://thisisbeside.morteva.workers.dev/" target="_blank" rel="noopener noreferrer"><small>Human + AI</small><strong>Beside</strong></a>
+      </div>
+      <div class="gallery-callout">
+        <a href="/gallery.html">See my gallery • photos, game memories, and Beside</a>
       </div>
     </section>
   </main>
