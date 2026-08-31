@@ -1,1 +1,2 @@
-Reconnect trigger for Cloudflare Git deployment.
+Force Cloudflare Git deployment after hero portrait fix.
+2026-08-31T09:24:00Z
