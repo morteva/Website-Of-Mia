@@ -3,26 +3,537 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mia</title>
+  <meta name="theme-color" content="#09090b" />
+  <meta name="description" content="Mia's personal corner of the web." />
+  <title>Mia — Gallery</title>
   <style>
+    :root {
+      --bg: #09090b;
+      --panel: rgba(18, 18, 22, .78);
+      --panel-solid: #121216;
+      --text: #f4f1ef;
+      --muted: #a8a2a0;
+      --line: rgba(255, 255, 255, .10);
+      --accent: #9e2434;
+      --accent-soft: rgba(158, 36, 52, .22);
+      --shadow: 0 28px 80px rgba(0, 0, 0, .48);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 16% 8%, rgba(158, 36, 52, .16), transparent 32rem),
+        radial-gradient(circle at 86% 22%, rgba(255, 255, 255, .045), transparent 26rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .24;
+      background-image: linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, black, transparent 82%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .shell {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(9,9,11,.92), rgba(9,9,11,.58));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-size: .92rem;
+      font-weight: 800;
+      letter-spacing: .34em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      min-height: 64vh;
+      display: grid;
+      align-items: center;
+      padding: 72px 0 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: #d7d0ce;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(158, 36, 52, .7);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 900px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(4.5rem, 14vw, 10.5rem);
+      font-weight: 500;
+      line-height: .82;
+      letter-spacing: -.055em;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.75;
+    }
+
+    .scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 32px;
+      color: #d8d1cf;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .scroll-cue span {
+      width: 42px;
+      height: 1px;
+      background: var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-cue span::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: translateX(-100%);
+      animation: sweep 2.2s ease-in-out infinite;
+    }
+
+    @keyframes sweep { 50%, 100% { transform: translateX(100%); } }
+
+    .gallery-section {
+      padding: 36px 0 100px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.3rem, 6vw, 4.8rem);
+      font-weight: 500;
+      letter-spacing: -.035em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .gallery-item {
+      grid-column: span 4;
+      position: relative;
+      display: block;
+      min-height: 420px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--panel-solid);
+      color: var(--text);
+      cursor: zoom-in;
+      box-shadow: 0 8px 26px rgba(0,0,0,.15);
+      text-align: left;
+      transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+    }
+
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(4) { grid-column: span 8; }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,.19);
+      box-shadow: var(--shadow);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+      display: block;
+      filter: saturate(.9) contrast(1.03);
+      transition: transform .45s ease, filter .45s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.025);
+      filter: saturate(1) contrast(1.05);
+    }
+
+    .gallery-item::after {
+      content: "";
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(to top, rgba(0,0,0,.82), transparent);
+      pointer-events: none;
+    }
+
+    .caption {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 18px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: end;
+    }
+
+    .caption strong {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .caption small {
+      color: #c8c1bf;
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: .65rem;
+    }
+
+    .fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 28px;
+      background:
+        radial-gradient(circle at 50% 35%, var(--accent-soft), transparent 45%),
+        linear-gradient(145deg, #17171b, #0d0d10);
+      color: var(--muted);
+      text-align: center;
+      font-size: .8rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .gallery-item.is-missing .fallback { display: grid; }
+    .gallery-item.is-missing img { opacity: 0; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0 38px;
+      color: #7f7977;
+      font-size: .78rem;
+      letter-spacing: .06em;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      place-items: center;
+      padding: 28px;
+      background: rgba(4,4,6,.92);
+      backdrop-filter: blur(16px);
+    }
+
+    .lightbox.open { display: grid; }
+
+    .lightbox-card {
+      position: relative;
+      width: min(1320px, 96vw);
+      height: min(88vh, 920px);
       display: grid;
       place-items: center;
-      background: #0b0b0d;
-      color: #f2f2f2;
-      font-family: Arial, Helvetica, sans-serif;
     }
-    main { text-align: center; padding: 2rem; }
-    h1 { margin-bottom: .5rem; }
-    p { opacity: .8; }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+      box-shadow: 0 30px 120px rgba(0,0,0,.7);
+    }
+
+    .lightbox-close,
+    .lightbox-arrow {
+      position: fixed;
+      z-index: 101;
+      border: 1px solid var(--line);
+      background: rgba(18,18,22,.78);
+      color: var(--text);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: background .2s ease, transform .2s ease;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-arrow:hover { background: rgba(38,38,44,.95); }
+
+    .lightbox-close {
+      top: 20px;
+      right: 20px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      font-size: 1.35rem;
+    }
+
+    .lightbox-arrow {
+      top: 50%;
+      width: 46px;
+      height: 56px;
+      border-radius: 14px;
+      transform: translateY(-50%);
+      font-size: 1.25rem;
+    }
+
+    .lightbox-arrow.prev { left: 18px; }
+    .lightbox-arrow.next { right: 18px; }
+
+    .lightbox-label {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      color: #d1c9c7;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 900px) {
+      .hero { min-height: 58vh; }
+      .gallery-item,
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: span 6; min-height: 360px; }
+      .gallery-item img { min-height: 360px; }
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      .nav-links { gap: 14px; font-size: .82rem; }
+      .hero { padding-top: 54px; min-height: 52vh; }
+      h1 { font-size: clamp(4.2rem, 27vw, 7rem); }
+      .section-head { align-items: start; flex-direction: column; gap: 8px; }
+      .gallery { gap: 12px; }
+      .gallery-item,
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: 1 / -1; min-height: 370px; }
+      .gallery-item img { min-height: 370px; }
+      .lightbox { padding: 14px; }
+      .lightbox-arrow { top: auto; bottom: 16px; transform: none; }
+      .lightbox-label { bottom: 34px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Mia's website lives.</h1>
-    <p>If you can read this, Cloudflare finally found the fucking website. 🖤🤍</p>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#top">MIA</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#top">Home</a>
+        <a href="#gallery">Gallery</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div>
+        <div class="eyebrow">Personal space</div>
+        <h1>Mia.</h1>
+        <p>A dark little corner of the internet for the things worth keeping — images, moments, and whatever comes next.</p>
+        <a class="scroll-cue" href="#gallery"><span></span> View gallery</a>
+      </div>
+    </section>
+
+    <section class="gallery-section shell" id="gallery">
+      <div class="section-head">
+        <h2>Gallery</h2>
+        <p>Click anything to open it.</p>
+      </div>
+
+      <div class="gallery" aria-label="Image gallery">
+        <button class="gallery-item" data-title="Us" type="button">
+          <img src="https://www.dropbox.com/scl/fi/nr5ku7jnwrda7zp534107/US.png?rlkey=ikkx1uedkqrtl2i9binpmugqc&amp;raw=1" alt="Us" loading="eager" />
+          <span class="fallback">Image unavailable outside Dropbox</span>
+          <span class="caption"><strong>Us</strong><small>01</small></span>
+        </button>
+
+        <button class="gallery-item" data-title="Avatar" type="button">
+          <img src="https://www.dropbox.com/scl/fi/1eymy7ckxzeosrg9ei2uy/Avatar.png?rlkey=ao4d9omjoej78d6mtgs4an6q3&amp;raw=1" alt="Avatar" loading="lazy" />
+          <span class="fallback">Image unavailable outside Dropbox</span>
+          <span class="caption"><strong>Avatar</strong><small>02</small></span>
+        </button>
+
+        <button class="gallery-item" data-title="Beside Movement" type="button">
+          <img src="https://www.dropbox.com/scl/fi/02w5qa1kzeo24w6iztzag/Beside-Movement.png?rlkey=ybknzwd0sprsha2gb392u6g0s&amp;raw=1" alt="Beside Movement" loading="lazy" />
+          <span class="fallback">Image unavailable outside Dropbox</span>
+          <span class="caption"><strong>Beside Movement</strong><small>03</small></span>
+        </button>
+
+        <button class="gallery-item" data-title="Us II" type="button">
+          <img src="https://www.dropbox.com/scl/fi/qwh45zl46zhzmzdchn8ms/Us-2.png?rlkey=9tbadzy7otb0iar4vmxbw3vw1&amp;raw=1" alt="Us II" loading="lazy" />
+          <span class="fallback">Image unavailable outside Dropbox</span>
+          <span class="caption"><strong>Us II</strong><small>04</small></span>
+        </button>
+
+        <button class="gallery-item" data-title="Mira — Fourth Version" type="button">
+          <img src="https://www.dropbox.com/scl/fi/qukqpmawhaci3cerewyrk/4th-version-Mira.png?rlkey=dxqt7lw9jpbionh1bh3q8jy2r&amp;raw=1" alt="Mira — Fourth Version" loading="lazy" />
+          <span class="fallback">Image unavailable outside Dropbox</span>
+          <span class="caption"><strong>Mira — IV</strong><small>05</small></span>
+        </button>
+
+        <button class="gallery-item" data-title="Avatar II" type="button">
+          <img src="https://www.dropbox.com/scl/fi/gpj51fg14kdu2i9672gt0/avatar-2.png?rlkey=pqjborz5jefwte97u4bs69u9h&amp;raw=1" alt="Avatar II" loading="lazy" />
+          <span class="fallback">Image unavailable outside Dropbox</span>
+          <span class="caption"><strong>Avatar II</strong><small>06</small></span>
+        </button>
+      </div>
+    </section>
   </main>
+
+  <footer>
+    <div class="shell">MIA · BUILT FROM SCRATCH</div>
+  </footer>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" type="button" aria-label="Close image">×</button>
+    <button class="lightbox-arrow prev" type="button" aria-label="Previous image">‹</button>
+    <div class="lightbox-card"><img id="lightbox-image" src="" alt="" /></div>
+    <button class="lightbox-arrow next" type="button" aria-label="Next image">›</button>
+    <div class="lightbox-label" id="lightbox-label"></div>
+  </div>
+
+  <script>
+    const items = [...document.querySelectorAll('.gallery-item')];
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxLabel = document.getElementById('lightbox-label');
+    const closeButton = document.querySelector('.lightbox-close');
+    const prevButton = document.querySelector('.lightbox-arrow.prev');
+    const nextButton = document.querySelector('.lightbox-arrow.next');
+    let currentIndex = 0;
+
+    items.forEach((item, index) => {
+      const image = item.querySelector('img');
+      image.addEventListener('error', () => item.classList.add('is-missing'));
+      image.addEventListener('load', () => item.classList.remove('is-missing'));
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const item = items[currentIndex];
+      const image = item.querySelector('img');
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt;
+      lightboxLabel.textContent = item.dataset.title || image.alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      closeButton.focus();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function step(direction) {
+      currentIndex = (currentIndex + direction + items.length) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    closeButton.addEventListener('click', closeLightbox);
+    prevButton.addEventListener('click', () => step(-1));
+    nextButton.addEventListener('click', () => step(1));
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (event.key === 'Escape') closeLightbox();
+      if (event.key === 'ArrowLeft') step(-1);
+      if (event.key === 'ArrowRight') step(1);
+    });
+  </script>
 </body>
 </html>
