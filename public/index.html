@@ -43,10 +43,8 @@
     .nav-links a:hover{color:var(--text)}
     .hero{min-height:76vh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);align-items:center;gap:clamp(30px,5vw,80px);padding:76px 0 64px}
     .hero-content{position:relative;z-index:2}
-    .hero-art{position:relative;min-height:520px;display:grid;place-items:center;isolation:isolate}
-    .hero-art::before{content:"";position:absolute;inset:7%;background:radial-gradient(circle at 50% 48%,rgba(212,20,90,.22),transparent 62%);filter:blur(22px);z-index:-1}
-    .hero-art img{width:min(100%,560px);aspect-ratio:1;object-fit:cover;object-position:center;border-radius:32px;opacity:.8;filter:saturate(.78) contrast(1.06);box-shadow:0 34px 100px rgba(0,0,0,.52);-webkit-mask-image:radial-gradient(ellipse at center,black 48%,rgba(0,0,0,.92) 62%,transparent 88%);mask-image:radial-gradient(ellipse at center,black 48%,rgba(0,0,0,.92) 62%,transparent 88%)}
-    .hero-art::after{content:"";position:absolute;inset:-1px;pointer-events:none;background:linear-gradient(to right,var(--bg) 0%,transparent 20%,transparent 82%,var(--bg) 100%),linear-gradient(to bottom,var(--bg) 0%,transparent 18%,transparent 82%,var(--bg) 100%)}
+    .hero-art{min-height:520px;display:grid;place-items:center}
+    .hero-art img{width:min(100%,500px);height:auto;display:block;border-radius:28px;box-shadow:0 24px 70px rgba(0,0,0,.38)}
     .eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px;color:#ddd4d2;font-size:.74rem;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
     .eyebrow::before{content:"";width:34px;height:1px;background:var(--accent);box-shadow:0 0 18px rgba(212,20,90,.75)}
     h1{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(5rem,16vw,11.5rem);font-weight:500;line-height:.78;letter-spacing:-.06em}
@@ -128,7 +126,7 @@
       .nav-links{gap:12px;font-size:.8rem}.nav-links a:nth-child(3){display:none}
       .hero{min-height:68vh;padding-top:56px;gap:18px}
       .hero-art{width:100%;margin-top:6px}
-      .hero-art img{max-width:100%;border-radius:22px;opacity:.72}
+      .hero-art img{max-width:100%;border-radius:22px}
       h1{font-size:clamp(4.3rem,27vw,7rem)}
       .section{padding:72px 0}
       .section-head{align-items:start;flex-direction:column;gap:8px}
@@ -175,7 +173,7 @@
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <img src="/mia-hero.svg" alt="" />
+        <img src="/mia-hero-simple.jpg" alt="" />
       </div>
     </section>
 
