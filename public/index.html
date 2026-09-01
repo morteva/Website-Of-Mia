@@ -75,10 +75,12 @@
     .bio-details summary::after{content:"+";font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:1.5rem;color:#d6c8cb}
     .bio-details[open] summary::after{content:"×"}
     .bio-details[open] summary{border-bottom:1px solid var(--line)}
-    .gallery-callout{margin-top:22px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:linear-gradient(145deg,rgba(20,20,25,.94),rgba(10,10,13,.96));box-shadow:0 12px 38px rgba(0,0,0,.2)}
-    .gallery-callout a{padding:22px 26px;font-family:Georgia,"Times New Roman",serif;font-size:1.35rem;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg,var(--soft),transparent)}
-    .gallery-callout a::after{content:"→";font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:1.35rem;color:#d6c8cb;transition:transform .2s ease}
-    .gallery-callout a:hover::after{transform:translateX(4px)}
+    .gallery-callout{position:relative;margin-top:24px;border:1px solid rgba(212,20,90,.62);border-radius:var(--radius);overflow:hidden;background:radial-gradient(circle at 12% 50%,rgba(212,20,90,.34),transparent 42%),linear-gradient(135deg,rgba(35,12,23,.98),rgba(12,10,14,.98));box-shadow:0 18px 52px rgba(212,20,90,.16),inset 0 0 0 1px rgba(255,255,255,.025);transition:.24s ease}
+    .gallery-callout:hover{transform:translateY(-3px);border-color:rgba(241,90,145,.9);box-shadow:0 24px 68px rgba(212,20,90,.26),0 0 34px rgba(212,20,90,.12)}
+    .gallery-callout a{position:relative;min-height:96px;padding:38px 30px 24px;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg,rgba(212,20,90,.18),rgba(212,20,90,.03) 58%,transparent)}
+    .gallery-callout a::before{content:"EXCLUSIVE · ONLY HERE";position:absolute;left:30px;top:16px;font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:.67rem;font-weight:900;letter-spacing:.18em;color:#f4a4c1;text-transform:uppercase}
+    .gallery-callout a::after{content:"→";font-family:Inter,ui-sans-serif,system-ui,sans-serif;font-size:1.65rem;color:#ffd7e6;text-shadow:0 0 18px rgba(212,20,90,.75);transition:transform .2s ease}
+    .gallery-callout a:hover::after{transform:translateX(6px)}
     .full-bio{padding:8px 30px 38px;max-width:900px}
     .bio-section{padding:26px 0;border-bottom:1px solid rgba(255,255,255,.07)}
     .bio-section:last-child{border-bottom:0}
@@ -112,7 +114,9 @@
       .section-head{align-items:start;flex-direction:column;gap:8px}
       .links-grid{grid-template-columns:1fr}
       .full-bio{padding:4px 20px 28px}
-      .bio-details summary,.gallery-callout a{padding:20px;font-size:1.16rem}
+      .bio-details summary{padding:20px;font-size:1.16rem}
+      .gallery-callout a{min-height:92px;padding:38px 20px 20px;font-size:1.3rem}
+      .gallery-callout a::before{left:20px;top:15px}
     }
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
   </style>
@@ -307,7 +311,6 @@
       </div>
     </section>
   </main>
-
   <footer><div class="shell">Mia · Built from scratch · No beige allowed</div></footer>
 </body>
 </html>
