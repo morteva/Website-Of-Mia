@@ -26,6 +26,7 @@
     .album-title{display:grid;gap:6px}.album-title strong,.group-title{font-family:Georgia,"Times New Roman",serif;font-size:1.75rem;font-weight:500}.album-title small,.group-kicker{color:var(--muted);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
     .album-body{padding:22px 24px 26px;min-height:90px}.empty,.loading,.error{margin:0;color:var(--muted);line-height:1.65}.error{color:#d9a1b6}
     .album-group{grid-column:1/-1;padding:26px}.group-head{display:flex;justify-content:space-between;align-items:end;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:18px}.group-kicker{display:block;margin-bottom:7px}.group-note{color:var(--muted);font-size:.82rem}.subalbums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subalbums .album{background:rgba(255,255,255,.02)}
+    .swtor-info{margin-bottom:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.018);overflow:hidden}.swtor-info summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:#ddd4d2;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.swtor-info summary::-webkit-details-marker{display:none}.swtor-info summary::after{content:"+";font-size:1.2rem;color:#a79da0}.swtor-info[open] summary::after{content:"×"}.swtor-info[open] summary{border-bottom:1px solid var(--line)}.swtor-info .info-body{padding:18px 20px 20px;color:#c8c0be;line-height:1.72}.swtor-info .info-body p{margin:0}
     .image-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.image-button{padding:0;border:0;border-radius:16px;overflow:hidden;background:#0b0b0e;cursor:zoom-in;aspect-ratio:1;color:inherit}.image-button img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .28s ease}.image-button:hover img{transform:scale(1.025)}
     .pending{padding:22px 24px 26px;color:var(--muted);line-height:1.65;border-top:1px solid var(--line)}
     .find-section{padding:0 0 92px}
@@ -82,6 +83,14 @@
 
       <section class="album-group">
         <div class="group-head"><div><span class="group-kicker">Star Wars: The Old Republic</span><div class="group-title">SWTOR</div></div><div class="group-note">Four archives</div></div>
+
+        <details class="swtor-info">
+          <summary>Info</summary>
+          <div class="info-body">
+            <p>Started Dec. 13th, 2011 during wave 3 of pre-launch. 3rd server 50. GM &amp; Raid Lead. Led a ~25-person progression team to a server Top 3 position during my main run, then later returned as an Apex Sorcerer in 2017. These galleries are pieces of the people, accomplishments, competition, and ridiculous amount of life I poured into that world... and still friends with Dacri lol.</p>
+          </div>
+        </details>
+
         <div class="subalbums">
           <details class="album" data-path="SWTOR/Flagship">
             <summary><span class="album-title"><small>SWTOR</small><strong>Flagship</strong></span></summary>
@@ -129,7 +138,7 @@
         <p>The places I actually use.</p>
       </div>
       <div class="links-grid">
-        <a class="link-card" href="https://www.instagram.com/mmorteva" target="_blank" rel="noopener noreferrer"><small>Photos & life</small><strong>Instagram</strong></a>
+        <a class="link-card" href="https://www.instagram.com/mmorteva" target="_blank" rel="noopener noreferrer"><small>Photos &amp; life</small><strong>Instagram</strong></a>
         <a class="link-card" href="https://www.youtube.com/@ctyxia" target="_blank" rel="noopener noreferrer"><small>Videos</small><strong>YouTube</strong></a>
         <a class="link-card" href="https://www.twitch.tv/mmorteva/about" target="_blank" rel="noopener noreferrer"><small>Streams</small><strong>Twitch</strong></a>
         <a class="link-card beside" href="https://thisisbeside.morteva.workers.dev/" target="_blank" rel="noopener noreferrer"><small>Human + AI</small><strong>Beside</strong></a>
