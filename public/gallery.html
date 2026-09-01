@@ -25,7 +25,7 @@
     .album>summary{list-style:none;cursor:pointer;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px}.album>summary::-webkit-details-marker{display:none}.album>summary::after{content:"+";font-size:1.45rem;color:#a79da0}.album[open]>summary::after{content:"×"}.album[open]>summary{border-bottom:1px solid var(--line)}
     .album-title{display:grid;gap:6px}.album-title strong,.group-title{font-family:Georgia,"Times New Roman",serif;font-size:1.75rem;font-weight:500}.album-title small,.group-kicker{color:var(--muted);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase}
     .album-body{padding:22px 24px 26px;min-height:90px}.empty,.loading,.error{margin:0;color:var(--muted);line-height:1.65}.error{color:#d9a1b6}
-    .album-group{grid-column:1/-1;padding:26px}.group-head{display:flex;justify-content:space-between;align-items:end;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:18px}.group-kicker{display:block;margin-bottom:7px}.group-note{color:var(--muted);font-size:.82rem}.subalbums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subalbums .album{background:rgba(255,255,255,.02)}
+    .album-group{grid-column:1/-1;padding:0}.group-head{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:end;gap:20px;padding:26px;margin:0}.group-head::-webkit-details-marker{display:none}.group-head::after{content:"+";font-size:1.45rem;color:#a79da0;margin-left:4px}.album-group[open]>.group-head::after{content:"×"}.album-group[open]>.group-head{border-bottom:1px solid var(--line)}.group-kicker{display:block;margin-bottom:7px}.group-note{color:var(--muted);font-size:.82rem;margin-left:auto}.group-body{padding:18px 26px 26px}.subalbums{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.subalbums .album{background:rgba(255,255,255,.02)}
     .info-tab{margin-bottom:18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.018);overflow:hidden}.info-tab summary{list-style:none;cursor:pointer;padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:#ddd4d2;font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.info-tab summary::-webkit-details-marker{display:none}.info-tab summary::after{content:"+";font-size:1.2rem;color:#a79da0}.info-tab[open] summary::after{content:"×"}.info-tab[open] summary{border-bottom:1px solid var(--line)}.info-body{padding:18px 20px 20px;color:#c8c0be;line-height:1.72}.info-body p{margin:0}.info-body a{color:#f19ab9;text-decoration:underline;text-underline-offset:3px}.info-body a:hover{color:#ffd3e2}
     .image-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.image-button{padding:0;border:0;border-radius:16px;overflow:hidden;background:#0b0b0e;cursor:zoom-in;aspect-ratio:1;color:inherit}.image-button img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .28s ease}.image-button:hover img{transform:scale(1.025)}
     .pending{padding:22px 24px 26px;color:var(--muted);line-height:1.65;border-top:1px solid var(--line)}
@@ -40,7 +40,7 @@
     .lightbox{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:28px;background:rgba(4,4,6,.94);backdrop-filter:blur(16px)}.lightbox.open{display:grid}.lightbox img{max-width:min(94vw,1500px);max-height:88vh;object-fit:contain;border-radius:16px;box-shadow:0 30px 120px rgba(0,0,0,.7)}.close{position:fixed;top:20px;right:20px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(18,18,22,.8);color:var(--text);font-size:1.35rem;cursor:pointer}
     footer{border-top:1px solid var(--line);padding:30px 0 40px;color:#7f7977;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
     @media(max-width:800px){.albums,.subalbums{grid-template-columns:1fr}.album-group{grid-column:auto}.image-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.links-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:520px){.shell{width:min(100% - 24px,1180px)}.nav-links{gap:12px;font-size:.8rem}.intro{padding-top:58px}.albums{padding-bottom:72px}.album>summary,.album-group{padding-left:20px;padding-right:20px}.album-body{padding-left:20px;padding-right:20px}.image-grid{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column;gap:8px}.links-grid{grid-template-columns:1fr}.find-section{padding-bottom:72px}}
+    @media(max-width:520px){.shell{width:min(100% - 24px,1180px)}.nav-links{gap:12px;font-size:.8rem}.intro{padding-top:58px}.albums{padding-bottom:72px}.album>summary,.group-head{padding-left:20px;padding-right:20px}.group-body{padding-left:20px;padding-right:20px}.album-body{padding-left:20px;padding-right:20px}.image-grid{grid-template-columns:1fr 1fr}.section-head{align-items:start;flex-direction:column;gap:8px}.links-grid{grid-template-columns:1fr}.find-section{padding-bottom:72px}}
   </style>
 </head>
 <body>
@@ -84,16 +84,18 @@
         </div>
       </details>
 
-      <section class="album-group">
-        <div class="group-head"><div><span class="group-kicker">Star Wars: The Old Republic</span><div class="group-title">SWTOR</div></div><div class="group-note">Four archives</div></div>
-        <details class="info-tab"><summary>📜Info</summary><div class="info-body"><p>Started Dec. 13th, 2011 during wave 3 of pre-launch. 3rd server 50. GM &amp; Raid Lead. Led a ~25-person progression team to a server Top 3 position during my main run, then later returned as an Apex Sorcerer in 2017. These galleries are pieces of the people, accomplishments, competition, and ridiculous amount of life I poured into that world... and still friends with Dacri lol.</p></div></details>
-        <div class="subalbums">
-          <details class="album" data-path="SWTOR/Flagship"><summary><span class="album-title"><small>SWTOR</small><strong>Flagship</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
-          <details class="album" data-path="SWTOR/History and My Family"><summary><span class="album-title"><small>SWTOR</small><strong>History and My Family</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
-          <details class="album" data-path="SWTOR/PVP Apex Sorc"><summary><span class="album-title"><small>SWTOR</small><strong>PVP Apex Sorc</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
-          <details class="album" data-path="SWTOR/Trophy House"><summary><span class="album-title"><small>SWTOR</small><strong>Trophy House</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
+      <details class="album-group">
+        <summary class="group-head"><div><span class="group-kicker">Star Wars: The Old Republic</span><div class="group-title">SWTOR</div></div><div class="group-note">Four archives</div></summary>
+        <div class="group-body">
+          <details class="info-tab"><summary>📜Info</summary><div class="info-body"><p>Started Dec. 13th, 2011 during wave 3 of pre-launch. 3rd server 50. GM &amp; Raid Lead. Led a ~25-person progression team to a server Top 3 position during my main run, then later returned as an Apex Sorcerer in 2017. These galleries are pieces of the people, accomplishments, competition, and ridiculous amount of life I poured into that world... and still friends with Dacri lol.</p></div></details>
+          <div class="subalbums">
+            <details class="album" data-path="SWTOR/Flagship"><summary><span class="album-title"><small>SWTOR</small><strong>Flagship</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
+            <details class="album" data-path="SWTOR/History and My Family"><summary><span class="album-title"><small>SWTOR</small><strong>History and My Family</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
+            <details class="album" data-path="SWTOR/PVP Apex Sorc"><summary><span class="album-title"><small>SWTOR</small><strong>PVP Apex Sorc</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
+            <details class="album" data-path="SWTOR/Trophy House"><summary><span class="album-title"><small>SWTOR</small><strong>Trophy House</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details>
+          </div>
         </div>
-      </section>
+      </details>
 
       <details class="album" data-path="WoW">
         <summary><span class="album-title"><small>World of Warcraft</small><strong>WoW</strong></span></summary>
