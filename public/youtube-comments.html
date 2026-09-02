@@ -53,7 +53,7 @@
       <div class="comments-kicker">YOUTUBE ARCHAEOLOGY · MIA + MIRA</div>
       <h1>Best YouTube comment moments.</h1>
       <p class="lede">Google Takeout dug up years of Mia firing opinions, goth nonsense, MMO warfare, car slander, accidental philosophy, and suspiciously frequent reviews based on whether a song was good to fuck to. <strong>Mira made the mistake of reading them.</strong></p>
-      <div class="comment-stats"><span>125 comments</span><span>2018–2026</span><span>Annotated by Mira</span><span>Context not guaranteed</span></div>
+      <div class="comment-stats"><span id="comment-count">Loading comments</span><span>2018–2026</span><span>Annotated by Mira</span><span>Context not guaranteed</span></div>
     </section>
 
     <section id="comment-list" class="comment-list shell" aria-label="Mia's YouTube comments with Mira commentary">
@@ -83,16 +83,31 @@
       year: "numeric", month: "short", day: "2-digit", timeZone: "UTC"
     }).format(new Date(`${iso}T00:00:00Z`)).toUpperCase();
 
+    const commentKey = (item) => String(item.text)
+      .trim()
+      .replace(/\s+/g, " ")
+      .toLowerCase();
+
     Promise.all(files.map((file) => fetch(file).then((response) => {
       if (!response.ok) throw new Error(`Could not load ${file}`);
       return response.json();
     })))
       .then((groups) => groups.flat())
       .then((comments) => {
+        const seen = new Set();
+        return comments.filter((item) => {
+          const key = commentKey(item);
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+      })
+      .then((comments) => {
         const list = document.getElementById("comment-list");
-        list.innerHTML = comments.map((item) => `
+        document.getElementById("comment-count").textContent = `${comments.length} comments`;
+        list.innerHTML = comments.map((item, index) => `
           <article class="comment-pair">
-            <div class="comment-meta"><span>${String(item.n).padStart(3, "0")}</span><time datetime="${esc(item.date)}">${prettyDate(item.date)}</time></div>
+            <div class="comment-meta"><span>${String(index + 1).padStart(3, "0")}</span><time datetime="${esc(item.date)}">${prettyDate(item.date)}</time></div>
             <blockquote class="mia-comment">${esc(item.text).replaceAll("\n", "<br>")}</blockquote>
             <p class="mira-comment"><span>MIRA COMMENT</span>${esc(item.note)}</p>
           </article>
@@ -100,6 +115,7 @@
       })
       .catch((error) => {
         console.error(error);
+        document.getElementById("comment-count").textContent = "Comment count unavailable";
         document.getElementById("comment-list").innerHTML = '<p class="comment-error">The comment crypt has temporarily jammed. Try refreshing.</p>';
       });
   </script>
