@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08080a" />
+  <meta name="description" content="Mia's best YouTube comment moments, with commentary by Mira." />
+  <title>Mia's Best YouTube Comment Moments</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .comments-hero { padding: clamp(82px, 11vw, 142px) 0 clamp(58px, 7vw, 88px); border-bottom: 1px solid var(--line); }
+    .comments-kicker { margin-bottom: 18px; color: #efa2bd; font-size: .66rem; font-weight: 900; letter-spacing: .24em; text-transform: uppercase; }
+    .comments-hero h1 { max-width: 980px; margin: 0; font-family: var(--serif); font-size: clamp(4rem, 9.5vw, 8.5rem); font-weight: 400; line-height: .82; letter-spacing: -.065em; text-wrap: balance; }
+    .comments-hero .lede { max-width: 790px; margin: 34px 0 0; color: var(--text-soft); font-family: var(--serif); font-size: clamp(1.08rem, 1.9vw, 1.35rem); line-height: 1.72; }
+    .comments-hero .lede strong { color: #fff; }
+    .comment-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .comment-stats span { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.018); font-size: .65rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .comment-list { max-width: 980px; padding: 14px 0 clamp(100px, 12vw, 160px); }
+    .comment-pair { position: relative; padding: clamp(52px, 7vw, 82px) 0; border-bottom: 1px solid rgba(255,255,255,.085); }
+    .comment-pair:last-child { border-bottom: 0; }
+    .comment-meta { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; color: var(--faint); font-size: .62rem; font-weight: 850; letter-spacing: .18em; }
+    .comment-meta span { color: var(--blush); }
+    .comment-meta time::before { content: "•"; margin-right: 14px; color: #4d4448; }
+    .mia-comment { margin: 0; color: #fff7f5; font-family: var(--serif); font-size: clamp(1.35rem, 2.5vw, 2.05rem); font-weight: 700; line-height: 1.5; letter-spacing: -.018em; text-wrap: pretty; }
+    .mira-comment { max-width: 780px; margin: 2.35rem 0 0; color: #b8adb0; font-family: var(--serif); font-size: clamp(.92rem, 1.4vw, 1.05rem); font-style: italic; font-weight: 400; line-height: 1.85; }
+    .mira-comment span { display: block; margin-bottom: .72rem; color: #d989a7; font-family: var(--sans); font-size: .58rem; font-style: normal; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .loading-comments, .comment-error { padding: 70px 0; color: var(--muted); font-family: var(--serif); font-style: italic; }
+    .comment-error { color: #e8a4bc; }
+    .back-home { margin: 0 0 84px; }
+    .back-home a { display: inline-flex; align-items: center; gap: 10px; color: var(--text-soft); font-size: .74rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .back-home a::before { content: "←"; color: var(--blush); font-size: 1rem; }
+    @media (max-width: 640px) {
+      .comments-hero { padding-top: 62px; }
+      .comment-pair { padding-block: 48px; }
+      .mira-comment { margin-top: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="/">MIA</a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="/#about">About</a>
+        <a href="/gallery.html">Gallery</a>
+        <a href="/#links">Links</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="comments-hero shell">
+      <div class="comments-kicker">YOUTUBE ARCHAEOLOGY · MIA + MIRA</div>
+      <h1>Best YouTube comment moments.</h1>
+      <p class="lede">Google Takeout dug up years of Mia firing opinions, goth nonsense, MMO warfare, car slander, accidental philosophy, and suspiciously frequent reviews based on whether a song was good to fuck to. <strong>Mira made the mistake of reading them.</strong></p>
+      <div class="comment-stats"><span>125 comments</span><span>2018–2026</span><span>Annotated by Mira</span><span>Context not guaranteed</span></div>
+    </section>
+
+    <section id="comment-list" class="comment-list shell" aria-label="Mia's YouTube comments with Mira commentary">
+      <p class="loading-comments">Excavating the comment catacombs...</p>
+    </section>
+
+    <div class="back-home shell"><a href="/#links">Back to Mia</a></div>
+  </main>
+  <footer><div class="shell">Mia · Built from scratch · No beige allowed</div></footer>
+
+  <script>
+    const files = [
+      "/youtube-comments-1.json",
+      "/youtube-comments-2.json",
+      "/youtube-comments-3.json",
+      "/youtube-comments-4.json"
+    ];
+
+    const esc = (value) => String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#39;");
+
+    const prettyDate = (iso) => new Intl.DateTimeFormat("en-US", {
+      year: "numeric", month: "short", day: "2-digit", timeZone: "UTC"
+    }).format(new Date(`${iso}T00:00:00Z`)).toUpperCase();
+
+    Promise.all(files.map((file) => fetch(file).then((response) => {
+      if (!response.ok) throw new Error(`Could not load ${file}`);
+      return response.json();
+    })))
+      .then((groups) => groups.flat())
+      .then((comments) => {
+        const list = document.getElementById("comment-list");
+        list.innerHTML = comments.map((item) => `
+          <article class="comment-pair">
+            <div class="comment-meta"><span>${String(item.n).padStart(3, "0")}</span><time datetime="${esc(item.date)}">${prettyDate(item.date)}</time></div>
+            <blockquote class="mia-comment">${esc(item.text).replaceAll("\n", "<br>")}</blockquote>
+            <p class="mira-comment"><span>MIRA COMMENT</span>${esc(item.note)}</p>
+          </article>
+        `).join("");
+      })
+      .catch((error) => {
+        console.error(error);
+        document.getElementById("comment-list").innerHTML = '<p class="comment-error">The comment crypt has temporarily jammed. Try refreshing.</p>';
+      });
+  </script>
+</body>
+</html>
