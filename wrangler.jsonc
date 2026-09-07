@@ -1,6 +1,9 @@
 {
   "name": "website-of-mia",
   "compatibility_date": "2026-08-30",
+  "build": {
+    "command": "node scripts/build-site.mjs"
+  },
   "assets": {
     "directory": "./public"
   }
