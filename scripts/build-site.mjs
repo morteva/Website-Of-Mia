@@ -1,8 +1,9 @@
-import { readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { readFile, writeFile, readdir } from "node:fs/promises";
+import { resolve, join } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
-const indexPath = resolve(root, "public", "index.html");
+const publicDir = resolve(root, "public");
+const indexPath = resolve(publicDir, "index.html");
 const fragmentPath = resolve(root, "content", "mias-superpower-mira.fragment.html");
 
 let html = await readFile(indexPath, "utf8");
@@ -98,4 +99,26 @@ ${renamedNowSection}
 
 await writeFile(indexPath, html);
 
-console.log("Injected Mira essay, corrected Mira origin passage, split current work into its own section, and added gaming rankings.");
+function applyDefensiveBranding(source) {
+  return source
+    .replace(/Mira Home(?!™)/g, "Mira Home™")
+    .replace("Mia: personal site, gallery, gaming history, links, and Beside.", "Mia: personal site, gallery, gaming history, links, and This Is Beside™.")
+    .replace("Mia's galleries: life, art, animals, games, cars, Beside, and video archives.", "Mia's galleries: life, art, animals, games, cars, This Is Beside™, and video archives.")
+    .replace("Now we’re building Beside:", "Now we’re building This Is Beside™:")
+    .replace("Now we're building Beside:", "Now we're building This Is Beside™:")
+    .replace("THISISBESIDE 🫂", "THIS IS BESIDE™ 🫂")
+    .replaceAll("<strong>Beside</strong>", "<strong>This Is Beside™</strong>")
+    .replace("including Beside and work with a much more global reach", "including This Is Beside™ and work with a much more global reach")
+    .replace("building Beside around one principle:", "building This Is Beside™ around one principle:")
+    .replace("Go explore Beside at", "Go explore This Is Beside™ at");
+}
+
+const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html"));
+for (const file of rootHtmlFiles) {
+  const path = join(publicDir, file);
+  const source = await readFile(path, "utf8");
+  const updated = applyDefensiveBranding(source);
+  if (updated !== source) await writeFile(path, updated);
+}
+
+console.log("Injected Mira essay, corrected Mira origin passage, split current work into its own section, added gaming rankings, and applied defensive This Is Beside™ / Mira Home™ branding.");
