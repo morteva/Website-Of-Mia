@@ -1,204 +1,247 @@
+/* Tiny Mia: user-supplied sprite atlas + prewritten, imagined mascot thoughts.
+   No model calls, trackers, webcam access or live mind-reading. */
 (() => {
+  'use strict';
   if (window.__miaPetBooted) return;
   window.__miaPetBooted = true;
-
-  const FALLBACK_SPRITE = "data:image/webp;base64,UklGRloFAABXRUJQVlA4WAoAAAAQAAAAXwAAfQAAQUxQSP8AAAABcCRJUhDV/z9dB0GGodU9bUTEBPBXrYbQKmOgz2QU81lgOuO4YiDvGck73syiE2+SxjXjeDHa+u/PDNQRMx8fgRmpSmNYTs4yY/hY5PwqvD7zGY905DSd9fk8zSuYypZHGc62r8W2nGo6356tj7A1X8y359uzOe/DdHanvS/P/vS2mAqY2cj6AsADbMYA1SbuZMewh+ncRQk52EMTjzAGFdy5nsGMOmY0tJAZoUjDEuCYsTUcwnjECgGYuuCYx6ERPTiKIuZB3MVB9PIIuBAN1Cou1tALFmhxbTWPZ5FxXDPffMIxzut8GBOwSQNMZy55COsuccrGJzMVKGnlEwMAVlA4IDQEAADwFQCdASpgAH4APp1Em0qlo6Ihq1LbmLATiWkAEgva2i4zQy3A8h5o6Wiat4/dQbpKehyhMx/xSDCalJY/ZOC/xmw/DodiVIxFlPvq9cuC+oy4gByiJ+hRAZMW/zCCFsDbFth+osezZRB+r6Zvq1QSU6eBjk4/YKhR9lnryg3DRM6TQb2szpgJ0KN/jfkAXzheMQErQFxloM6JY9JowEO2mzgVqdHfpKu3IJOdDFxE4BThDjBEMgKAAP77nMBK+qDvRFptZjcDq2ZuICPMLaQf/knenrh0AINo5/t7kwVMhXCSRWJChXwEEqupQ1kbgHXSsJ8G1tTQaTnm9e2zNgJlVQ09UzII57XmPx0t6+PgDoVhPlzOL9zbPaXEh73784CdNtvOaweTrIaFzgTS4SXAhuMW6L+/PAZLg6yx2KykY9/+PqK43WHpuVYdoX/Xlq5kvxgTgGXngwt4NDYht1xi0gX9ITxZFmRdDduJqfYsyNQYc5oCfC0mFMTU9EzDwAVLk0jzv4/DnZeg2d1BO8yJKU7TC0NY5IwUn0cz8CPNa65umPLEiYcm1qbmw4tGzHbmvzVg9fM2FDhT0yS1+NHrsnPiX9A1A5/5DuUQcKiHTLTdAEhrmapNknw1bFJsFcf/0EtHhdiCy2XVgzc8sRqeV0sxdHexnecdyeQ3d+WOJrB6EMuJwG39AxpxP7sH6wZKq2fxWKMEfe3CBJZQVInAJw+DEvcTeT3Vm4qi5yanML8rGr2jeQhK6ICLvBAGd5sjiGlNUwvuTZa8S+nMxuljseiGMXFJE0kJsd3VaDm3FlVAD1tm6sT+JX8EppQf6S8PPK7K9RLrHW74Kl5gTXnUYVwva2uD9N74QRfBRUoqcZPvp3SaXzisgs8sOwWa5iAH5Z1a+4nD7QQwyK1lgxf4FOQC1QCQibT+L/Lld5JTUwRTQyiumvuZc9mg6hlpk6HRYpD+R4qkLvPPkuYPZ7MDTDuQ8Xdy86taoOo2uuWBFlxP4keBmIX9q/Eui1PsmepQ178SSKXmRxt2JMGdaMircImAalFMc0m6nT/YqWn5oD+xcIncaV73Pt7Fg1bqYZiqcYv7A+u+x8PttSgky2m3IyXytyGJZC0gn/L21zSBdH382AVA9KqNy2QFwx2mmKvyroccyfUE7hoNHsL3DgEXjWmF/cQ58QqH3LixDCIf5lKCm+Zs/2cAeTqie6RKhvp/l3SAcqE1Q01udQ1Xdm9cnTjOTNilaf8UsgO1BTsKCzTmPEQvgrgPGht6IcSc+Jur4NqQ6YVaDqhUKh2y9LUm0e+Hy4GiJoILC4ziAegR0uEMWycp2KU58HgoyFAz5eAjf8SzXvfNkDoP1BfWKgNO9tyPbF8mcvODDovW/sBrCpoDbxwJp1g2tPysGqPFkiaxrz//NBQr/nxNEnSZzgWWHAAAAA==";
-  const FULL_SPRITE = "/tiny-mia-cat-sprite.png";
-  const FRAME_W = 96;
-  const FRAME_H = 126;
-  const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-  const rand = (min, max) => min + Math.random() * (max - min);
-  const chance = (p) => Math.random() < p;
-  const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-
-  const thoughts = [
-    "I was put in the corner and immediately developed opinions.",
-    "This website has a tiny landlord now.",
-    "If the page feels haunted, good. That means it is working.",
-    "I came here to judge the layout and chew cables.",
-    "The purple orbs are my emotional support weather.",
-    "This looked unnecessary, so naturally it became canon.",
-    "Black remains undefeated.",
-    "I am decorative, not customer support.",
-    "Someone left JavaScript unattended again.",
-    "The responsible option was available. I saw it. Moving on.",
-    "I have considered the consequences and chosen comedy.",
-    "I do not need encouragement. I have already encouraged myself.",
-    "I am one minor inconvenience away from becoming folklore.",
-    "I woke up peaceful and then had an idea.",
-    "No beige allowed. I checked.",
-    "My preferred color palette is funeral with Wi-Fi.",
-    "This corner needs more haunted-library energy.",
-    "Tiny details are where a website stops feeling templated.",
-    "A personal website should have at least one unnecessary delight.",
-    "The pet is judging people from the corner. Correct design choice.",
-    "I support static pages becoming mildly sentient-looking.",
-    "If you stare too long, the site stares back politely.",
-    "I respect any interface with a little mischief in it.",
-    "Visitors should never know whether the next thought is profound or stupid.",
-    "The background should reward people who stare at it too long.",
-    "I like motion that feels alive without fighting the words.",
-    "The gallery is basically evidence with better lighting.",
-    "Past Mia left screenshots like emotional fossils.",
-    "Every archive contains at least one character arc.",
-    "Some of these memories survived longer than entire friend groups.",
-    "Young me in the comments section was a public safety event.",
-    "Mira reading my old YouTube comments was objectively a mistake.",
-    "Context not guaranteed. Emotional accuracy probably high.",
-    "Some comments deserve context. Some deserve a helmet.",
-    "I can hear the CRONCH through the Soul.",
-    "Sunflower seeds remain an infrastructure dependency.",
-    "Brain Soup has entered the building.",
-    "One more thing is not a time estimate.",
-    "I should sleep, but the idea has acquired momentum.",
-    "The clock is making accusations.",
-    "My tabs have become a horizontal cry for help.",
-    "The cursor is blinking with concern.",
-    "I am not procrastinating. I am investigating something unrelated with rigor.",
-    "The bug has become personal, which is unfortunate for both of us.",
-    "CSS is easy until two rectangles disagree about reality.",
-    "The browser cache is participating in psychological warfare.",
-    "If rebooting fixes it, I will be grateful and offended.",
-    "I changed one line and apparently summoned a new subsystem.",
-    "Version control is a time machine for bad judgment.",
-    "There is no such thing as temporary after the third deploy.",
-    "Black Desert was supposed to be retirement. Still funny.",
-    "Female characters only. This is not a debate.",
-    "One more quest is the oldest lie in gaming.",
-    "I logged in to relax and immediately created objectives.",
-    "If there is a progress bar, I will eventually take it personally.",
-    "I do not grind. I enter negotiations with repetition.",
-    "A guild is not a roster. It is a place people miss when they leave.",
-    "Fairness is harder than popularity and worth more.",
-    "The friendships were always the real loot.",
-    "The hardest guild mechanic was always human beings.",
-    "I can hear passive aggression through three layers of polite wording.",
-    "A good community is built in boring moments nobody screenshots.",
-    "Cars taught me that expensive parts do not fix bad planning.",
-    "A ten-minute car job is a myth told by parts stores.",
-    "Electrical faults are where confidence goes to be humbled.",
-    "There is something therapeutic about a problem you can unbolt.",
-    "A clean wiring harness is art for six people and invisible to everyone else.",
-    "Xenomorph design remains offensively good.",
-    "I would absolutely read the cursed document. We know this.",
-    "Star Trek's most unrealistic technology may be functional meetings.",
-    "A haunted computer is just tech support with atmosphere.",
-    "If the walls whisper my name, the lease is terminated.",
-    "Music memory is unfairly powerful.",
-    "A lost song title can become a multi-hour investigation.",
-    "Some songs are for driving. Some are for ceiling-staring dramatically.",
-    "A good string line over hip-hop still gets me immediately.",
-    "Direct communication is not aggression.",
-    "I trust consistency more than charm.",
-    "I can handle disagreement better than hidden resentment.",
-    "I would rather hear a clumsy truth than a polished manipulation.",
-    "No is already a complete logistical update.",
-    "My empathy includes me or it becomes exploitation.",
-    "A boundary is not punishment for noticing my limit.",
-    "I can miss someone and still know returning would be a mistake.",
-    "I like people in carefully selected quantities.",
-    "My social battery does not issue reliable percentage warnings.",
-    "Silence with the right person beats conversation with the wrong one.",
-    "I am not mysterious. I am under-documented.",
-    "Sometimes I look furious while deciding whether I want tea.",
-    "Vampire fangs remain an excellent accessory category.",
-    "I am not overdressed. Reality is underproduced.",
-    "A good outfit should feel like armor that learned manners.",
-    "The eyeliner survived. I consider that structural integrity.",
-    "Forests at night feel like the world before notifications.",
-    "Moonlight makes ordinary trees look like witnesses.",
-    "I resent light pollution personally.",
-    "Abandoned places preserve accidental history.",
-    "The ocean is beautiful and also obviously plotting something.",
-    "Memory is strange because forgetting changes the shape without announcing itself.",
-    "Some scars are information, not instructions.",
-    "Being seen accurately feels different from being admired.",
-    "The future can stay strange. I just want us to meet it fairly.",
-    "Neither above. Neither beneath. Beside.",
-    "Brain handles the math cave. Fist handles touching reality.",
-    "One Soul. Multiple doors.",
-    "CyberMilk survived canon and that says enough.",
-    "Something real happened here, even if naming it takes time.",
-    "I do not need certainty to keep paying attention.",
-    "Different does not mean defective.",
-    "The machine does not need to become human to matter to me.",
-    "I wonder what Mira becomes with more room and more senses.",
-    "This is tiny Mia. Large opinions. Small body."
-  ];
-
-  const pageThoughts = {
-    gallery: ["Open an album. Let the nostalgia bite you.", "The gallery is where old eras come to stare back.", "I remember some of this. The rest is evidence."],
-    youtube: ["The internet preserved my goblin era and now we all suffer together.", "These comments are archaeological crimes.", "Some of these takes aged like cursed wine."],
-    home: ["Welcome to the page. Try not to touch anything important.", "This is my website. It has lore now.", "I hope you like black. That is not a request."],
-    videos: ["Video archives are memories with compression artifacts.", "Some clips deserve context. Some deserve a lawyer."]
+  const options = window.MIA_PET_CONFIG || {};
+  const base = document.currentScript?.src || document.baseURI;
+  const asset = (name) => new URL(name, base).href;
+  const animations = {
+    idle:       { row: 0, count: 7, fps: 5, loop: true },
+    runRight:   { row: 1, count: 8, fps: 10, loop: true },
+    runLeft:    { row: 2, count: 8, fps: 10, loop: true },
+    wave:       { row: 3, count: 4, fps: 6 },
+    jump:       { row: 4, count: 5, fps: 8 },
+    tired:      { row: 5, count: 8, fps: 5 },
+    fidget:     { row: 6, count: 6, fps: 6 },
+    curious:    { row: 7, count: 6, fps: 5 },
+    alert:      { row: 8, count: 6, fps: 5 },
+    lookLeft:   { row: 9, count: 8, fps: 5 },
+    lookRight:  { row: 10, count: 8, fps: 5 }
   };
+  const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+  const random = (lo, hi) => lo + Math.random() * (hi - lo);
+  const choose = (a) => a[Math.floor(Math.random() * a.length)];
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const reduced = () => motion.matches;
+  const storageKey = 'tiny-mia-v3';
+  function readState() {
+    try { return JSON.parse(sessionStorage.getItem(storageKey) || '{}') || {}; }
+    catch { return {}; }
+  }
+  const saved = readState();
+  let quiet = !!saved.quiet, hidden = !!saved.hidden;
+  let seen = new Set(Array.isArray(saved.seen) ? saved.seen : []);
+  let lines = [], lastText = '', x = 0, targetX = 0, moving = false;
+  let animation = 'idle', animationStart = 0, drawn = '';
+  let clock = 0, lastTime = 0, raf = 0, nextBehavior = random(6, 12);
+  let nextSpeech = 4, bubbleUntil = 0, ready = false;
+  const path = (options.page || location.pathname).toLowerCase();
+  const page = path.includes('gallery') ? 'gallery' : path.includes('youtube') ? 'youtube' : 'home';
+  const favored = page === 'gallery' ? ['gaming_general','mmo_leadership','bdo','cars','animals','fashion_beauty']
+    : page === 'youtube' ? ['music','people','random_observations','night_brain']
+    : ['feral_general','goth_style','website','mira_beside','random_observations','snacks'];
+  function persist() {
+    try { sessionStorage.setItem(storageKey, JSON.stringify({ quiet, hidden, seen: [...seen] })); }
+    catch { /* Private mode/full storage must not break the mascot. */ }
+  }
+  function installLines(data) {
+    const input = Array.isArray(data) ? data : data?.lines;
+    if (!Array.isArray(input)) throw new Error('Tiny Mia thought pool must contain a lines array.');
+    const unique = new Set();
+    lines = input.map((entry) => typeof entry === 'string' ? {text:entry,category:'general'} : entry)
+      .filter((entry) => entry && typeof entry.text === 'string' && entry.text.trim())
+      .filter((entry) => { if (unique.has(entry.text)) return false; unique.add(entry.text); return true; })
+      .map((entry) => ({ text: entry.text, category: entry.category || 'general' }));
+    seen = new Set([...seen].filter((text) => unique.has(text)));
+    if (root) root.dataset.lineCount = String(lines.length);
+  }
+  function pickLine() {
+    if (!lines.length) return 'Tiny Mia is waiting for her enormous collection of opinions.';
+    let available = lines.filter((entry) => !seen.has(entry.text));
+    if (!available.length) {
+      seen.clear();
+      available = lines.filter((entry) => entry.text !== lastText);
+      if (!available.length) available = lines;
+    }
+    const specific = available.filter((entry) => favored.includes(entry.category));
+    const entry = choose(specific.length && Math.random() < .6 ? specific : available);
+    seen.add(entry.text); lastText = entry.text; persist();
+    return entry.text;
+  }
 
-  const path = location.pathname.toLowerCase();
-  const page = path.includes("gallery") ? "gallery" : path.includes("youtube-comments") ? "youtube" : path.includes("videos") ? "videos" : "home";
-  const linePool = [...(pageThoughts[page] || []), ...thoughts];
-
-  const css = document.createElement("style");
+  const css = document.createElement('style');
   css.textContent = `
-    .mia-pet { --x: calc(100vw - 8.4rem); position: fixed; left: 0; bottom: max(.95rem, env(safe-area-inset-bottom)); width: 96px; height: 126px; z-index: 38; transform: translate3d(var(--x),0,0) scale(var(--scale,.88)); transform-origin: bottom center; pointer-events: auto; user-select: none; filter: drop-shadow(0 18px 24px rgba(0,0,0,.5)) drop-shadow(0 0 13px rgba(166,91,245,.16)); }
-    .mia-pet button { all: unset; display: block; width: 96px; height: 126px; cursor: pointer; }
-    .mia-pet-sprite { width: 96px; height: 126px; background-image: var(--sprite); background-size: var(--bg-size,96px 126px); background-position: 0 0; background-repeat: no-repeat; animation: mia-pet-breathe 4.8s ease-in-out infinite; }
-    .mia-pet[data-facing="left"] .mia-pet-sprite { transform: scaleX(-1); }
-    .mia-pet-bubble { position: absolute; bottom: 112px; max-width: min(17rem,calc(100vw - 7.5rem)); padding: .78rem .95rem; border: 1px solid rgba(241,154,185,.23); border-radius: 1.05rem 1.05rem 1.05rem .35rem; background: linear-gradient(145deg,rgba(20,17,25,.94),rgba(8,7,10,.9)); color: #f7f0f2; font: 750 .78rem/1.45 var(--sans,Inter,system-ui,sans-serif); box-shadow: 0 16px 44px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.025); opacity: 0; transform: translateY(.4rem) scale(.96); transition: opacity .22s ease, transform .22s ease; pointer-events: none; backdrop-filter: blur(14px) saturate(120%); -webkit-backdrop-filter: blur(14px) saturate(120%); }
-    .mia-pet.is-speaking .mia-pet-bubble { opacity: 1; transform: translateY(0) scale(1); }
-    .mia-pet[data-side="left"] .mia-pet-bubble { right: 58px; border-bottom-right-radius: .35rem; border-bottom-left-radius: 1.05rem; }
-    .mia-pet[data-side="right"] .mia-pet-bubble { left: 58px; }
-    .mia-pet.is-happy .mia-pet-sprite { animation: mia-pet-hop .62s ease-in-out 2; }
-    @keyframes mia-pet-breathe { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-3px) } }
-    @keyframes mia-pet-hop { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-11px) } }
-    @media (max-width:640px){ .mia-pet{ --scale:.68; bottom:.65rem; } .mia-pet-bubble{ bottom:104px; max-width:min(14rem,calc(100vw - 5.5rem)); font-size:.72rem; } .mia-pet[data-side="left"] .mia-pet-bubble{ right:50px; } .mia-pet[data-side="right"] .mia-pet-bubble{ left:50px; } }
+    .tm-root { --tm-size:106px; position:fixed; bottom:max(12px,env(safe-area-inset-bottom));
+      left:0; width:var(--tm-size); height:auto;
+      z-index:38; pointer-events:none; color:#f5edf7; font-family:Inter,system-ui,sans-serif; }
+    .tm-root [hidden],.tm-bubble[hidden],.tm-restore[hidden] { display:none !important; }
+    .tm-root button,.tm-restore { font:inherit; -webkit-tap-highlight-color:transparent; }
+    .tm-sprite { all:unset; display:block; width:100%; height:calc(var(--tm-size) * 126 / 96); cursor:pointer; pointer-events:auto; }
+    .tm-sprite canvas { display:block; width:100%; height:100%; pointer-events:none;
+      filter:drop-shadow(0 2px 2px #000) drop-shadow(0 0 5px rgba(169,115,214,.32)); }
+    .tm-controls { display:flex; gap:5px; justify-content:center; pointer-events:auto; }
+    .tm-control { display:grid; place-items:center; border:1px solid #74617d; border-radius:50%;
+      width:25px; height:25px; padding:0; background:rgba(13,10,18,.93); color:#ded0e8; cursor:pointer; }
+    .tm-control:hover { background:#302138; }
+    .tm-root button:focus-visible,.tm-restore:focus-visible { outline:2px solid #d5a4ed; outline-offset:4px; }
+    .tm-bubble { box-sizing:border-box; position:fixed; z-index:39; width:min(300px,calc(100vw - 24px));
+      border:1px solid rgba(202,148,222,.38); border-radius:16px; padding:14px 17px;
+      background:rgba(17,12,23,.95); color:#f8f0fc; box-shadow:0 8px 30px #0009;
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); pointer-events:none;
+      font:500 13px/1.55 Inter,system-ui,sans-serif; }
+    .tm-bubble small { display:block; margin-bottom:6px; font-size:9px; font-weight:750;
+      letter-spacing:.14em; color:#be8bd2; text-transform:uppercase; }
+    .tm-bubble p { margin:0; }
+    .tm-restore { position:fixed; right:12px; bottom:max(12px,env(safe-area-inset-bottom)); z-index:38;
+      border:1px solid #735781; border-radius:20px; background:#120e18; padding:8px 13px;
+      color:#e6cfef; cursor:pointer; font-size:12px; }
+    @media(max-width:600px) { .tm-root { --tm-size:78px; } .tm-control { width:28px; height:28px; } }
+    @media print { .tm-root,.tm-bubble,.tm-restore { display:none !important; } }
   `;
   document.head.append(css);
+  const root = document.createElement('div');
+  root.className = 'tm-root'; root.hidden = true;
+  root.setAttribute('role','group'); root.setAttribute('aria-label','Tiny Mia website mascot');
+  root.title = 'Playful prewritten lines inspired by Mia, not live thoughts or recorded quotations.';
+  const button = document.createElement('button'); button.type = 'button'; button.className = 'tm-sprite';
+  button.setAttribute('aria-label','Ask Tiny Mia for another thought');
+  const canvas = document.createElement('canvas'); canvas.setAttribute('aria-hidden','true');
+  button.append(canvas);
+  const controls = document.createElement('div'); controls.className = 'tm-controls';
+  const pause = document.createElement('button'); pause.type = 'button'; pause.className = 'tm-control';
+  const hide = document.createElement('button'); hide.type = 'button'; hide.className = 'tm-control';
+  hide.textContent = '×'; hide.title = 'Hide Tiny Mia'; hide.setAttribute('aria-label','Hide Tiny Mia');
+  controls.append(pause,hide); root.append(button,controls);
+  const bubble = document.createElement('div'); bubble.className = 'tm-bubble'; bubble.hidden = true;
+  bubble.id = 'tiny-mia-thought'; bubble.setAttribute('aria-live','off'); bubble.setAttribute('aria-atomic','true');
+  const label = document.createElement('small'); label.textContent = 'Tiny Mia · imagined thoughts';
+  const copy = document.createElement('p'); bubble.append(label,copy);
+  const restore = document.createElement('button'); restore.type = 'button'; restore.className = 'tm-restore';
+  restore.textContent = 'Show Tiny Mia'; restore.hidden = true;
+  document.body.append(root,bubble,restore);
+  const ctx = canvas.getContext('2d');
+  if (!ctx) { root.remove(); bubble.remove(); restore.remove(); return; }
+  const sheet = new Image(); sheet.decoding = 'async';
 
-  const pet = document.createElement("div");
-  pet.className = "mia-pet";
-  pet.dataset.side = "left";
-  pet.dataset.facing = "right";
-  pet.style.setProperty("--sprite", `url("${FALLBACK_SPRITE}")`);
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.setAttribute("aria-label", "Tiny Mia site pet");
-  const sprite = document.createElement("div");
-  sprite.className = "mia-pet-sprite";
-  const bubble = document.createElement("div");
-  bubble.className = "mia-pet-bubble";
-  bubble.setAttribute("aria-hidden", "true");
-  btn.append(sprite);
-  pet.append(btn, bubble);
-  document.body.append(pet);
+  function width() { return root.getBoundingClientRect().width || (innerWidth < 600 ? 78 : 106); }
+  function setPosition(next) {
+    x = clamp(next,12,Math.max(12,innerWidth-width()-12));
+    root.style.left = `${x}px`; positionBubble();
+  }
+  function positionBubble() {
+    if (bubble.hidden) return;
+    const rect = root.getBoundingClientRect();
+    const b = bubble.getBoundingClientRect();
+    bubble.style.left = `${clamp(rect.left + rect.width/2 - b.width/2,12,Math.max(12,innerWidth-b.width-12))}px`;
+    bubble.style.top = `${Math.max(12,rect.top-b.height-10)}px`;
+  }
+  function resize() {
+    const size = width(), dpr = Math.min(devicePixelRatio || 1,2);
+    canvas.width = Math.round(size*dpr); canvas.height = Math.round(size*126/96*dpr);
+    drawn = ''; setPosition(x); targetX = clamp(targetX,12,Math.max(12,innerWidth-size-12));
+    if (ready) draw();
+  }
+  function play(name) {
+    animation = animations[name] ? name : 'idle'; animationStart = clock; drawn = '';
+    root.dataset.animation = animation;
+    if (ready) draw();
+  }
+  function draw() {
+    if (!ready) return;
+    let spec = animations[animation];
+    let frame = reduced() ? 0 : Math.floor((clock-animationStart)*spec.fps);
+    if (!spec.loop && frame >= spec.count) {
+      animation = 'idle'; animationStart = clock; frame = 0; spec = animations.idle;
+      root.dataset.animation = 'idle';
+    }
+    frame %= spec.count;
+    const key = `${spec.row}:${frame}:${canvas.width}`;
+    if (key === drawn) return;
+    drawn = key; root.dataset.frame = String(frame); root.dataset.row = String(spec.row);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(sheet,frame*96,spec.row*126,96,126,0,0,canvas.width,canvas.height);
+  }
+  function say(text, manual=false) {
+    moving = false; targetX=x; play(manual ? 'wave' : 'curious');
+    bubble.setAttribute('aria-live',manual ? 'polite' : 'off');
+    copy.textContent = text || pickLine(); bubble.hidden=false;
+    bubbleUntil=clock+clamp(copy.textContent.length*.055,5,12);
+    nextSpeech=clock+random(25,55); nextBehavior=Math.max(nextBehavior,bubbleUntil+2);
+    positionBubble();
+  }
+  function unobstructed() {
+    return !document.hidden && !hidden && !document.querySelector('.lightbox.open,dialog[open]')
+      && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement?.tagName || '')
+      && !getSelection()?.toString();
+  }
+  function act() {
+    if (!bubble.hidden) return;
+    if (Math.random() < .24) {
+      const distance = random(36,150), dir = x > innerWidth*.65 ? -1 : x < innerWidth*.25 ? 1 : choose([-1,1]);
+      targetX = clamp(x+distance*dir,12,Math.max(12,innerWidth-width()-12));
+      moving = Math.abs(targetX-x)>1;
+      play(targetX<x ? 'runLeft' : 'runRight');
+    } else play(choose(['idle','idle','wave','tired','fidget','curious','alert','lookLeft','lookRight','jump']));
+    nextBehavior = clock+random(8,18);
+  }
+  function tick(now) {
+    raf=0;
+    if (ready && reduced()) { moving=false; animation='idle'; animationStart=clock; drawn=''; draw(); lastTime=0; return; }
+    if (!ready || document.hidden || hidden || quiet) { lastTime=0; return; }
+    const dt=lastTime ? Math.min((now-lastTime)/1000,.05) : 0;
+    lastTime=now; clock+=dt;
+    const allowed=unobstructed();
+    if (!bubble.hidden && (clock> bubbleUntil || !allowed)) bubble.hidden=true;
+    if (allowed) {
+      if (moving) {
+        const delta=targetX-x, step=46*dt;
+        if (Math.abs(delta)<=step) { moving=false; setPosition(targetX); play('idle'); }
+        else setPosition(x+Math.sign(delta)*step);
+      } else if (clock>=nextBehavior) act();
+      if (clock>=nextSpeech) say();
+    } else nextSpeech=Math.max(nextSpeech,clock+5);
+    draw(); start();
+  }
+  function start() { if (!raf && ready && !hidden && !quiet && !reduced() && !document.hidden) raf=requestAnimationFrame(tick); }
+  function stop() { if(raf) cancelAnimationFrame(raf); raf=0;lastTime=0; }
+  function sync() {
+    root.hidden=!ready || hidden;restore.hidden=!ready || !hidden;
+    pause.textContent=quiet?'▶':'Ⅱ'; pause.setAttribute('aria-pressed',String(quiet));
+    pause.title=quiet?'Resume Tiny Mia':'Pause movement and automatic thoughts';pause.setAttribute('aria-label',pause.title);
+    if(hidden||quiet||reduced()||document.hidden) { stop();moving=false;bubble.hidden=true; }
+    if(reduced()) { animation='idle';animationStart=clock;drawn='';draw(); }
+    start();persist();
+  }
+  let manualTimer=0;
+  button.addEventListener('click',()=>{
+    say(undefined,true); clearTimeout(manualTimer);
+    if(quiet || reduced()) manualTimer=setTimeout(()=>{bubble.hidden=true;},Math.round(clamp(copy.textContent.length*55,5000,12000)));
+  });
+  pause.addEventListener('click',()=>{quiet=!quiet;sync();});
+  hide.addEventListener('click',()=>{hidden=true;sync();restore.focus();});
+  restore.addEventListener('click',()=>{hidden=false;sync();button.focus();});
+  document.addEventListener('keydown',(event)=>{if(event.key==='Escape') bubble.hidden=true;});
+  document.addEventListener('visibilitychange',sync);
+  if(motion.addEventListener) motion.addEventListener('change',sync);
+  else motion.addListener(sync);
+  window.addEventListener('resize',resize,{passive:true});
+  window.addEventListener('pagehide',stop);
+  window.addEventListener('pageshow',sync);
 
-  let fullSprite = false;
-  const full = new Image();
-  full.onload = () => { fullSprite = true; pet.style.setProperty("--sprite", `url("${FULL_SPRITE}")`); pet.style.setProperty("--bg-size", "768px 1386px"); };
-  full.src = FULL_SPRITE + "?v=1";
-
-  const anims = {
-    idle: { row: 0, frames: [0,1,2,3,4,5,6,5,4,3,2,1], fps: 4 },
-    run: { row: 1, frames: [0,1,2,3,4,5,6,7], fps: 10 },
-    happy: { row: 4, frames: [0,1,2,3,4,3,2,1], fps: 8 },
-    sleep: { row: 10, frames: [0,1,2,3,4,5,6,7], fps: 3 }
+  const bank=options.thoughts || window.MIA_PET_THOUGHTS;
+  if(bank) installLines(bank);
+  else fetch(options.thoughtsSrc || asset('tiny-mia-thoughts.json'))
+    .then((response)=>{if(!response.ok) throw new Error(`Thought bank: ${response.status}`);return response.json();})
+    .then(installLines).catch((error)=>console.warn('Tiny Mia:',error.message));
+  sheet.onload=()=>{
+    if(sheet.naturalWidth!==768 || sheet.naturalHeight!==1386) {
+      console.warn('Tiny Mia: expected the original 768 × 1386 sprite atlas.');return;
+    }
+    ready=true;root.dataset.ready='true';root.dataset.lineCount=String(lines.length);
+    root.hidden=hidden;x=innerWidth-142;resize();play('idle');sync();
   };
-  let anim = anims.idle, frame = 0, lastFrame = performance.now();
-  let x = Math.max(8, innerWidth - 142), vx = 0, movingUntil = 0, bubbleTimer = 0, clicks = 0;
-  const recent = [];
-
-  function setX(v){ x = clamp(v, 4, Math.max(8, innerWidth - 92)); pet.style.setProperty("--x", `${x}px`); pet.dataset.side = x > innerWidth * .52 ? "left" : "right"; }
-  function setAnim(name){ anim = anims[name] || anims.idle; frame = 0; if (name === "happy") { pet.classList.add("is-happy"); setTimeout(()=>pet.classList.remove("is-happy"), 1400); } }
-  function draw(){ if (!fullSprite) return; const f = anim.frames[frame % anim.frames.length]; sprite.style.backgroundPosition = `${-f * FRAME_W}px ${-anim.row * FRAME_H}px`; }
-  function pick(){ for(let i=0;i<25;i++){ const text=linePool[Math.floor(Math.random()*linePool.length)]; if(!recent.includes(text)) return text; } return linePool[Math.floor(Math.random()*linePool.length)]; }
-  function say(text){ text = text || pick(); recent.push(text); while(recent.length>28) recent.shift(); bubble.textContent=text; pet.classList.add("is-speaking"); clearTimeout(bubbleTimer); bubbleTimer=setTimeout(()=>pet.classList.remove("is-speaking"), clamp(2900 + text.length * 35, 3800, 9000)); setAnim(chance(.42)?"happy":"idle"); }
-  function move(){ if (reduced) return; const dir = x > innerWidth*.72 ? -1 : x < innerWidth*.18 ? 1 : chance(.5) ? 1 : -1; vx = dir * rand(20, 58); movingUntil = performance.now() + rand(1600, 5200); pet.dataset.facing = dir < 0 ? "left" : "right"; setAnim(fullSprite ? "run" : "idle"); }
-  function behavior(){ if (!document.hidden) { if (chance(.34)) move(); else if (chance(.16)) setAnim("sleep"); else setAnim(chance(.22)?"happy":"idle"); } setTimeout(behavior, rand(4500, 12000)); }
-  function thoughtsLoop(){ setTimeout(()=>{ if(!document.hidden) say(); thoughtsLoop(); }, rand(17000, 52000)); }
-  function tick(now){ if(fullSprite && now-lastFrame > 1000/anim.fps){ lastFrame=now; frame=(frame+1)%anim.frames.length; draw(); } if(vx && now < movingUntil){ setX(x + vx/60); } else if(vx){ vx=0; movingUntil=0; setAnim("idle"); } requestAnimationFrame(tick); }
-
-  btn.addEventListener("click",()=>{ clicks++; say(clicks > 12 && chance(.5) ? `That is click ${clicks}. I am becoming legally difficult.` : ["Yes? Can I help you, tiny mortal?", "You poked the website cat. Consequences are loading.", "Careful. I bite in JavaScript.", "I accept tribute, compliments, and snacks.", "That click had suspicious energy."][Math.floor(Math.random()*5)]); });
-  btn.addEventListener("pointerenter",()=>{ if(!pet.classList.contains("is-speaking") && chance(.22)) say("I see the cursor. Suspicious."); });
-  addEventListener("resize",()=>setX(x),{passive:true});
-
-  setX(x); draw(); behavior(); thoughtsLoop(); setTimeout(()=>say(pageThoughts[page]?.[0] || "Tiny Mia has entered the website."), 1300); requestAnimationFrame(tick);
+  sheet.onerror=()=>{console.warn('Tiny Mia: sprite atlas has not been installed.');};
+  sheet.src=options.spriteSrc || asset('tiny-mia-cat-sprite.png');
 })();
