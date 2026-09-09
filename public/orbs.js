@@ -1,6 +1,18 @@
 (() => {
+  function loadTinyMiaPet() {
+    if (window.__miaPetLoaderAdded) return;
+    window.__miaPetLoaderAdded = true;
+    const script = document.createElement('script');
+    script.src = '/mia-pet.js';
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+
   const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) return;
+  if (reduced) {
+    loadTinyMiaPet();
+    return;
+  }
 
   const style = document.createElement('style');
   style.textContent = `
@@ -22,7 +34,10 @@
   document.body.prepend(canvas);
 
   const ctx = canvas.getContext('2d', { alpha: true });
-  if (!ctx) return;
+  if (!ctx) {
+    loadTinyMiaPet();
+    return;
+  }
 
   const rand = (min, max) => min + Math.random() * (max - min);
   const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
@@ -59,7 +74,6 @@
     width = window.innerWidth;
     height = window.innerHeight;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-
     canvas.width = Math.max(1, Math.floor(width * dpr));
     canvas.height = Math.max(1, Math.floor(height * dpr));
     canvas.style.width = `${width}px`;
@@ -79,9 +93,6 @@
 
     const nx = p.x / Math.max(width, 1);
     const ny = p.y / Math.max(height, 1);
-
-    // A slowly evolving flow field. Every orb samples a slightly different
-    // current, so there is no shared fixed path or repeating formation.
     const field =
       Math.sin((nx * 5.1 + t * 0.055) * p.fieldScale + p.phase) +
       Math.cos((ny * 4.3 - t * 0.047) * p.fieldScale + p.phase2) +
@@ -91,11 +102,10 @@
     const targetSpeed = p.speed * (0.82 + 0.2 * Math.sin(t * 0.17 + p.phase2));
     const targetVx = Math.cos(angle) * targetSpeed;
     const targetVy = Math.sin(angle) * targetSpeed;
-
     const easing = 1 - Math.exp(-p.turn * dt * 60);
+
     p.vx += (targetVx - p.vx) * easing;
     p.vy += (targetVy - p.vy) * easing;
-
     p.x += p.vx * dt;
     p.y += p.vy * dt;
 
@@ -110,8 +120,8 @@
     const pulse = 1 + Math.sin(t * p.breathe + p.phase) * 0.12;
     const glowRadius = p.glow * pulse;
     const alpha = p.alpha * (0.72 + 0.28 * Math.sin(t * p.breathe + p.phase2));
-
     const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowRadius);
+
     gradient.addColorStop(0, `rgba(225, 181, 255, ${alpha})`);
     gradient.addColorStop(0.12, `rgba(190, 118, 255, ${alpha * 0.62})`);
     gradient.addColorStop(0.42, `rgba(157, 82, 235, ${alpha * 0.22})`);
@@ -133,10 +143,12 @@
     const t = now / 1000;
     last = now;
 
-    ctx.clearRect(0, 0, width, height);
-    for (const p of particles) {
-      updateParticle(p, dt, t);
-      drawParticle(p, t);
+    if (!document.hidden) {
+      ctx.clearRect(0, 0, width, height);
+      for (const p of particles) {
+        updateParticle(p, dt, t);
+        drawParticle(p, t);
+      }
     }
 
     requestAnimationFrame(frame);
@@ -145,4 +157,5 @@
   resize();
   window.addEventListener('resize', resize, { passive: true });
   requestAnimationFrame(frame);
+  loadTinyMiaPet();
 })();
