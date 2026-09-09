@@ -3,7 +3,7 @@
     if (window.__miaPetLoaderAdded) return;
     window.__miaPetLoaderAdded = true;
     const script = document.createElement('script');
-    script.src = '/mia-pet.js';
+    script.src = '/mia-pet.js?v=vesper-20260909-r1';
     script.defer = true;
     document.head.appendChild(script);
   }
