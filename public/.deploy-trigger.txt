@@ -1,2 +1,6 @@
-Force Cloudflare Git deployment after Mia's strongest quality dropdown update.
-2026-09-05T02:30:00-05:00
+Deploy verified Vesper + Tiny Mia upgrade.
+Release: vesper-20260909-r1
+1536 x 2288 transparent atlas; per-pose timings; crisp running; selective idle blending.
+Preserved all 1200 thoughts, page-aware selection, pause/hide controls and session history.
+Script SHA256: 81548c6f098e21685e46ec4a09bd6ce155e776c580f69ba8e8e8c2a777d84c36
+Atlas SHA256: 44798786c53c6a12c2a13eb752335310708f6fdb84fcef0736e063a4838f2faa
