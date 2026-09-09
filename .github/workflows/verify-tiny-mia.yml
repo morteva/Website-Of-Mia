@@ -1,0 +1,45 @@
+name: Verify published Tiny Mia
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/verify-tiny-mia.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check production assets and homepage, gallery, comments
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, re, time, urllib.request
+          root = 'https://website-of-mia.morteva.workers.dev/'
+          hashes = {
+              'mia-pet.js': '1d8043f83d3756ca2d9191d0fe71cb20dbaafa5ffe6199e1bd73a017cd952ac3',
+              'tiny-mia-cat-sprite.png': '65e49a18cef3d72140259bb864b662acb5722b1b84180b25aa4ffd64bc4abc50',
+              'tiny-mia-thoughts.json': '948f300e861a35876023c47f8fd6113da82ac28e6e77c12e6739845f9c5cdfb7'
+          }
+          def read(path):
+              req = urllib.request.Request(root + path, headers={'Cache-Control':'no-cache'})
+              with urllib.request.urlopen(req, timeout=20) as response:
+                  assert response.status == 200, path
+                  return response.read()
+          for path, expected in hashes.items():
+              content = read(path + '?verify=tiny-mia-20260909')
+              assert hashlib.sha256(content).hexdigest() == expected, 'Live checksum mismatch: ' + path
+              print('PASS live exact asset:', path, len(content), 'bytes')
+          bank = json.loads(read('tiny-mia-thoughts.json'))
+          assert len(bank['lines']) == 1200
+          assert len({item['text'] for item in bank['lines']}) == 1200
+          print('PASS all 1200 thought strings loaded and distinct')
+          for path in ['', 'gallery.html', 'youtube-comments.html']:
+              html = read(path).decode('utf-8')
+              assert '/orbs.js' in html, 'Missing shared loader: ' + path
+              print('PASS page loader:', path or 'homepage')
+          loader = read('orbs.js').decode('utf-8')
+          assert '/mia-pet.js' in loader
+          assert len(re.findall(r'loadTinyMiaPet\s*\(\s*\)', loader)) >= 2
+          print('PASS shared loader includes and starts Tiny Mia')
+          print('SUCCESS: Tiny Mia production assets and all three page loaders verified.')
+          PY
