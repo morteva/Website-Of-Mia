@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 const publicDir = new URL('../public/', import.meta.url);
 const sourceDir = new URL('../content/tiny-mia-static/', import.meta.url);
 const expectedHash = 'fb5b1cce92b1f8063ee96ef285aebdb96e10b79e3bc89ceb3a45864210bec372';
-const release = 'tiny-static-20260910-r2';
+const release = 'tiny-static-20260910-r3';
 const parts = await Promise.all(Array.from({ length: 11 }, (_, index) =>
   readFile(new URL(`part-${String(index + 1).padStart(2, '0')}.bin`, sourceDir))
 ));
