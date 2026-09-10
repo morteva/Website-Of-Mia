@@ -219,7 +219,7 @@
   bubble.setAttribute('aria-atomic', 'true');
 
   const label = document.createElement('small');
-  label.textContent = 'Tiny Mia · imagined thoughts';
+  label.textContent = 'Tiny Mia';
 
   const copy = document.createElement('p');
   bubble.append(label, copy);
