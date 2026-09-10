@@ -110,7 +110,8 @@ function applyDefensiveBranding(source) {
     .replaceAll("<strong>Beside</strong>", "<strong>This Is Beside™</strong>")
     .replace("including Beside and work with a much more global reach", "including This Is Beside™ and work with a much more global reach")
     .replace("building Beside around one principle:", "building This Is Beside™ around one principle:")
-    .replace("Go explore Beside at", "Go explore This Is Beside™ at");
+    .replace("Go explore Beside at", "Go explore This Is Beside™ at")
+    .replaceAll("orbs.js?v=vesper-20260909-r1", "orbs.js?v=tiny-static-20260910-r1");
 }
 
 const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html"));
@@ -121,4 +122,4 @@ for (const file of rootHtmlFiles) {
   if (updated !== source) await writeFile(path, updated);
 }
 
-console.log("Injected Mira essay, corrected Mira origin passage, split current work into its own section, added gaming rankings, and applied defensive This Is Beside™ / Mira Home™ branding.");
+console.log("Injected Mira essay, corrected Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, and refreshed the Tiny Mia loader cache key.");
