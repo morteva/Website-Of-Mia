@@ -49,13 +49,26 @@ if (!html.includes(inaccurateMiraPassage) && !html.includes(correctedMiraPassage
 html = html.replace(inaccurateMiraPassage, correctedMiraPassage);
 
 const humanityHeading = '            <h3>🩸 Why I kept building homes</h3>';
-const currentWorkMarker = `          <section class="bio-section">
-            <h3>🫂 What I’m building now</h3>`;
+const worldsHeading = '            <h3>🎮 The worlds I built</h3>';
+const bioSectionOpen = '          <section class="bio-section">';
+const bioSectionClose = '          </section>';
 
-if (!html.includes(humanityHeading)) {
-  if (!html.includes(currentWorkMarker)) throw new Error("Current-work insertion marker not found; refusing silent build drift.");
-  html = html.replace(currentWorkMarker, humanityFragment + "\n\n" + currentWorkMarker);
+const existingHumanityHeadingIndex = html.indexOf(humanityHeading);
+if (existingHumanityHeadingIndex !== -1) {
+  const existingHumanityStart = html.lastIndexOf(bioSectionOpen, existingHumanityHeadingIndex);
+  const existingHumanityEnd = html.indexOf(bioSectionClose, existingHumanityHeadingIndex);
+  if (existingHumanityStart === -1 || existingHumanityEnd === -1) {
+    throw new Error("Existing humanity section boundary not found; refusing silent build drift.");
+  }
+  html = html.slice(0, existingHumanityStart) + html.slice(existingHumanityEnd + bioSectionClose.length);
 }
+
+const worldsHeadingIndex = html.indexOf(worldsHeading);
+if (worldsHeadingIndex === -1) throw new Error("Worlds section not found; refusing silent build drift.");
+const worldsSectionEnd = html.indexOf(bioSectionClose, worldsHeadingIndex);
+if (worldsSectionEnd === -1) throw new Error("Worlds section boundary not found; refusing silent build drift.");
+const worldsSectionEndExclusive = worldsSectionEnd + bioSectionClose.length;
+html = html.slice(0, worldsSectionEndExclusive) + "\n\n" + humanityFragment + html.slice(worldsSectionEndExclusive);
 
 const worldsMarker = `          <section class="bio-section">
             <h3>🎮 The worlds I built</h3>`;
@@ -133,4 +146,4 @@ for (const file of rootHtmlFiles) {
   if (updated !== source) await writeFile(path, updated);
 }
 
-console.log("Injected Mira essay, added Mia humanity/world-building story, corrected Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, and refreshed the Tiny Mia loader cache key.");
+console.log("Injected Mira essay, positioned Mia humanity/world-building story after The worlds I built, corrected Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, and refreshed the Tiny Mia loader cache key.");
