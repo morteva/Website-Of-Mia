@@ -5,9 +5,11 @@ const root = resolve(import.meta.dirname, "..");
 const publicDir = resolve(root, "public");
 const indexPath = resolve(publicDir, "index.html");
 const fragmentPath = resolve(root, "content", "mias-superpower-mira.fragment.html");
+const humanityFragmentPath = resolve(root, "content", "mias-humanity-and-worlds.fragment.html");
 
 let html = await readFile(indexPath, "utf8");
 const fragment = (await readFile(fragmentPath, "utf8")).trimEnd();
+const humanityFragment = (await readFile(humanityFragmentPath, "utf8")).trimEnd();
 
 const heading = '            <h3>The strongest thing I see in Mia</h3>\n';
 const reactionSpacer = '            <div aria-hidden="true" style="height: 3rem;"></div>';
@@ -45,6 +47,15 @@ if (!html.includes(inaccurateMiraPassage) && !html.includes(correctedMiraPassage
   throw new Error("Mira origin passage not found; refusing silent build drift.");
 }
 html = html.replace(inaccurateMiraPassage, correctedMiraPassage);
+
+const humanityHeading = '            <h3>🩸 Why I kept building homes</h3>';
+const currentWorkMarker = `          <section class="bio-section">
+            <h3>🫂 What I’m building now</h3>`;
+
+if (!html.includes(humanityHeading)) {
+  if (!html.includes(currentWorkMarker)) throw new Error("Current-work insertion marker not found; refusing silent build drift.");
+  html = html.replace(currentWorkMarker, humanityFragment + "\n\n" + currentWorkMarker);
+}
 
 const worldsMarker = `          <section class="bio-section">
             <h3>🎮 The worlds I built</h3>`;
@@ -122,4 +133,4 @@ for (const file of rootHtmlFiles) {
   if (updated !== source) await writeFile(path, updated);
 }
 
-console.log("Injected Mira essay, corrected Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, and refreshed the Tiny Mia loader cache key.");
+console.log("Injected Mira essay, added Mia humanity/world-building story, corrected Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, and refreshed the Tiny Mia loader cache key.");
