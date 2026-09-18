@@ -107,9 +107,7 @@
       object-fit: contain;
       user-select: none;
       -webkit-user-drag: none;
-      filter:
-        drop-shadow(0 5px 9px rgba(0,0,0,.72))
-        drop-shadow(0 0 9px rgba(143,72,180,.26));
+      filter: drop-shadow(0 5px 9px rgba(0,0,0,.72));
     }
     .tm-hide {
       position: absolute;
@@ -198,7 +196,7 @@
   sprite.title = 'Click for another Tiny Mia thought';
 
   const img = document.createElement('img');
-  img.src = asset('tiny-mia-static.png');
+  img.src = asset('tiny-mia-static.png?v=a726b1e6264c');
   img.alt = '';
   img.setAttribute('aria-hidden', 'true');
   sprite.append(img);
