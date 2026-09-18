@@ -382,11 +382,6 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 }
 .little-things-song strong { margin-bottom: 0; }
 .little-things-song p { color: #d0c5c5; }
-.little-things-closing {
-  margin-top: 28px !important;
-  color: var(--muted) !important;
-  font-style: italic;
-}
 @media (max-width: 640px) {
   .little-things-song { grid-template-columns: 1fr; gap: 3px; }
 }
