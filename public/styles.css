@@ -255,6 +255,26 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .quote-strip { margin-top: 32px; padding: 24px 27px; border-left: 2px solid var(--blood); background: linear-gradient(90deg, rgba(215,25,93,.13), transparent); color: #e0d4d3; font-family: var(--serif); font-size: 1.15rem; font-style: italic; line-height: 1.7; }
 
 .bio-details { margin-top: 20px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: linear-gradient(145deg, rgba(22,19,25,.96), rgba(9,8,11,.98)); box-shadow: var(--shadow-sm); }
+.bio-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+.bio-panel-grid > .bio-details,
+.bio-panel-grid > .bio-nav-card {
+  margin-top: 0;
+}
+.bio-panel-grid > .bio-details[open] {
+  grid-column: 1 / -1;
+}
+.bio-panel-grid > .bio-details-compact[open] {
+  grid-column: auto;
+}
+.bio-panel-grid > .bio-nav-card {
+  min-width: 0;
+}
+
 .bio-details summary, .album > summary, .group-head, .info-tab summary { list-style: none; cursor: pointer; }
 .bio-details summary::-webkit-details-marker, .album > summary::-webkit-details-marker, .group-head::-webkit-details-marker, .info-tab summary::-webkit-details-marker { display: none; }
 .bio-details > summary {
@@ -552,6 +572,8 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 42px; color: #766d70
 }
 
 @media (max-width: 800px) {
+  .bio-panel-grid { grid-template-columns: 1fr; gap: 14px; }
+  .bio-panel-grid > .bio-details[open], .bio-panel-grid > .bio-details-compact[open] { grid-column: 1; }
   .albums, .subalbums { grid-template-columns: 1fr; }
   .album-group { grid-column: auto; }
   .image-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
