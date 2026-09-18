@@ -482,7 +482,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 
 .passions-empty-space { min-height: 24vh; }
 
-.links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.links-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
 .link-card {
   position: relative;
   min-height: 190px;
@@ -504,6 +504,25 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .link-card small { color: var(--muted); font-size: .63rem; font-weight: 800; letter-spacing: .19em; text-transform: uppercase; }
 .link-card strong { font-size: clamp(1.65rem, 2.5vw, 2.05rem); letter-spacing: -.025em; }
 .link-card.beside { background: radial-gradient(circle at 84% 16%, rgba(215,25,93,.1575), transparent 48%), rgba(17,16,21,.69); }
+.link-card.exclusive-media {
+  border-color: rgba(215,25,93,.48);
+  background:
+    linear-gradient(145deg, rgba(58,10,30,.64), rgba(15,10,17,.68) 72%);
+  box-shadow: 0 18px 48px rgba(89,5,34,.13);
+}
+.link-card.exclusive-media::after {
+  content: "→";
+  color: #efa2bd;
+  text-shadow: 0 0 16px rgba(215,25,93,.46);
+}
+.link-card.exclusive-media:hover {
+  border-color: rgba(241,90,145,.80);
+  background:
+    linear-gradient(145deg, rgba(72,12,37,.70), rgba(18,11,20,.73) 72%);
+  box-shadow: 0 24px 64px rgba(121,7,48,.23);
+}
+.link-card.exclusive-media small { color: #efa2bd; }
+
 
 .gallery-callout { position: relative; margin-top: 18px; overflow: hidden; border: 1px solid rgba(215,25,93,.5); border-radius: var(--radius-md); background: linear-gradient(120deg, rgba(53,10,27,.705), rgba(13,10,14,.735) 64%); box-shadow: 0 22px 58px rgba(89,5,34,.18); transition: transform .3s var(--ease), border-color .3s, box-shadow .3s; }
 .gallery-callout::before { content: ""; position: absolute; width: 280px; height: 280px; left: -80px; top: -130px; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; }
@@ -567,6 +586,10 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .status { padding: 18px 0 clamp(90px, 11vw, 136px); }
 
 footer { border-top: 1px solid var(--line); padding: 32px 0 42px; color: #766d70; font-size: .65rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+
+@media (max-width: 1100px) {
+  .links-grid { grid-template-columns: repeat(3, 1fr); }
+}
 
 @media (max-width: 920px) {
   .hero { min-height: auto; }
