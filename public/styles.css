@@ -257,15 +257,15 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .bio-details {
   margin-top: 20px;
   overflow: hidden;
-  border: 1px solid rgba(255,244,244,.11);
+  border: 1px solid rgba(255,244,244,.16);
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(145deg, rgba(22,19,25,.70), rgba(9,8,11,.76));
+    linear-gradient(145deg, rgba(22,19,25,.38), rgba(9,8,11,.48));
   box-shadow:
-    0 16px 42px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.035);
-  backdrop-filter: blur(14px) saturate(118%);
-  -webkit-backdrop-filter: blur(14px) saturate(118%);
+    0 16px 42px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.055);
+  backdrop-filter: blur(2px) saturate(126%);
+  -webkit-backdrop-filter: blur(2px) saturate(126%);
 }
 .bio-panel-grid {
   display: grid;
@@ -296,13 +296,13 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   justify-content: space-between;
   gap: 22px;
   padding: 25px 32px;
-  background: linear-gradient(90deg, rgba(215,25,93,.12), rgba(215,25,93,.035) 30%, transparent 72%);
+  background: linear-gradient(90deg, rgba(215,25,93,.085), rgba(215,25,93,.018) 30%, transparent 72%);
   font-family: var(--serif);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
   transition: background .25s ease;
 }
 .bio-details > summary:hover {
-  background: linear-gradient(90deg, rgba(215,25,93,.17), rgba(215,25,93,.045) 32%, transparent 76%);
+  background: linear-gradient(90deg, rgba(215,25,93,.13), rgba(215,25,93,.028) 32%, transparent 76%);
 }
 .bio-details summary::after, .album > summary::after, .group-head::after, .info-tab summary::after { content: "+"; color: #b6a8ab; font-family: var(--sans); font-weight: 300; transition: transform .25s var(--ease), color .25s; }
 .bio-details[open] > summary::after, .album[open] > summary::after, .album-group[open] > .group-head::after, .info-tab[open] summary::after { content: "×"; color: var(--blush); transform: rotate(90deg); }
@@ -343,16 +343,16 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   gap: 22px;
   padding: 25px 32px;
   overflow: hidden;
-  border: 1px solid rgba(255,244,244,.11);
+  border: 1px solid rgba(255,244,244,.16);
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(90deg, rgba(215,25,93,.12), rgba(215,25,93,.035) 30%, transparent 72%),
-    linear-gradient(145deg, rgba(22,19,25,.70), rgba(9,8,11,.76));
+    linear-gradient(90deg, rgba(215,25,93,.085), rgba(215,25,93,.02) 30%, transparent 72%),
+    linear-gradient(145deg, rgba(22,19,25,.38), rgba(9,8,11,.48));
   box-shadow:
-    0 16px 42px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.035);
-  backdrop-filter: blur(14px) saturate(118%);
-  -webkit-backdrop-filter: blur(14px) saturate(118%);
+    0 16px 42px rgba(0,0,0,.20),
+    inset 0 1px 0 rgba(255,255,255,.055);
+  backdrop-filter: blur(2px) saturate(126%);
+  -webkit-backdrop-filter: blur(2px) saturate(126%);
   font-family: var(--serif);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
   transition: background .25s ease, border-color .25s ease, transform .25s var(--ease);
@@ -360,8 +360,8 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .bio-nav-card:hover {
   border-color: rgba(255,244,244,.19);
   background:
-    linear-gradient(90deg, rgba(215,25,93,.17), rgba(215,25,93,.045) 32%, transparent 76%),
-    linear-gradient(145deg, rgba(22,19,25,.66), rgba(9,8,11,.72));
+    linear-gradient(90deg, rgba(215,25,93,.13), rgba(215,25,93,.028) 32%, transparent 76%),
+    linear-gradient(145deg, rgba(22,19,25,.34), rgba(9,8,11,.44));
   transform: translateY(-2px);
 }
 .bio-nav-arrow {
@@ -458,7 +458,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   transition: background .25s ease;
 }
 .passion-panel-sample summary:hover {
-  background: linear-gradient(90deg, rgba(215,25,93,.17), rgba(215,25,93,.045) 32%, transparent 76%);
+  background: linear-gradient(90deg, rgba(215,25,93,.13), rgba(215,25,93,.028) 32%, transparent 76%);
 }
 .passion-panel-sample summary::-webkit-details-marker { display: none; }
 .passion-panel-sample summary::after {
