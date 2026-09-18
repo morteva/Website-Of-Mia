@@ -278,7 +278,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   border-bottom: 1px solid var(--line);
 }
 .bio-details[open] > summary::before {
-  content: "To collapse, re-click the thingymagic or double click anywhere inside this thingymagig";
+  content: "To close this section, click the title again or double-click anywhere within the panel.";
   position: absolute;
   left: 32px;
   right: 76px;
