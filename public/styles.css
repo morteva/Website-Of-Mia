@@ -272,7 +272,25 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .bio-details > summary:hover { background: linear-gradient(90deg, rgba(215,25,93,.2), transparent 72%); }
 .bio-details summary::after, .album > summary::after, .group-head::after, .info-tab summary::after { content: "+"; color: #b6a8ab; font-family: var(--sans); font-weight: 300; transition: transform .25s var(--ease), color .25s; }
 .bio-details[open] > summary::after, .album[open] > summary::after, .album-group[open] > .group-head::after, .info-tab[open] summary::after { content: "×"; color: var(--blush); transform: rotate(90deg); }
-.bio-details[open] > summary { border-bottom: 1px solid var(--line); }
+.bio-details[open] > summary {
+  position: relative;
+  padding-bottom: 39px;
+  border-bottom: 1px solid var(--line);
+}
+.bio-details[open] > summary::before {
+  content: "To collapse, re-click the thingymagic or double click anywhere inside this thingymagig";
+  position: absolute;
+  left: 32px;
+  right: 76px;
+  bottom: 9px;
+  color: var(--faint);
+  font-family: var(--sans);
+  font-size: .48rem;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: .055em;
+  opacity: .78;
+}
 .full-bio { max-width: 930px; padding: 12px 38px 42px; }
 .bio-section { padding: 34px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
 .bio-section:last-child { border-bottom: 0; }
@@ -468,6 +486,8 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 42px; color: #766d70
   .about-main { padding: 29px 24px; }
   .card { padding: 25px 23px; }
   .bio-details > summary { min-height: 76px; padding: 21px 22px; font-size: 1.12rem; }
+  .bio-details[open] > summary { padding-bottom: 38px; }
+  .bio-details[open] > summary::before { left: 22px; right: 56px; bottom: 8px; font-size: .44rem; }
   .bio-nav-card { min-height: 76px; padding: 21px 22px; font-size: 1.12rem; }
   .passions-page { padding-block: 58px 78px; }
   .passions-intro { margin-top: 30px; padding: 22px 0 24px 18px; }
