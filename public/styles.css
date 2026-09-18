@@ -378,7 +378,68 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   line-height: 1.75;
 }
 .passions-intro p:last-child { margin-bottom: 0; }
-.passions-empty-space { min-height: 36vh; }
+
+.passions-panel-demo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: clamp(44px, 6vw, 72px);
+}
+.passion-panel {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: linear-gradient(145deg, rgba(22,19,25,.96), rgba(9,8,11,.98));
+  box-shadow: var(--shadow-sm);
+}
+.passion-panel[open] {
+  grid-column: 1 / -1;
+  border-color: rgba(215,25,93,.28);
+}
+.passion-panel summary {
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 26px 30px;
+  list-style: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgba(215,25,93,.12), transparent 72%);
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  transition: background .25s ease;
+}
+.passion-panel summary::-webkit-details-marker { display: none; }
+.passion-panel summary::after {
+  content: "+";
+  color: #b6a8ab;
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 300;
+  transition: transform .25s var(--ease), color .25s;
+}
+.passion-panel[open] summary {
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(90deg, rgba(215,25,93,.18), transparent 76%);
+}
+.passion-panel[open] summary::after {
+  content: "×";
+  color: var(--blush);
+  transform: rotate(90deg);
+}
+.passion-panel-body {
+  padding: 28px 30px 34px;
+}
+.passion-panel-body p {
+  max-width: 880px;
+  margin: 0;
+  color: var(--text-soft);
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+.passions-empty-space { min-height: 24vh; }
 
 .links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 .link-card {
@@ -509,6 +570,10 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 42px; color: #766d70
   .bio-nav-card { min-height: 76px; padding: 21px 22px; font-size: 1.12rem; }
   .passions-page { padding-block: 58px 78px; }
   .passions-intro { margin-top: 30px; padding: 22px 0 24px 18px; }
+  .passions-panel-demo { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
+  .passion-panel[open] { grid-column: 1; }
+  .passion-panel summary { min-height: 78px; padding: 22px; font-size: 1.2rem; }
+  .passion-panel-body { padding: 22px; }
   .full-bio { padding: 8px 22px 30px; }
   .bio-section { padding-block: 28px; }
   .links-grid { grid-template-columns: 1fr; }
