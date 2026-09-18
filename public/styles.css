@@ -721,33 +721,3 @@ body::after {
   }
 }
 
-.about-main,
-.card,
-.bio-details,
-.album,
-.album-group,
-.video-card {
-  background: linear-gradient(145deg, rgba(24,21,28,.78), rgba(11,10,13,.86));
-  -webkit-backdrop-filter: blur(10px) saturate(112%);
-  backdrop-filter: blur(10px) saturate(112%);
-}
-
-.link-card {
-  background: rgba(17,16,21,.72);
-  -webkit-backdrop-filter: blur(9px) saturate(112%);
-  backdrop-filter: blur(9px) saturate(112%);
-}
-
-.link-card:hover { background: rgba(23,21,27,.88); }
-.link-card.beside {
-  background:
-    radial-gradient(circle at 84% 16%, rgba(215,25,93,.19), transparent 48%),
-    rgba(17,16,21,.76);
-}
-
-.subalbums .album { background: rgba(17,16,21,.42); }
-.info-tab {
-  background: rgba(15,13,18,.46);
-  -webkit-backdrop-filter: blur(7px);
-  backdrop-filter: blur(7px);
-}
