@@ -254,20 +254,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .card h3 { margin: 12px 0 13px; font-size: clamp(1.65rem, 2.5vw, 2.05rem); line-height: 1.06; letter-spacing: -.025em; }
 .quote-strip { margin-top: 32px; padding: 24px 27px; border-left: 2px solid var(--blood); background: linear-gradient(90deg, rgba(215,25,93,.13), transparent); color: #e0d4d3; font-family: var(--serif); font-size: 1.15rem; font-style: italic; line-height: 1.7; }
 
-.bio-details {
-  margin-top: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.11);
-  border-radius: var(--radius-lg);
-  background:
-    linear-gradient(90deg, rgba(215,25,93,.055), rgba(215,25,93,.012) 30%, transparent 72%),
-    rgba(13,14,17,.42);
-  box-shadow:
-    0 18px 44px rgba(0,0,0,.17),
-    inset 0 1px 0 rgba(255,255,255,.05);
-  backdrop-filter: blur(10px) saturate(72%);
-  -webkit-backdrop-filter: blur(10px) saturate(72%);
-}
+.bio-details { margin-top: 20px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: linear-gradient(145deg, rgba(22,19,25,.96), rgba(9,8,11,.98)); box-shadow: var(--shadow-sm); }
 .bio-panel-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -297,14 +284,12 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   justify-content: space-between;
   gap: 22px;
   padding: 25px 32px;
-  background: linear-gradient(90deg, rgba(215,25,93,.055), rgba(215,25,93,.012) 30%, transparent 72%);
+  background: linear-gradient(90deg, rgba(215,25,93,.13), transparent 68%);
   font-family: var(--serif);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
   transition: background .25s ease;
 }
-.bio-details > summary:hover {
-  background: linear-gradient(90deg, rgba(215,25,93,.085), rgba(215,25,93,.018) 32%, transparent 76%);
-}
+.bio-details > summary:hover { background: linear-gradient(90deg, rgba(215,25,93,.2), transparent 72%); }
 .bio-details summary::after, .album > summary::after, .group-head::after, .info-tab summary::after { content: "+"; color: #b6a8ab; font-family: var(--sans); font-weight: 300; transition: transform .25s var(--ease), color .25s; }
 .bio-details[open] > summary::after, .album[open] > summary::after, .album-group[open] > .group-head::after, .info-tab[open] summary::after { content: "×"; color: var(--blush); transform: rotate(90deg); }
 .bio-details[open] > summary {
@@ -344,25 +329,17 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   gap: 22px;
   padding: 25px 32px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.11);
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(90deg, rgba(215,25,93,.055), rgba(215,25,93,.012) 30%, transparent 72%),
-    rgba(13,14,17,.42);
-  box-shadow:
-    0 18px 44px rgba(0,0,0,.17),
-    inset 0 1px 0 rgba(255,255,255,.05);
-  backdrop-filter: blur(10px) saturate(72%);
-  -webkit-backdrop-filter: blur(10px) saturate(72%);
+  background: linear-gradient(90deg, rgba(215,25,93,.13), transparent 68%), linear-gradient(145deg, rgba(22,19,25,.96), rgba(9,8,11,.98));
+  box-shadow: var(--shadow-sm);
   font-family: var(--serif);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
   transition: background .25s ease, border-color .25s ease, transform .25s var(--ease);
 }
 .bio-nav-card:hover {
-  border-color: rgba(255,244,244,.19);
-  background:
-    linear-gradient(90deg, rgba(215,25,93,.13), rgba(215,25,93,.028) 32%, transparent 76%),
-    linear-gradient(145deg, rgba(22,19,25,.34), rgba(9,8,11,.44));
+  border-color: var(--line-strong);
+  background: linear-gradient(90deg, rgba(215,25,93,.2), transparent 72%), linear-gradient(145deg, rgba(22,19,25,.96), rgba(9,8,11,.98));
   transform: translateY(-2px);
 }
 .bio-nav-arrow {
@@ -430,16 +407,10 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 }
 .passion-panel-sample {
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.11);
+  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(90deg, rgba(215,25,93,.055), rgba(215,25,93,.012) 30%, transparent 72%),
-    rgba(13,14,17,.42);
-  box-shadow:
-    0 18px 44px rgba(0,0,0,.17),
-    inset 0 1px 0 rgba(255,255,255,.05);
-  backdrop-filter: blur(10px) saturate(72%);
-  -webkit-backdrop-filter: blur(10px) saturate(72%);
+  background: linear-gradient(145deg, rgba(22,19,25,.96), rgba(9,8,11,.98));
+  box-shadow: var(--shadow-sm);
 }
 .passion-panel-sample[open] {
   grid-column: 1 / -1;
@@ -454,14 +425,14 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   padding: 25px 32px;
   list-style: none;
   cursor: pointer;
-  background: linear-gradient(90deg, rgba(215,25,93,.055), rgba(215,25,93,.012) 30%, transparent 72%);
+  background: linear-gradient(90deg, rgba(215,25,93,.13), transparent 68%);
   color: var(--text);
   font-family: var(--serif);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
   transition: background .25s ease;
 }
 .passion-panel-sample summary:hover {
-  background: linear-gradient(90deg, rgba(215,25,93,.085), rgba(215,25,93,.018) 32%, transparent 76%);
+  background: linear-gradient(90deg, rgba(215,25,93,.2), transparent 72%);
 }
 .passion-panel-sample summary::-webkit-details-marker { display: none; }
 .passion-panel-sample summary::after {
