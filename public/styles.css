@@ -322,6 +322,72 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .bio-section h3 { margin: 0 0 18px; font-size: clamp(1.7rem, 3vw, 2.45rem); letter-spacing: -.025em; }
 .bio-section p { margin: 0 0 16px; color: #c8bebe; line-height: 1.85; }
 .bio-section p:last-child { margin-bottom: 0; }
+
+.little-things-section { padding-top: 28px; }
+.little-things-intro {
+  margin-bottom: 30px !important;
+  color: #cfc5c5 !important;
+}
+.little-things-group {
+  padding: 26px 0 30px;
+  border-top: 1px solid rgba(255,255,255,.075);
+}
+.little-things-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.little-things-heading span {
+  color: var(--blush);
+  font-size: .56rem;
+  font-weight: 850;
+  letter-spacing: .18em;
+}
+.little-things-heading h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+}
+.little-things-list {
+  display: grid;
+  gap: 10px;
+}
+.little-things-item {
+  padding: 17px 18px;
+  border: 1px solid rgba(255,255,255,.075);
+  border-radius: 12px;
+  background: rgba(255,255,255,.018);
+}
+.little-things-item strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #f0e8e7;
+  font-family: var(--serif);
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+.little-things-item p {
+  margin: 0;
+  color: #bdb3b3;
+  line-height: 1.7;
+}
+.little-things-song {
+  display: grid;
+  grid-template-columns: minmax(110px,.42fr) 1fr;
+  align-items: baseline;
+  gap: 14px;
+}
+.little-things-song strong { margin-bottom: 0; }
+.little-things-song p { color: #d0c5c5; }
+.little-things-closing {
+  margin-top: 28px !important;
+  color: var(--muted) !important;
+  font-style: italic;
+}
+@media (max-width: 640px) {
+  .little-things-song { grid-template-columns: 1fr; gap: 3px; }
+}
+
 .bio-link, .info-body a { color: var(--blush); text-decoration: underline; text-decoration-color: rgba(241,154,185,.45); text-underline-offset: 4px; transition: color .2s, text-decoration-color .2s; }
 .bio-link:hover, .info-body a:hover { color: #ffd4e3; text-decoration-color: currentColor; }
 
