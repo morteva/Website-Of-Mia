@@ -324,19 +324,22 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .bio-section p:last-child { margin-bottom: 0; }
 
 .little-things-section { padding-top: 28px; }
-.little-things-intro {
-  margin-bottom: 30px !important;
-  color: #cfc5c5 !important;
-}
 .little-things-group {
-  padding: 26px 0 30px;
+  padding: 34px 0 42px;
   border-top: 1px solid rgba(255,255,255,.075);
+}
+.little-things-section > .little-things-group:first-child {
+  padding-top: 8px;
+  border-top: 0;
+}
+.little-things-group + .little-things-group {
+  margin-top: 24px;
 }
 .little-things-heading {
   display: flex;
   align-items: baseline;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 26px;
 }
 .little-things-heading span {
   color: var(--blush);
@@ -350,10 +353,10 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 }
 .little-things-list {
   display: grid;
-  gap: 10px;
+  gap: 16px;
 }
 .little-things-item {
-  padding: 17px 18px;
+  padding: 22px 22px;
   border: 1px solid rgba(255,255,255,.075);
   border-radius: 12px;
   background: rgba(255,255,255,.018);
