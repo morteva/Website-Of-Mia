@@ -3,7 +3,7 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-gothic.png', publicDir);
-const release = 'tiny-gothic-20260918-r3';
+const release = 'tiny-gothic-doll-20260918-r1';
 
 const image = await readFile(imagePath);
 if (image.length < 1000) {
@@ -19,7 +19,7 @@ if (!imageAssignment.test(pet) || !petLoader.test(orbs)) {
   throw new Error('Tiny Mia image or loader reference changed; refusing silent build drift.');
 }
 
-const updatedPet = pet.replace(imageAssignment, `img.src = asset('tiny-mia-gothic.png?v=1e36df66b9e8');`);
+const updatedPet = pet.replace(imageAssignment, `img.src = asset('tiny-mia-gothic.png?v=20260918-doll1');`);
 const updatedOrbs = orbs.replace(petLoader, `script.src = '/mia-pet.js?v=${release}';`);
 const htmlFiles = (await readdir(publicDir)).filter(name => name.endsWith('.html'));
 const pages = await Promise.all(htmlFiles.map(async name => {
@@ -34,4 +34,4 @@ for (const page of pages) {
   if (page.updated !== page.source) await writeFile(page.path, page.updated);
 }
 
-console.log(`Tiny Mia: gothic doll image present; prior creature backup preserved.`);
+console.log(`Tiny Mia: gothic doll cutout present; previous mascot preserved as OLD-BACKUP.`);

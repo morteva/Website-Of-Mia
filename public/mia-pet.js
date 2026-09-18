@@ -196,7 +196,7 @@
   sprite.title = 'Click for another Tiny Mia thought';
 
   const img = document.createElement('img');
-  img.src = asset('tiny-mia-gothic.png?v=1e36df66b9e8');
+  img.src = asset('tiny-mia-gothic.png?v=20260918-doll1');
   img.alt = '';
   img.setAttribute('aria-hidden', 'true');
   sprite.append(img);
