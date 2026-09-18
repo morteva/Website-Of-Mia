@@ -7,7 +7,7 @@ const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-static.png', publicDir);
 const expectedHash = 'cb5d4728f06f9815ab0a8b1e7948c9ad7e7741a064d249e177a326e023afe013';
 const expectedLength = 12133;
-const release = 'tiny-gothic-20260918-r1';
+const release = 'tiny-gothic-20260918-r2';
 
 const image = await readFile(imagePath);
 if (image.length !== expectedLength || createHash('sha256').update(image).digest('hex') !== expectedHash) {
