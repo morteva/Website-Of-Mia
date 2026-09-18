@@ -3,7 +3,7 @@
     if (window.__miaPetLoaderAdded) return;
     window.__miaPetLoaderAdded = true;
     const script = document.createElement('script');
-    script.src = '/mia-pet.js?v=tiny-gothic-20260918-r2';
+    script.src = '/mia-pet.js?v=tiny-gothic-20260918-r3';
     script.defer = true;
     document.head.appendChild(script);
   }
