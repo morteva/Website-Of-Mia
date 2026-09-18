@@ -392,6 +392,10 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   background: linear-gradient(145deg, rgba(22,19,25,.96), rgba(9,8,11,.98));
   box-shadow: var(--shadow-sm);
 }
+.passion-panel-sample[open] {
+  grid-column: 1 / -1;
+}
+
 .passion-panel-sample summary {
   min-height: 86px;
   display: flex;
