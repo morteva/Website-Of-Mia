@@ -423,7 +423,23 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   transition: transform .25s var(--ease), color .25s;
 }
 .passion-panel-sample[open] summary {
+  position: relative;
+  padding-bottom: 39px;
   border-bottom: 1px solid var(--line);
+}
+.passion-panel-sample[open] summary::before {
+  content: "To close this section, click the title again or double-click anywhere within the panel.";
+  position: absolute;
+  left: 32px;
+  right: 76px;
+  bottom: 9px;
+  color: var(--faint);
+  font-family: var(--sans);
+  font-size: .48rem;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: .055em;
+  opacity: .78;
 }
 .passion-panel-sample[open] summary::after {
   content: "×";
@@ -572,6 +588,8 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 42px; color: #766d70
   .passions-intro { margin-top: 30px; padding: 22px 0 24px 18px; }
   .passions-panel-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 40px; }
   .passion-panel-sample summary { min-height: 76px; padding: 21px 22px; font-size: 1.12rem; }
+  .passion-panel-sample[open] summary { padding-bottom: 38px; }
+  .passion-panel-sample[open] summary::before { left: 22px; right: 56px; bottom: 8px; font-size: .44rem; }
   .passion-panel-content { padding: 8px 22px 24px; }
   .full-bio { padding: 8px 22px 30px; }
   .bio-section { padding-block: 28px; }
