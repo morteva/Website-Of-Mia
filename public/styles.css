@@ -626,6 +626,44 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .album > summary { min-height: 100px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 26px 28px; background: linear-gradient(90deg, rgba(215,25,93,.04125), transparent); transition: background .25s; }
 .album > summary:hover { background: linear-gradient(90deg, rgba(215,25,93,.09), transparent 72%); }
 .album[open] > summary { border-bottom: 1px solid var(--line); }
+
+.album-external {
+  display: block;
+  min-height: 100px;
+}
+.album-external-inner {
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 26px 28px;
+  background: linear-gradient(90deg, rgba(215,25,93,.04125), transparent);
+  transition: background .25s;
+}
+.album-external:hover .album-external-inner {
+  background: linear-gradient(90deg, rgba(215,25,93,.09), transparent 72%);
+}
+.album-external-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex: 0 0 auto;
+}
+.album-external-arrow {
+  color: var(--blush);
+  font-size: 1rem;
+  line-height: 1;
+}
+.album-external-meta small {
+  color: var(--faint);
+  font-size: .5rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 .album-title { display: grid; gap: 5px; }
 .album-title strong, .group-title { font-size: 1.85rem; line-height: 1.1; letter-spacing: -.025em; }
 .album-title small, .group-kicker { color: var(--muted); font-size: .62rem; font-weight: 800; letter-spacing: .19em; text-transform: uppercase; }
