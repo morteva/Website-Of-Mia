@@ -109,6 +109,9 @@
       -webkit-user-drag: none;
       filter: drop-shadow(0 5px 9px rgba(0,0,0,.72));
     }
+    .tm-root.tm-expanded {
+      --tm-size: min(62vw, 72vh);
+    }
     .tm-hide {
       position: absolute;
       right: 2px;
@@ -126,8 +129,48 @@
       pointer-events: auto;
       font: 8px/1 Inter, system-ui, sans-serif;
     }
-    .tm-hide:hover { background: #302138; }
-    .tm-sprite:focus-visible, .tm-hide:focus-visible, .tm-restore:focus-visible {
+    .tm-expand {
+      position: absolute;
+      right: 2px;
+      bottom: 18px;
+      display: grid;
+      place-items: center;
+      width: 14px;
+      height: 14px;
+      padding: 0;
+      border: 1px solid #74617d;
+      border-radius: 3px;
+      background: rgba(13,10,18,.93);
+      color: #ded0e8;
+      cursor: pointer;
+      pointer-events: auto;
+      font: 9px/1 Inter, system-ui, sans-serif;
+    }
+    .tm-minimize-back {
+      position: absolute;
+      left: 50%;
+      top: -54px;
+      display: none;
+      min-width: min(280px, calc(100vw - 24px));
+      transform: translateX(-50%);
+      border: 1px solid rgba(202,148,222,.58);
+      border-radius: 999px;
+      padding: 13px 24px;
+      background: linear-gradient(135deg, rgba(43,20,51,.98), rgba(20,13,27,.98));
+      color: #fff5ff;
+      box-shadow: 0 10px 32px #000a, inset 0 1px rgba(255,255,255,.08);
+      cursor: pointer;
+      pointer-events: auto;
+      font: 800 15px/1 Inter, system-ui, sans-serif;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .tm-root.tm-expanded .tm-expand { display: none; }
+    .tm-root.tm-expanded .tm-minimize-back { display: block; }
+    .tm-hide:hover, .tm-expand:hover { background: #302138; }
+    .tm-minimize-back:hover { border-color: #d5a4ed; background: linear-gradient(135deg, #472253, #23152d); }
+    .tm-sprite:focus-visible, .tm-hide:focus-visible, .tm-expand:focus-visible,
+    .tm-minimize-back:focus-visible, .tm-restore:focus-visible {
       outline: 2px solid #d5a4ed;
       outline-offset: 4px;
     }
@@ -174,7 +217,9 @@
     }
     @media (max-width: 600px) {
       .tm-root { --tm-size: 96px; right: 4px; bottom: 4px; }
+      .tm-root.tm-expanded { --tm-size: min(82vw, 68vh); right: 8px; }
       .tm-bubble { bottom: 108px; }
+      .tm-minimize-back { top: -48px; min-width: min(240px, calc(100vw - 20px)); padding: 11px 18px; font-size: 13px; }
     }
     @media print {
       .tm-root, .tm-bubble, .tm-restore { display: none !important; }
@@ -207,7 +252,21 @@
   hide.textContent = '×';
   hide.title = 'Hide Tiny Mia';
   hide.setAttribute('aria-label', 'Hide Tiny Mia');
-  root.append(sprite, hide);
+
+  const expand = document.createElement('button');
+  expand.type = 'button';
+  expand.className = 'tm-expand';
+  expand.textContent = '⛶';
+  expand.title = 'Make Tiny Mia full size';
+  expand.setAttribute('aria-label', 'Make Tiny Mia full size');
+
+  const minimizeBack = document.createElement('button');
+  minimizeBack.type = 'button';
+  minimizeBack.className = 'tm-minimize-back';
+  minimizeBack.textContent = 'Minimize Back';
+  minimizeBack.setAttribute('aria-label', 'Minimize Tiny Mia back to normal size');
+
+  root.append(sprite, expand, hide, minimizeBack);
 
   const bubble = document.createElement('div');
   bubble.className = 'tm-bubble';
@@ -252,6 +311,7 @@
   });
 
   hide.addEventListener('click', () => {
+    root.classList.remove('tm-expanded');
     hidden = true;
     root.hidden = true;
     bubble.hidden = true;
@@ -259,6 +319,16 @@
     clearTimeout(bubbleTimer);
     clearTimeout(speechTimer);
     persist();
+  });
+
+  expand.addEventListener('click', () => {
+    root.classList.add('tm-expanded');
+    bubble.hidden = true;
+    clearTimeout(bubbleTimer);
+  });
+
+  minimizeBack.addEventListener('click', () => {
+    root.classList.remove('tm-expanded');
   });
 
   restore.addEventListener('click', () => {

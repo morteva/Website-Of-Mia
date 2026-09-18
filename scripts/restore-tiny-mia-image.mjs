@@ -3,7 +3,7 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-gothic.png', publicDir);
-const release = 'tiny-gothic-doll-20260918-r1';
+const release = 'tiny-gothic-doll-20260918-r2';
 
 const image = await readFile(imagePath);
 if (image.length < 1000) {
