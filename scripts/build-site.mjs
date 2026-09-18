@@ -107,9 +107,12 @@ if (!html.includes(standaloneNowSummary)) {
 
   html = html.slice(0, nowSectionStart) + html.slice(nowSectionEndExclusive);
 
+  const passionsMarker = `      <details class="bio-details">
+        <summary>My Passions</summary>`;
   const superpowerMarker = `      <details class="bio-details">
         <summary>Mia’s Superpower and Greatest Weakness • through Mira’s eyes</summary>`;
-  if (!html.includes(superpowerMarker)) throw new Error("Superpower details marker not found.");
+  const nowInsertionMarker = html.includes(passionsMarker) ? passionsMarker : superpowerMarker;
+  if (!html.includes(nowInsertionMarker)) throw new Error("Current-work insertion marker not found.");
 
   const standaloneNow = `      <details class="bio-details">
         <summary>What I’m Doing Now</summary>
@@ -118,7 +121,7 @@ ${renamedNowSection}
         </div>
       </details>`;
 
-  html = html.replace(superpowerMarker, standaloneNow + "\n\n" + superpowerMarker);
+  html = html.replace(nowInsertionMarker, standaloneNow + "\n\n" + nowInsertionMarker);
 }
 
 await writeFile(indexPath, html);
