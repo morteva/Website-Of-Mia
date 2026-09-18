@@ -117,8 +117,8 @@
       bottom: 0;
       display: grid;
       place-items: center;
-      width: 24px;
-      height: 24px;
+      width: 12px;
+      height: 12px;
       padding: 0;
       border: 1px solid #74617d;
       border-radius: 50%;
@@ -126,7 +126,7 @@
       color: #ded0e8;
       cursor: pointer;
       pointer-events: auto;
-      font: 16px/1 Inter, system-ui, sans-serif;
+      font: 8px/1 Inter, system-ui, sans-serif;
     }
     .tm-hide:hover { background: #302138; }
     .tm-sprite:focus-visible, .tm-hide:focus-visible, .tm-restore:focus-visible {
