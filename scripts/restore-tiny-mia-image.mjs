@@ -5,8 +5,8 @@ import { createHash } from 'node:crypto';
 
 const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-static.png', publicDir);
-const expectedHash = 'a726b1e6264c51ed49e23802f54acf8a21de44bc4bd51bd1b58dc11d7b3adcba';
-const expectedLength = 26313;
+const expectedHash = 'cb5d4728f06f9815ab0a8b1e7948c9ad7e7741a064d249e177a326e023afe013';
+const expectedLength = 12133;
 const release = 'tiny-gothic-20260918-r1';
 
 const image = await readFile(imagePath);
