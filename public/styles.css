@@ -118,7 +118,7 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 22px;
+  margin-bottom: 14px;
   color: #d9ced0;
   font-size: .69rem;
   font-weight: 850;
@@ -136,22 +136,22 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 
 .hero {
   position: relative;
-  min-height: calc(100svh - 76px);
+  min-height: auto;
   display: flex;
   align-items: center;
-  padding-block: clamp(74px, 9vw, 122px);
+  padding-block: clamp(52px, 5.5vw, 74px) clamp(44px, 5vw, 66px);
 }
 .hero::after {
   content: "01 / MIA";
   position: absolute;
   right: 0;
-  bottom: 24px;
+  bottom: 8px;
   color: var(--faint);
   font-size: .62rem;
   font-weight: 800;
   letter-spacing: .23em;
 }
-.hero-content { position: relative; z-index: 2; width: 100%; max-width: 1040px; }
+.hero-content { position: relative; z-index: 2; width: 100%; max-width: 960px; }
 .hero h1 {
   margin: 0 0 0 -0.07em;
   font-size: clamp(6rem, 13.5vw, 12rem);
@@ -164,8 +164,8 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   display: grid;
   grid-template-columns: 250px minmax(0, 1fr);
   align-items: center;
-  gap: clamp(30px, 4vw, 52px);
-  margin-top: 42px;
+  gap: clamp(24px, 3vw, 38px);
+  margin-top: 28px;
 }
 .hero-copy {
   position: relative;
@@ -221,7 +221,8 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   mask-composite: intersect;
 }
 
-.section { padding-block: clamp(88px, 11vw, 142px); }
+.section { padding-block: clamp(72px, 8vw, 104px); }
+#about.section { padding-top: clamp(42px, 4.5vw, 62px); }
 .section-head {
   display: flex;
   align-items: end;
@@ -389,16 +390,17 @@ footer { border-top: 1px solid var(--line); padding: 32px 0 42px; color: #766d70
   .nav-links { gap: 13px; font-size: .68rem; letter-spacing: .025em; }
   .nav-links a { padding-block: 22px 20px; }
   .nav-links a::after { bottom: 14px; }
-  .hero { min-height: auto; padding-block: 65px 88px; }
-  .hero::after { bottom: 30px; }
+  .hero { min-height: auto; padding-block: 48px 56px; }
+  .hero::after { bottom: 8px; }
   .hero h1 { font-size: clamp(5.5rem, 28vw, 8rem); }
-  .hero-signature { grid-template-columns: 1fr; gap: 26px; margin-top: 36px; }
+  .hero-signature { grid-template-columns: 1fr; gap: 22px; margin-top: 26px; }
   .hero-art { width: 250px; max-width: 100%; }
   .hero-art img { width: 250px; max-width: 100%; }
   .hero-copy { margin-top: 0; padding-left: 17px; font-size: 1rem; }
   .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
   .btn { padding-inline: 15px; }
-  .section { padding-block: 82px; }
+  .section { padding-block: 64px; }
+  #about.section { padding-top: 38px; }
   .section-head { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 28px; }
   .section-head p { text-align: left; }
   .about-main { padding: 29px 24px; }
