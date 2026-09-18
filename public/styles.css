@@ -429,14 +429,15 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 }
 .passion-panel-sample {
   overflow: hidden;
-  border: 1px solid rgba(255,244,244,.11);
+  border: 1px solid rgba(255,244,244,.16);
   border-radius: var(--radius-lg);
-  background: linear-gradient(145deg, rgba(22,19,25,.70), rgba(9,8,11,.76));
+  background:
+    linear-gradient(145deg, rgba(22,19,25,.30), rgba(9,8,11,.38));
   box-shadow:
-    0 16px 42px rgba(0,0,0,.22),
-    inset 0 1px 0 rgba(255,255,255,.035);
-  backdrop-filter: blur(14px) saturate(118%);
-  -webkit-backdrop-filter: blur(14px) saturate(118%);
+    0 16px 42px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.06);
+  backdrop-filter: blur(1px) saturate(130%);
+  -webkit-backdrop-filter: blur(1px) saturate(130%);
 }
 .passion-panel-sample[open] {
   grid-column: 1 / -1;
@@ -451,7 +452,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   padding: 25px 32px;
   list-style: none;
   cursor: pointer;
-  background: linear-gradient(90deg, rgba(215,25,93,.13), transparent 68%);
+  background: linear-gradient(90deg, rgba(215,25,93,.075), rgba(215,25,93,.015) 30%, transparent 72%);
   color: var(--text);
   font-family: var(--serif);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
