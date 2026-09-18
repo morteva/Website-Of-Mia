@@ -262,8 +262,8 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .bio-details { margin-top: 20px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: linear-gradient(145deg, rgba(22,19,25,.72), rgba(9,8,11,.735)); box-shadow: var(--shadow-sm); }
 .bio-panel-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 18px;
   margin-top: 20px;
 }
 .bio-panel-grid > .bio-details,
