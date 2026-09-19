@@ -998,3 +998,205 @@ body::after {
   }
 }
 
+
+
+/* A Quiet Hello */
+.hello-page {
+  min-height: calc(100svh - 76px);
+  padding-block: clamp(62px, 7vw, 96px) clamp(88px, 10vw, 126px);
+}
+.hello-head {
+  max-width: 760px;
+}
+.hello-head h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(4rem, 9vw, 7.5rem);
+  font-weight: 400;
+  line-height: .86;
+  letter-spacing: -.06em;
+}
+.hello-intro {
+  max-width: 650px;
+  margin: 30px 0 0;
+  color: var(--text-soft);
+  font-family: var(--serif);
+  font-size: clamp(1rem, 1.7vw, 1.18rem);
+  line-height: 1.75;
+}
+.hello-card {
+  max-width: 860px;
+  margin-top: 44px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(22,19,25,.72), rgba(9,8,11,.735));
+  box-shadow: var(--shadow-sm);
+}
+.hello-disclaimer {
+  border-bottom: 1px solid var(--line);
+}
+.hello-disclaimer > summary {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 21px 26px;
+  list-style: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, rgba(215,25,93,.09), transparent 70%);
+  color: #e8dddf;
+  font-size: .72rem;
+  font-weight: 850;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+  transition: background .22s ease;
+}
+.hello-disclaimer > summary:hover {
+  background: linear-gradient(90deg, rgba(215,25,93,.14), transparent 72%);
+}
+.hello-disclaimer > summary::-webkit-details-marker { display: none; }
+.hello-disclaimer > summary::after {
+  content: "+";
+  color: var(--blush);
+  font-size: 1.05rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  transition: transform .22s var(--ease);
+}
+.hello-disclaimer[open] > summary::after {
+  transform: rotate(45deg);
+}
+.hello-disclaimer-body {
+  max-width: 760px;
+  padding: 24px 26px 30px;
+}
+.hello-disclaimer-body p {
+  margin: 0 0 16px;
+  color: #c5babc;
+  line-height: 1.78;
+}
+.hello-disclaimer-body p:last-child { margin-bottom: 0; }
+
+.hello-form {
+  display: grid;
+  gap: 21px;
+  padding: 30px 26px 32px;
+}
+.hello-field {
+  display: grid;
+  gap: 8px;
+}
+.hello-label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+.hello-field label {
+  color: #ded3d5;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.hello-optional {
+  color: var(--faint);
+  font-size: .57rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.hello-field input,
+.hello-field textarea {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.105);
+  border-radius: 10px;
+  background: rgba(255,255,255,.025);
+  color: var(--text);
+  font: inherit;
+  font-size: .9rem;
+  line-height: 1.55;
+  outline: none;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.hello-field input {
+  min-height: 46px;
+  padding: 0 14px;
+}
+.hello-field textarea {
+  min-height: 190px;
+  padding: 13px 14px;
+  resize: vertical;
+}
+.hello-field input::placeholder,
+.hello-field textarea::placeholder {
+  color: #675f62;
+}
+.hello-field input:focus,
+.hello-field textarea:focus {
+  border-color: rgba(241,154,185,.42);
+  background: rgba(255,255,255,.035);
+  box-shadow: 0 0 0 3px rgba(215,25,93,.07);
+}
+.hello-help {
+  margin: 0;
+  color: #756c6f;
+  font-size: .66rem;
+  line-height: 1.55;
+}
+.hello-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: #a99fa1;
+  font-size: .72rem;
+  line-height: 1.6;
+}
+.hello-consent input {
+  width: 16px;
+  height: 16px;
+  margin: 3px 0 0;
+  accent-color: var(--blood);
+}
+.hello-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-top: 3px;
+}
+.hello-submit {
+  min-height: 43px;
+  padding: 0 18px;
+  border: 1px solid rgba(241,154,185,.24);
+  border-radius: 999px;
+  background: rgba(215,25,93,.075);
+  color: #cbbfc1;
+  font: inherit;
+  font-size: .69rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.hello-submit:disabled {
+  cursor: not-allowed;
+  opacity: .48;
+}
+.hello-setup-note {
+  margin: 0;
+  color: #6f6669;
+  font-size: .62rem;
+  line-height: 1.5;
+  text-align: right;
+}
+@media (max-width: 640px) {
+  .hello-page { padding-block: 50px 82px; }
+  .hello-card { margin-top: 34px; border-radius: 20px; }
+  .hello-disclaimer > summary,
+  .hello-disclaimer-body,
+  .hello-form { padding-left: 20px; padding-right: 20px; }
+  .hello-actions { align-items: flex-start; flex-direction: column; }
+  .hello-setup-note { text-align: left; }
+}
