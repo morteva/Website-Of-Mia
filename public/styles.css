@@ -258,6 +258,8 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .card:hover { transform: translateY(-3px); border-color: var(--line-strong); }
 .card h3 { margin: 12px 0 13px; font-size: clamp(1.65rem, 2.5vw, 2.05rem); line-height: 1.06; letter-spacing: -.025em; }
 .quote-strip { margin-top: 32px; padding: 24px 27px; border-left: 2px solid var(--blood); background: linear-gradient(90deg, rgba(215,25,93,.13), transparent); color: #e0d4d3; font-family: var(--serif); font-size: 1.15rem; font-style: italic; line-height: 1.7; }
+.about-quote-stack { margin-top: 32px; display: grid; gap: 14px; }
+.about-quote-stack .quote-strip { margin-top: 0; }
 
 .bio-details { margin-top: 20px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: linear-gradient(145deg, rgba(22,19,25,.72), rgba(9,8,11,.735)); box-shadow: var(--shadow-sm); }
 .bio-panel-grid {
