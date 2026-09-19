@@ -140,7 +140,7 @@ function applyDefensiveBranding(source) {
 
 const protectionLoader = '<script src="/content-protection.js?v=20260918-r1" defer data-content-protection></script>';
 
-const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html"));
+const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html") && !/^google[a-z0-9_-]+\.html$/i.test(file));
 for (const file of rootHtmlFiles) {
   const path = join(publicDir, file);
   const source = await readFile(path, "utf8");
