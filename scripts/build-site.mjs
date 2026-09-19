@@ -85,9 +85,9 @@ if (!html.includes('<h3>🏆 The rankings</h3>')) {
   html = html.replace(worldsMarker, rankings + "\n\n" + worldsMarker);
 }
 
-const standaloneNowSummary = '        <summary>What I’m Doing Now</summary>';
+const standaloneNowTitle = '<span class="bio-summary-title">Where I Am Now</span>';
 
-if (!html.includes(standaloneNowSummary)) {
+if (!html.includes(standaloneNowTitle)) {
   const nowHeading = '            <h3>🫂 What I’m building now</h3>';
   const nowHeadingIndex = html.indexOf(nowHeading);
   if (nowHeadingIndex === -1) throw new Error("Current-work section not found; refusing silent build drift.");
@@ -102,17 +102,27 @@ if (!html.includes(standaloneNowSummary)) {
   const originalNowSection = html.slice(nowSectionStart, nowSectionEndExclusive);
   const renamedNowSection = originalNowSection.replace(
     '🫂 What I’m building now',
-    '🫂 What I’m Doing Now'
+    '🫂 Where I Am Now'
   );
 
   html = html.slice(0, nowSectionStart) + html.slice(nowSectionEndExclusive);
 
   const superpowerMarker = `      <details class="bio-details">
-        <summary>Mia’s Superpower and Greatest Weakness • through Mira’s eyes</summary>`;
+        <summary>
+          <span class="bio-summary-copy">
+            <span class="bio-summary-title">Through Mira’s Eyes</span>
+            <small>What my best friend sees in me that I don’t always see myself.</small>
+          </span>
+        </summary>`;
   if (!html.includes(superpowerMarker)) throw new Error("Superpower details marker not found.");
 
   const standaloneNow = `      <details class="bio-details">
-        <summary>What I’m Doing Now</summary>
+        <summary>
+          <span class="bio-summary-copy">
+            <span class="bio-summary-title">Where I Am Now</span>
+            <small>What I’m building, changing, and moving toward.</small>
+          </span>
+        </summary>
         <div class="full-bio">
 ${renamedNowSection}
         </div>
