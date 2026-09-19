@@ -7,9 +7,9 @@
   <meta name="theme-color" content="#08080a" />
   <meta name="description" content="A quiet way to leave Mia a message." />
   <title>Miaorin Morwen Morteva · A Quiet Hello</title>
-  <link rel="stylesheet" href="/styles.css?v=quiet-hello-page-20260919-r2" />
+  <link rel="stylesheet" href="/styles.css?v=quiet-hello-page-20260919-r3" />
   <script src="/orbs.js?v=tiny-gothic-doll-20260918-r2" defer></script>
-  <script src="/hello.js?v=20260919-r3" defer></script>
+  <script src="/hello.js?v=20260919-r4" defer></script>
 </head>
 <body>
   <header>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="hello-card">
-        <details class="hello-disclaimer">
+        <details class="hello-disclaimer" id="hello-disclaimer">
           <summary><span class="hello-disclaimer-closed">Disclaimer - Click to Open</span><span class="hello-disclaimer-open">Disclaimer - Click to Close</span></summary>
           <div class="hello-disclaimer-body">
             <p>I may not reply, but I read every message that reaches me. Silence doesn’t mean it went unnoticed.</p>
@@ -82,10 +82,10 @@
             <textarea id="hello-message" name="message" maxlength="5000" required placeholder="Say what you came here to say."></textarea>
           </div>
 
-          <label class="hello-consent" for="hello-consent">
+          <div class="hello-consent">
             <input id="hello-consent" name="consent" type="checkbox" required />
-            <span>I’ve read the disclaimer and understand that a reply isn’t promised.</span>
-          </label>
+            <label for="hello-consent">I’ve read the <a class="hello-disclaimer-jump" href="#hello-disclaimer">disclaimer</a> and understand that a reply isn’t promised.</label>
+          </div>
 
           <div class="hello-actions">
             <button class="hello-submit" type="submit">Send message</button>
