@@ -20,17 +20,20 @@
       return;
     }
 
-    const data = new FormData(form);
+    const formData = new FormData(form);
 
-    if (String(data.get("website") || "").trim()) {
+    if (String(formData.get("website") || "").trim()) {
       form.reset();
       setStatus("Message sent. Thank you for trusting me with it.", "success");
       return;
     }
 
-    const subject = String(data.get("subject") || "").trim();
-    if (!subject) data.set("subject", "A Quiet Hello");
-    data.delete("website");
+    formData.delete("website");
+
+    const subject = String(formData.get("subject") || "").trim();
+    if (!subject) formData.set("subject", "A Quiet Hello");
+
+    const payload = Object.fromEntries(formData.entries());
 
     button.disabled = true;
     button.textContent = "Sending…";
@@ -39,8 +42,11 @@
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: data,
-        headers: { Accept: "application/json" }
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(payload)
       });
 
       const result = await response.json().catch(() => ({}));
