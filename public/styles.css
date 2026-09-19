@@ -376,6 +376,73 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   color: #bdb3b3;
   line-height: 1.7;
 }
+
+.little-person-item {
+  padding: 0;
+  overflow: hidden;
+}
+.little-person-details {
+  width: 100%;
+}
+.little-person-details summary {
+  min-height: 84px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 7px;
+  padding: 22px;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+}
+.little-person-details summary::-webkit-details-marker { display: none; }
+.little-person-details summary::marker { content: ""; }
+.little-person-details summary strong {
+  margin: 0;
+}
+.little-person-arrow {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--blush);
+  font-size: .92rem;
+  line-height: 1;
+  opacity: .72;
+  transform-origin: center;
+  transition: transform .22s var(--ease), opacity .22s ease;
+}
+.little-person-details summary:hover .little-person-arrow {
+  opacity: 1;
+  transform: translateY(2px);
+}
+.little-person-details[open] summary {
+  border-bottom: 1px solid rgba(255,255,255,.065);
+}
+.little-person-details[open] .little-person-arrow {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+.little-person-details[open] summary:hover .little-person-arrow {
+  transform: rotate(180deg) translateY(-2px);
+}
+.little-person-copy {
+  max-width: 860px;
+  padding: 22px 22px 26px;
+}
+.little-person-copy p {
+  margin: 0 0 15px;
+  color: #c8bebe;
+  line-height: 1.78;
+}
+.little-person-copy p:last-child { margin-bottom: 0; }
+.little-person-copy strong {
+  display: inline;
+  margin: 0;
+  color: #f0e8e7;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 750;
+}
 .little-things-song {
   display: grid;
   grid-template-columns: minmax(110px,.42fr) 1fr;
