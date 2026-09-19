@@ -5,6 +5,21 @@
 
   if (!form || !status || !button) return;
 
+  const disclaimer = document.getElementById("hello-disclaimer");
+  const disclaimerJump = document.querySelector(".hello-disclaimer-jump");
+
+  disclaimerJump?.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (!disclaimer) return;
+
+    disclaimer.open = true;
+    disclaimer.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    window.setTimeout(() => {
+      disclaimer.querySelector("summary")?.focus({ preventScroll: true });
+    }, 450);
+  });
+
   function setStatus(message, state = "") {
     status.textContent = message;
     if (state) status.dataset.state = state;
