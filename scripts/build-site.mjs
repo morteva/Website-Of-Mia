@@ -138,12 +138,20 @@ function applyDefensiveBranding(source) {
     .replaceAll("orbs.js?v=vesper-20260909-r1", "orbs.js?v=tiny-static-20260910-r1");
 }
 
+const protectionLoader = '<script src="/content-protection.js?v=20260918-r1" defer data-content-protection></script>';
+
 const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html"));
 for (const file of rootHtmlFiles) {
   const path = join(publicDir, file);
   const source = await readFile(path, "utf8");
-  const updated = applyDefensiveBranding(source);
+  let updated = applyDefensiveBranding(source);
+
+  if (!updated.includes("data-content-protection")) {
+    if (!/<\/head>/i.test(updated)) throw new Error(`Missing head in public page: ${path}`);
+    updated = updated.replace(/<\/head>/i, `  ${protectionLoader}\n</head>`);
+  }
+
   if (updated !== source) await writeFile(path, updated);
 }
 
-console.log("Injected Mira essay, positioned Mia humanity/world-building story after The worlds I built, corrected Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, and refreshed the Tiny Mia loader cache key.");
+console.log("Injected Mira essay, positioned Mia humanity/world-building story after The worlds I built, corrected Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, refreshed Tiny Mia, and enabled casual content protection.");
