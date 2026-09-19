@@ -1201,6 +1201,21 @@ body::after {
   margin: 3px 0 0;
   accent-color: var(--blood);
 }
+.hello-disclaimer {
+  scroll-margin-top: 94px;
+}
+.hello-disclaimer-jump {
+  color: #cbbfc1;
+  text-decoration: underline;
+  text-decoration-color: rgba(241,154,185,.5);
+  text-underline-offset: 3px;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+.hello-disclaimer-jump:hover,
+.hello-disclaimer-jump:focus-visible {
+  color: #f0e6e8;
+  text-decoration-color: var(--blush);
+}
 .hello-actions {
   display: flex;
   align-items: center;
