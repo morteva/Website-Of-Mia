@@ -7,8 +7,9 @@
   <meta name="theme-color" content="#08080a" />
   <meta name="description" content="A quiet way to leave Mia a message." />
   <title>Miaorin Morwen Morteva · A Quiet Hello</title>
-  <link rel="stylesheet" href="/styles.css?v=quiet-hello-page-20260919-r1" />
+  <link rel="stylesheet" href="/styles.css?v=quiet-hello-page-20260919-r2" />
   <script src="/orbs.js?v=tiny-gothic-doll-20260918-r2" defer></script>
+  <script src="/hello.js?v=20260919-r1" defer></script>
 </head>
 <body>
   <header>
@@ -36,13 +37,17 @@
             <p>On the rare chance I do decide to reply, make sure the email address you leave is correct. If you don’t hear from me within a day, you probably won’t. That doesn’t mean I disliked what you said or that your message didn’t matter.</p>
             <p>I’m simply very private about opening my life beyond this website to people I don’t know. This space lets me share parts of myself on my own terms, and I’d appreciate that boundary being respected.</p>
             <p>Cruel, threatening, or deliberately fucked-up messages aren’t going to ruin my day. They’ll get a shrug, a delete, and nothing more.</p>
-            <p>What you send here comes to me, not a marketing list. I will not sell, trade, rent, or hand your email address to advertisers, companies, or anyone else willing to throw money at me. Your information is not a product.</p>
+            <p>Your message is sent through a form-delivery service to reach my private inbox. I do not sell, trade, rent, or hand your email address to advertisers, companies, or anyone else willing to throw money at me. I do not use it for marketing. The delivery service may temporarily process or retain submissions as part of delivering them. Your information is not a product to me.</p>
             <p>I’m happy to hear what you’d like to see on this site. Ask me questions. Tell me what you think I should expand on. Tell me what helped you, what made something harder, or what you wish I had talked about.</p>
             <p>Suggestions are welcome. Instructions on who I should be are not. This website exists because I chose to be honest about who I am. That part isn’t up for editing.</p>
           </div>
         </details>
 
-        <form class="hello-form" id="quiet-hello-form">
+        <form class="hello-form" id="quiet-hello-form" novalidate>
+          <div class="hello-honeypot" aria-hidden="true">
+            <label for="hello-website">Website</label>
+            <input id="hello-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
           <div class="hello-field">
             <div class="hello-label-row">
               <label for="hello-name">Name</label>
@@ -80,8 +85,8 @@
           </label>
 
           <div class="hello-actions">
-            <button class="hello-submit" type="submit" disabled>Send message</button>
-            <p class="hello-setup-note">Secure delivery is being connected before this goes live.</p>
+            <button class="hello-submit" type="submit">Send message</button>
+            <p class="hello-status" id="hello-status" role="status" aria-live="polite"></p>
           </div>
         </form>
       </div>
