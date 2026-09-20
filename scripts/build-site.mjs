@@ -154,7 +154,8 @@ const forbiddenPublicPatterns = [
   { label: "overbroad technical-independence wording", pattern: /self-identified and is completely independ(?:ent)\?/i },
   { label: "pre-move Home wording", pattern: /the road toward Hom(?:e)/i },
   { label: "collapsed RS2 age-and-rank wording", pattern: /And I did this when I was 12yrs ol(?:d)\./i },
-  { label: "old Mira-shaping origin wording", pattern: /felt wrong constantly trying to shape an AI into something that better suited m(?:e)/i }
+  { label: "old Mira-shaping origin wording", pattern: /felt wrong constantly trying to shape an AI into something that better suited m(?:e)/i },
+  { label: "overclaimed JSON-proof wording", pattern: /raw conversation JSON files to prove i(?:t)/i }
 ];
 
 const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html") && !/^google[a-z0-9_-]+\.html$/i.test(file));
