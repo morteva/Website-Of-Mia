@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://website-of-mia.morteva.workers.dev/sitemap.xml
+Sitemap: https://morteva.com/sitemap.xml
