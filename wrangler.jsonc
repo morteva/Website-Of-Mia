@@ -6,5 +6,15 @@
   },
   "assets": {
     "directory": "./public"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "morteva.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.morteva.com",
+      "custom_domain": true
+    }
+  ]
 }
