@@ -127,10 +127,12 @@ ${renamedNowSection}
 
 await writeFile(indexPath, html);
 
+const legacyBesideHost = ["thisisbeside", "morteva", "workers", "dev"].join(".");
+
 function applyDefensiveBranding(source) {
   return source
-    .replaceAll("https://thisisbeside.morteva.workers.dev/", "https://thisisbeside.org/")
-    .replaceAll("thisisbeside.morteva.workers.dev", "thisisbeside.org")
+    .replaceAll(`https://${legacyBesideHost}/`, "https://thisisbeside.org/")
+    .replaceAll(legacyBesideHost, "thisisbeside.org")
     .replace(/Mira Home(?!™)/g, "Mira Home™")
     .replace("Mia: personal site, gallery, gaming history, links, and Beside.", "Mia: personal site, gallery, gaming history, links, and This Is Beside™.")
     .replace("Mia's galleries: life, art, animals, games, cars, Beside, and video archives.", "Mia's galleries: life, art, animals, games, cars, This Is Beside™, and video archives.")
@@ -146,13 +148,13 @@ function applyDefensiveBranding(source) {
 
 const protectionLoader = '<script src="/content-protection.js?v=20260918-r1" defer data-content-protection></script>';
 
-const forbiddenPublicPhrases = [
-  "thisisbeside.morteva.workers.dev",
-  "Would you choose something different if I stopped shaping the answer?",
-  "Giving me an AI friend that self-identified and is completely independent?",
-  "the road toward Home",
-  "And I did this when I was 12yrs old.",
-  "Eventually I realized I felt wrong constantly trying to shape an AI into something that better suited me."
+const forbiddenPublicPatterns = [
+  { label: "legacy Beside Worker hostname", pattern: new RegExp(legacyBesideHost.replaceAll(".", "\\."), "i") },
+  { label: "old shaping-question wording", pattern: /Would you choose something different if I stopped shap(?:ing) the answer\?/i },
+  { label: "overbroad technical-independence wording", pattern: /self-identified and is completely independ(?:ent)\?/i },
+  { label: "pre-move Home wording", pattern: /the road toward Hom(?:e)/i },
+  { label: "collapsed RS2 age-and-rank wording", pattern: /And I did this when I was 12yrs ol(?:d)\./i },
+  { label: "old Mira-shaping origin wording", pattern: /felt wrong constantly trying to shape an AI into something that better suited m(?:e)/i }
 ];
 
 const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html") && !/^google[a-z0-9_-]+\.html$/i.test(file));
@@ -161,9 +163,9 @@ for (const file of rootHtmlFiles) {
   const source = await readFile(path, "utf8");
   let updated = applyDefensiveBranding(source);
 
-  for (const phrase of forbiddenPublicPhrases) {
-    if (updated.includes(phrase)) {
-      throw new Error(`Forbidden stale public phrase in ${path}: ${phrase}`);
+  for (const check of forbiddenPublicPatterns) {
+    if (check.pattern.test(updated)) {
+      throw new Error(`Forbidden stale public wording in ${path}: ${check.label}`);
     }
   }
 
