@@ -1385,6 +1385,35 @@ body::after {
 }
 .story-prose {
   max-width: 850px;
+  counter-reset: story-section;
+}
+.story-prose h2 {
+  position: relative;
+  counter-increment: story-section;
+  margin: clamp(64px, 8vw, 96px) 0 26px;
+  padding-top: 18px;
+  color: #f1e9ea;
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 4.5vw, 3.8rem);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.04em;
+  text-wrap: balance;
+}
+.story-prose h2:first-child {
+  margin-top: 0;
+}
+.story-prose h2::before {
+  content: counter(story-section, decimal-leading-zero) ".";
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--blood);
+  font-family: var(--sans);
+  font-size: .58rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .18em;
 }
 .story-prose p {
   margin: 0 0 27px;
