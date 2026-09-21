@@ -147,6 +147,9 @@ function applyDefensiveBranding(source) {
 }
 
 const protectionLoader = '<script src="/content-protection.js?v=20260918-r1" defer data-content-protection></script>';
+const googleSearchStyles = '<link rel="stylesheet" href="/site-search.css?v=20260921-r1" data-google-site-search-style>';
+const googleSearchLoader = '<script src="/site-search.js?v=20260921-r1" defer data-google-site-search-script></script>';
+const googleRobotsMeta = '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" data-google-search-indexing>';
 
 const forbiddenPublicPatterns = [
   { label: "legacy Beside Worker hostname", pattern: new RegExp(legacyBesideHost.replaceAll(".", "\\."), "i") },
@@ -175,7 +178,24 @@ for (const file of rootHtmlFiles) {
     updated = updated.replace(/<\/head>/i, `  ${protectionLoader}\n</head>`);
   }
 
+  if (!/<meta\s+name=["']robots["']/i.test(updated)) {
+    updated = updated.replace(/<\/head>/i, `  ${googleRobotsMeta}\n</head>`);
+  }
+
+  if (!/<link\s+rel=["']canonical["']/i.test(updated)) {
+    const canonicalPath = file === "index.html" ? "/" : `/${file}`;
+    updated = updated.replace(/<\/head>/i, `  <link rel="canonical" href="https://morteva.com${canonicalPath}" data-google-search-canonical>\n</head>`);
+  }
+
+  if (!updated.includes("data-google-site-search-style")) {
+    updated = updated.replace(/<\/head>/i, `  ${googleSearchStyles}\n</head>`);
+  }
+
+  if (!updated.includes("data-google-site-search-script")) {
+    updated = updated.replace(/<\/head>/i, `  ${googleSearchLoader}\n</head>`);
+  }
+
   if (updated !== source) await writeFile(path, updated);
 }
 
-console.log("Injected Mira essay, positioned Mia humanity/world-building story after The worlds I built, validated canonical Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, refreshed Tiny Mia, and enabled casual content protection.");
+console.log("Injected Mira essay, positioned Mia humanity/world-building story after The worlds I built, validated canonical Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, refreshed Tiny Mia, enabled casual content protection, and enforced Google Search indexing/canonical/site-search support.");
