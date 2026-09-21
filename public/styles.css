@@ -720,16 +720,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .link-card.voice-logs-card {
   grid-column: 1;
   grid-row: 2;
-  border-color: rgba(241,154,185,.20);
-  background:
-    radial-gradient(circle at 84% 16%, rgba(215,25,93,.10), transparent 46%),
-    rgba(17,16,21,.66);
 }
-.link-card.voice-logs-card::after {
-  content: "→";
-  color: var(--blush);
-}
-.link-card.voice-logs-card small { color: #d6a0b4; }
 
 
 .gallery-callout { position: relative; margin-top: 18px; overflow: hidden; border: 1px solid rgba(215,25,93,.5); border-radius: var(--radius-md); background: linear-gradient(120deg, rgba(53,10,27,.705), rgba(13,10,14,.735) 64%); box-shadow: 0 22px 58px rgba(89,5,34,.18); transition: transform .3s var(--ease), border-color .3s, box-shadow .3s; }
