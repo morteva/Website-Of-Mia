@@ -72,7 +72,7 @@ if (!html.includes('<h3>🏆 The rankings</h3>')) {
             <h3>🏆 The rankings</h3>
             <p>I spent years competing near the top across multiple MMOs: Top 5,000 in RS2, server Top 3 progression in SWTOR, roughly top 0.8% WoW Arena, 44th Blizzard-side Frost DK in TWW S2, and Top 1% Raider.IO PvE in TWW S2 and S3.</p>
             <div class="quote-strip">“Ranks fade. Games die. But the people who became family outlive the world that brought them together.”</div>
-            <p><a class="bio-link" href="/gallery.html">See the screenshots, history, and receipts in my gallery →</a></p>
+            <p><a class="bio-link" href="/gallery.html">See the screenshots, history, and proof in my gallery →</a></p>
           </section>`;
 
   if (!html.includes(worldsMarker)) throw new Error("Worlds section not found; refusing silent build drift.");
