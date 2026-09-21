@@ -70,7 +70,7 @@ img, video { max-width: 100%; }
 .shell { width: min(var(--content), calc(100% - 64px)); margin-inline: auto; }
 section { scroll-margin-top: 92px; }
 
-header {
+body > header {
   position: sticky;
   top: 0;
   z-index: 30;
