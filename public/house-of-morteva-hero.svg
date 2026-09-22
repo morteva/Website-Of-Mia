@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 820" role="img" aria-labelledby="title desc">
+  <title id="title">House of Morteva crest</title>
+  <desc id="desc">A silver gothic M framed by dark red crescents and a jeweled central spine.</desc>
+  <defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf6"/>
+      <stop offset=".13" stop-color="#b9b0aa"/>
+      <stop offset=".32" stop-color="#f4ece7"/>
+      <stop offset=".53" stop-color="#8b8582"/>
+      <stop offset=".72" stop-color="#e8ded8"/>
+      <stop offset="1" stop-color="#706b69"/>
+    </linearGradient>
+    <linearGradient id="silverEdge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffaf6"/>
+      <stop offset=".5" stop-color="#d7ccc7"/>
+      <stop offset="1" stop-color="#8c8683"/>
+    </linearGradient>
+    <linearGradient id="blood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ee315f"/>
+      <stop offset=".33" stop-color="#be163f"/>
+      <stop offset=".72" stop-color="#7f0d35"/>
+      <stop offset="1" stop-color="#350712"/>
+    </linearGradient>
+    <filter id="shadow" x="-35%" y="-35%" width="170%" height="170%">
+      <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#000" flood-opacity=".58"/>
+    </filter>
+    <filter id="redGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="1 0 0 0 0.85  0 0.15 0 0 0.02  0 0 0.2 0 0.12  0 0 0 .45 0" result="glow"/>
+      <feMerge><feMergeNode in="glow"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <g opacity=".96" filter="url(#redGlow)">
+    <path d="M333 177 C271 118 148 146 108 271 C73 379 130 511 314 649"
+          fill="none" stroke="url(#blood)" stroke-width="28" stroke-linecap="round"/>
+    <path d="M387 177 C449 118 572 146 612 271 C647 379 590 511 406 649"
+          fill="none" stroke="url(#blood)" stroke-width="28" stroke-linecap="round"/>
+    <path d="M330 181 C268 139 176 159 139 261"
+          fill="none" stroke="#ff5578" stroke-width="2.2" opacity=".55"/>
+    <path d="M390 181 C452 139 544 159 581 261"
+          fill="none" stroke="#ff5578" stroke-width="2.2" opacity=".55"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <path d="M111 183 L250 183 L360 494 L470 183 L609 183 L552 226 L552 606 L614 665 L438 665 L492 606 L492 319 L392 598 L328 598 L228 319 L228 606 L282 665 L106 665 L168 606 L168 226 Z"
+          fill="url(#silver)" stroke="#f8f1ed" stroke-width="4.2" stroke-linejoin="round"/>
+    <path d="M128 198 L238 198 L360 537 L482 198 L592 198"
+          fill="none" stroke="#413d3c" stroke-width="4" opacity=".72"/>
+    <path d="M188 236 L188 585 M532 236 L532 585"
+          stroke="#5f5a58" stroke-width="2.2" opacity=".55"/>
+    <path d="M213 215 L253 215 L360 511 L467 215 L507 215"
+          fill="none" stroke="#fff7f1" stroke-width="1.5" opacity=".42"/>
+  </g>
+
+  <g fill="url(#silverEdge)" stroke="#fff8f3" stroke-width="2.6" filter="url(#shadow)">
+    <path d="M360 48 L389 145 L360 196 L331 145 Z"/>
+    <path d="M360 198 L373 335 L360 381 L347 335 Z"/>
+    <path d="M360 383 L374 526 L360 580 L346 526 Z"/>
+    <path d="M360 582 L391 681 L360 778 L329 681 Z"/>
+  </g>
+
+  <g fill="url(#blood)" stroke="#ffc0cf" stroke-width="2.4" filter="url(#redGlow)">
+    <path d="M360 96 L382 132 L360 168 L338 132 Z"/>
+    <path d="M360 643 L381 679 L360 715 L339 679 Z"/>
+  </g>
+
+  <circle cx="360" cy="381" r="8" fill="#dcd1cb" stroke="#fff7f2" stroke-width="2.2"/>
+  <g fill="#f4ece7" opacity=".88">
+    <path d="M89 318 L112 330 L89 342 L66 330 Z"/>
+    <path d="M631 318 L654 330 L631 342 L608 330 Z"/>
+  </g>
+</svg>
