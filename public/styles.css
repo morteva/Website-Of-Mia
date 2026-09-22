@@ -167,14 +167,10 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 }
 .hero-signature {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(320px, 430px);
+  grid-template-columns: 250px minmax(0, 1fr);
   align-items: center;
-  gap: clamp(28px, 4vw, 58px);
+  gap: clamp(24px, 3vw, 38px);
   margin-top: 28px;
-}
-
-.hero-signature-house {
-  width: min(100%, 1120px);
 }
 .hero-copy {
   position: relative;
@@ -212,29 +208,52 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 
 .hero-art { position: relative; min-height: 0; display: block; isolation: isolate; }
 
-.hero-art-house {
-  width: min(100%, 430px);
-  justify-self: end;
-  text-align: center;
+.hero-photo {
+  width: 250px;
 }
 
-.hero-art-house img {
-  width: 100%;
+.hero-photo img {
+  width: 250px;
   max-width: none;
   height: auto;
   display: block;
   border: 0;
-  border-radius: 0;
+  border-radius: 18px;
   box-shadow: none;
+  filter: none;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0, #000 9%, #000 91%, transparent 100%),
+    linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.hero-house-mark {
+  position: absolute;
+  right: 0;
+  bottom: 54px;
+  z-index: 1;
+  width: clamp(285px, 26vw, 350px);
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero-house-mark img {
+  width: 100%;
+  height: auto;
+  display: block;
   filter:
-    drop-shadow(0 0 14px rgba(215,25,93,.13))
-    drop-shadow(0 18px 44px rgba(0,0,0,.38));
+    drop-shadow(0 0 12px rgba(215,25,93,.12))
+    drop-shadow(0 16px 38px rgba(0,0,0,.34));
 }
 
 .hero-house-label {
   position: relative;
-  width: min(88%, 350px);
-  margin: -2px auto 0;
+  width: min(88%, 300px);
+  margin: -4px auto 0;
   display: grid;
   gap: 1px;
   color: #a99da0;
@@ -244,24 +263,24 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 
 .hero-house-label::before {
   content: "";
-  width: 82px;
+  width: 70px;
   height: 1px;
-  margin: 0 auto 10px;
-  background: linear-gradient(90deg, transparent, rgba(215,25,93,.65), transparent);
+  margin: 0 auto 9px;
+  background: linear-gradient(90deg, transparent, rgba(215,25,93,.58), transparent);
 }
 
 .hero-house-label span {
-  font-size: .52rem;
+  font-size: .49rem;
   font-weight: 800;
-  letter-spacing: .34em;
+  letter-spacing: .32em;
 }
 
 .hero-house-label strong {
   color: #d8cecc;
   font-family: var(--serif);
-  font-size: clamp(1rem, 1.7vw, 1.34rem);
+  font-size: clamp(.96rem, 1.45vw, 1.18rem);
   font-weight: 400;
-  letter-spacing: .18em;
+  letter-spacing: .17em;
 }
 
 .section { padding-block: clamp(72px, 8vw, 104px); }
@@ -923,8 +942,14 @@ footer {
 @media (max-width: 920px) {
   .hero { min-height: auto; }
   .hero-content { max-width: 760px; }
-  .hero-signature { grid-template-columns: minmax(0, 1fr) minmax(280px, 360px); gap: 32px; }
-  .hero-art-house { width: min(100%, 360px); }
+  .hero-signature { grid-template-columns: 250px minmax(0, 1fr); gap: 30px; }
+  .hero-house-mark {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(100%, 320px);
+    margin: 30px auto 0;
+  }
   .about-grid { grid-template-columns: 1fr; }
   .links-grid { grid-template-columns: repeat(2,1fr); }
 }
@@ -948,11 +973,12 @@ footer {
   .hero { min-height: auto; padding-block: 48px 56px; }
   .hero::after { bottom: 8px; }
   .hero h1 { font-size: clamp(5.5rem, 28vw, 8rem); }
-  .hero-signature { grid-template-columns: 1fr; gap: 28px; margin-top: 26px; }
-  .hero-art-house { width: min(100%, 300px); justify-self: center; }
-  .hero-art-house img { width: 100%; max-width: 100%; }
-  .hero-house-label { margin-top: 2px; }
-  .hero-house-label strong { font-size: 1.05rem; }
+  .hero-signature { grid-template-columns: 1fr; gap: 22px; margin-top: 26px; }
+  .hero-photo { width: 250px; max-width: 100%; }
+  .hero-photo img { width: 250px; max-width: 100%; }
+  .hero-house-mark { width: min(100%, 280px); margin-top: 26px; }
+  .hero-house-label { margin-top: 0; }
+  .hero-house-label strong { font-size: 1rem; }
   .hero-copy { margin-top: 0; padding-left: 17px; font-size: 1rem; }
   .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
   .btn { padding-inline: 15px; }
