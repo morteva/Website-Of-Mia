@@ -201,9 +201,15 @@ function extractHeadValue(source, pattern, fallback = "") {
   return source.match(pattern)?.[1]?.trim() || fallback;
 }
 
+function extractDescription(source) {
+  const doubleQuoted = source.match(/<meta\s+name=["']description["']\s+content="([^"]*)"[^>]*>/i)?.[1];
+  const singleQuoted = source.match(/<meta\s+name=["']description["']\s+content='([^']*)'[^>]*>/i)?.[1];
+  return (doubleQuoted ?? singleQuoted ?? "Mia's personal website.").trim();
+}
+
 function applySocialMetadata(source, file) {
   const title = extractHeadValue(source, /<title>([^<]+)<\/title>/i, "Miaorin Morwen Morteva");
-  const description = extractHeadValue(source, /<meta\s+name=["']description["']\s+content=["']([^"']*)["'][^>]*>/i, "Mia's personal website.");
+  const description = extractDescription(source);
   const canonical = extractHeadValue(source, /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["'][^>]*>/i, file === "index.html" ? "https://morteva.com/" : `https://morteva.com/${file}`);
   const safe = value => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
 
@@ -303,7 +309,7 @@ for (const file of rootHtmlFiles) {
   updated = updated
     .replace(/\s*<link[^>]+data-google-site-search-style[^>]*>/gi, "")
     .replace(/\s*<script[^>]+data-google-site-search-script[^>]*><\/script>/gi, "")
-    .replace(/\/styles\.css\?v=[^"']+/g, "/styles.css?v=20260923-site-refresh-r1");
+    .replace(/\/styles\.css\?v=[^"']+/g, "/styles.css?v=20260923-site-refresh-r2");
 
   updated = updated.replace(/<nav class="nav-links"[^>]*>[\s\S]*?<\/nav>/i, renderSharedNav(file));
 

@@ -1751,3 +1751,30 @@ body::after {
   }
   .nav-links a::after { bottom: 9px; }
 }
+
+
+/* Gallery hologram: preserve the editor-composed desktop position, tame it on small screens. */
+@media (max-width: 760px) {
+  .gallery-hero-hologram {
+    translate: 0 0 !important;
+    width: clamp(108px, 34vw, 142px) !important;
+    height: auto !important;
+    left: auto !important;
+    right: -4px !important;
+    top: -34px !important;
+    pointer-events: none;
+  }
+  .intro h1:has(.gallery-hero-hologram) {
+    padding-right: 26vw;
+  }
+}
+@media (max-width: 430px) {
+  .gallery-hero-hologram {
+    width: 104px !important;
+    right: -8px !important;
+    top: -22px !important;
+  }
+  .intro h1:has(.gallery-hero-hologram) {
+    padding-right: 84px;
+  }
+}
