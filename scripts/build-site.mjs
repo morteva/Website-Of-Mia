@@ -1,4 +1,4 @@
-import { readFile, writeFile, readdir } from "node:fs/promises";
+import { readFile, writeFile, readdir, stat } from "node:fs/promises";
 import { resolve, join } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
@@ -206,6 +206,8 @@ function applySocialMetadata(source, file) {
   return source.replace(/<\/head>/i, `${social}\n</head>`);
 }
 
+const MAX_DEPLOY_ASSET_BYTES = 24 * 1024 * 1024;
+
 async function buildMediaManifests() {
   const imagePattern = /\.(avif|gif|jpe?g|png|webp)$/i;
   const videoPattern = /\.(mp4|webm|ogg|m4v)$/i;
@@ -220,6 +222,8 @@ async function buildMediaManifests() {
       if (entry.isDirectory()) {
         await walkGallery(full, [...parts, entry.name]);
       } else if (entry.isFile() && imagePattern.test(entry.name)) {
+        const info = await stat(full);
+        if (info.size > MAX_DEPLOY_ASSET_BYTES) continue;
         const key = parts.join("/");
         gallery[key] ??= [];
         const url = "/galleries/" + [...parts, entry.name].map(encodeURIComponent).join("/");
@@ -233,11 +237,16 @@ async function buildMediaManifests() {
     items.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
   }
 
+  const videos = [];
   const videoEntries = await readdir(videosRoot, { withFileTypes: true });
-  const videos = videoEntries
-    .filter(entry => entry.isFile() && videoPattern.test(entry.name))
-    .map(entry => ({ name: entry.name, url: "/videos/" + encodeURIComponent(entry.name) }))
-    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+  for (const entry of videoEntries) {
+    if (!entry.isFile() || !videoPattern.test(entry.name)) continue;
+    const full = join(videosRoot, entry.name);
+    const info = await stat(full);
+    if (info.size > MAX_DEPLOY_ASSET_BYTES) continue;
+    videos.push({ name: entry.name, url: "/videos/" + encodeURIComponent(entry.name) });
+  }
+  videos.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
 
   await writeFile(join(publicDir, "gallery-manifest.json"), JSON.stringify({ albums: gallery }, null, 2) + "\n");
   await writeFile(join(publicDir, "video-manifest.json"), JSON.stringify({ videos }, null, 2) + "\n");

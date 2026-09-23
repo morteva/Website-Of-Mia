@@ -2,10 +2,10 @@
   "name": "website-of-mia",
   "compatibility_date": "2026-08-30",
   "build": {
-    "command": "node scripts/build-site.mjs && node scripts/restore-tiny-mia-image.mjs"
+    "command": "node scripts/build-site.mjs && node scripts/restore-tiny-mia-image.mjs && node scripts/build-deploy-assets.mjs"
   },
   "assets": {
-    "directory": "./public"
+    "directory": "./dist"
   },
   "routes": [
     {
