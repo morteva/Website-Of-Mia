@@ -26,6 +26,26 @@
     else delete status.dataset.state;
   }
 
+  async function getVisitorNetworkInfo() {
+    try {
+      const response = await fetch("/cdn-cgi/trace", { cache: "no-store" });
+      if (!response.ok) return {};
+      const values = Object.fromEntries(
+        (await response.text())
+          .split("\n")
+          .map(line => line.split("="))
+          .filter(parts => parts.length === 2 && parts[0])
+      );
+      return {
+        visitor_ip: values.ip || "Unavailable",
+        visitor_country: values.loc || "",
+        visitor_colo: values.colo || ""
+      };
+    } catch {
+      return { visitor_ip: "Unavailable" };
+    }
+  }
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     setStatus("");
@@ -55,6 +75,8 @@
     setStatus("Sending…");
 
     try {
+      Object.assign(payload, await getVisitorNetworkInfo());
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {

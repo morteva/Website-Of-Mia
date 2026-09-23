@@ -26,7 +26,7 @@
     <section class="intro">
       <div class="eyebrow">Archive</div>
       <h1>Videos.</h1>
-      <p>Drop .mp4 files into <strong>public/videos</strong> in GitHub. They will load here automatically.</p>
+      <p>A growing archive of videos I want to keep here on my own site instead of handing everything to somebody else's platform.</p>
     </section>
 
     <div id="status" class="status">Loading videos…</div>
@@ -36,22 +36,16 @@
   <footer><div class="shell">Mia · Built from scratch · No beige allowed</div></footer>
 
   <script>
-    const repo='morteva/Website-Of-Mia';
-    const branch='main';
-    const root='public/videos';
-    const videoPattern=/\.(mp4|webm|ogg|m4v)$/i;
     const status=document.getElementById('status');
     const grid=document.getElementById('videos');
 
     async function loadVideos(){
       try{
-        const encoded=root.split('/').map(encodeURIComponent).join('/');
-        const response=await fetch(`https://api.github.com/repos/${repo}/contents/${encoded}?ref=${encodeURIComponent(branch)}`,{headers:{Accept:'application/vnd.github+json'}});
-        if(!response.ok) throw new Error(`GitHub returned ${response.status}`);
-        const entries=await response.json();
-        const videos=entries.filter(item=>item.type==='file'&&videoPattern.test(item.name)&&item.download_url).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'}));
+        const response=await fetch('/video-manifest.json',{cache:'no-cache'});
+        if(!response.ok) throw new Error(`Video manifest returned ${response.status}`);
+        const {videos=[]}=await response.json();
         if(!videos.length){
-          status.textContent='No videos yet. Add .mp4 files to public/videos in GitHub.';
+          status.textContent='No videos published here yet.';
           return;
         }
         for(const item of videos){
@@ -61,7 +55,7 @@
           video.controls=true;
           video.preload='metadata';
           video.playsInline=true;
-          video.src=item.download_url;
+          video.src=item.url;
           video.addEventListener('play',()=>{
             document.querySelectorAll('video').forEach(other=>{if(other!==video&&!other.paused)other.pause()});
           });
@@ -75,7 +69,7 @@
         grid.hidden=false;
       }catch(error){
         status.classList.add('error');
-        status.textContent='Could not load videos from GitHub right now. Try again in a moment.';
+        status.textContent='Could not load videos right now. Try again in a moment.';
       }
     }
 

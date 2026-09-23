@@ -66,7 +66,7 @@
       <details class="album">
         <summary><span class="album-title"><small>MP4 Archive</small><strong>Videos</strong></span></summary>
         <div class="album-body">
-          <details class="info-tab" open><summary>🎬Video archive</summary><div class="info-body"><p>Drop .mp4 files into <strong>public/videos</strong> in GitHub and they will appear automatically on the video page. <a href="/videos.html">Open the video archive →</a></p></div></details>
+          <details class="info-tab" open><summary>🎬Video archive</summary><div class="info-body"><p>A separate archive for videos that belong here instead of on somebody else's platform. <a href="/videos.html">Open the video archive →</a></p></div></details>
         </div>
       </details>
 
@@ -163,18 +163,19 @@
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer"><button class="close" type="button" aria-label="Close image">×</button><img id="lightbox-image" src="" alt="" /></div>
 
   <script>
-    const repo='morteva/Website-Of-Mia';
-    const branch='main';
-    const galleryRoot='public/galleries';
-    const imagePattern=/\.(avif|gif|jpe?g|png|webp)$/i;
     const lightbox=document.getElementById('lightbox');
     const lightboxImage=document.getElementById('lightbox-image');
     const closeButton=document.querySelector('.close');
     let lightboxTrigger=null;
+    let galleryManifestPromise=null;
 
-    function apiPath(path){
-      const encoded=[galleryRoot,...path.split('/')].map(encodeURIComponent).join('/');
-      return `https://api.github.com/repos/${repo}/contents/${encoded}?ref=${encodeURIComponent(branch)}`;
+    function getGalleryManifest(){
+      galleryManifestPromise ??= fetch('/gallery-manifest.json',{cache:'no-cache'})
+        .then(response=>{
+          if(!response.ok) throw new Error(`Gallery manifest returned ${response.status}`);
+          return response.json();
+        });
+      return galleryManifestPromise;
     }
 
     async function loadAlbum(album){
@@ -186,27 +187,24 @@
       loading.textContent='Loading images…';
       slot.appendChild(loading);
       try{
-        const response=await fetch(apiPath(album.dataset.path),{headers:{Accept:'application/vnd.github+json'}});
-        if(!response.ok) throw new Error(`GitHub returned ${response.status}`);
-        const entries=await response.json();
-        const images=entries.filter(item=>item.type==='file'&&imagePattern.test(item.name)&&item.download_url);
+        const manifest=await getGalleryManifest();
+        const images=manifest.albums?.[album.dataset.path] || [];
         slot.replaceChildren();
         if(!images.length){
           const empty=document.createElement('p');
           empty.className='empty';
-          empty.textContent=`No images yet. Add files to public/galleries/${album.dataset.path} in GitHub.`;
+          empty.textContent='Nothing published in this album yet.';
           slot.appendChild(empty);
         }else{
           const grid=document.createElement('div');
           grid.className='image-grid';
-          images.sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'}));
           for(const item of images){
             const button=document.createElement('button');
             button.className='image-button';
             button.type='button';
             button.setAttribute('aria-label',`Open ${item.name}`);
             const img=document.createElement('img');
-            img.src=item.download_url;
+            img.src=item.url;
             img.alt=item.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ');
             img.loading='lazy';
             button.appendChild(img);
@@ -220,7 +218,7 @@
         slot.replaceChildren();
         const message=document.createElement('p');
         message.className='error';
-        message.textContent='Could not load this gallery from GitHub right now. Try again in a moment.';
+        message.textContent='Could not load this album right now. Try again in a moment.';
         slot.appendChild(message);
       }
     }

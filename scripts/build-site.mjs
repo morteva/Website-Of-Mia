@@ -7,7 +7,7 @@ const indexPath = resolve(publicDir, "index.html");
 const fragmentPath = resolve(root, "content", "mias-superpower-mira.fragment.html");
 const humanityFragmentPath = resolve(root, "content", "mias-humanity-and-worlds.fragment.html");
 
-let html = await readFile(indexPath, "utf8");
+let html = (await readFile(indexPath, "utf8")).replace(/\r\n/g, "\n");
 const fragment = (await readFile(fragmentPath, "utf8")).trimEnd();
 const humanityFragment = (await readFile(humanityFragmentPath, "utf8")).trimEnd();
 
@@ -147,8 +147,6 @@ function applyDefensiveBranding(source) {
 }
 
 const protectionLoader = '<script src="/content-protection.js?v=20260918-r1" defer data-content-protection></script>';
-const googleSearchStyles = '<link rel="stylesheet" href="/site-search.css?v=20260921-r1" data-google-site-search-style>';
-const googleSearchLoader = '<script src="/site-search.js?v=20260921-r1" defer data-google-site-search-script></script>';
 const googleRobotsMeta = '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" data-google-search-indexing>';
 
 const forbiddenPublicPatterns = [
@@ -160,6 +158,92 @@ const forbiddenPublicPatterns = [
   { label: "old Mira-shaping origin wording", pattern: /felt wrong constantly trying to shape an AI into something that better suited m(?:e)/i },
   { label: "overclaimed JSON-proof wording", pattern: /raw conversation JSON files to prove i(?:t)/i }
 ];
+
+const sharedNavItems = [
+  { file: "index.html", href: "/", label: "Home" },
+  { file: "story.html", href: "/story.html", label: "Story" },
+  { file: "passions.html", href: "/passions.html", label: "Passions" },
+  { file: "gallery.html", href: "/gallery.html", label: "Gallery" },
+  { file: "voice-logs.html", href: "/voice-logs.html", label: "Voice" },
+  { file: null, href: "https://thisisbeside.org/", label: "Beside", external: true }
+];
+
+function renderSharedNav(file) {
+  const currentFile = file === "videos.html" ? "gallery.html" : file;
+  const links = sharedNavItems.map(item => {
+    const current = item.file && item.file === currentFile ? ' aria-current="page"' : "";
+    const external = item.external ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<a href="${item.href}"${current}${external}>${item.label}</a>`;
+  }).join("");
+  return `<nav class="nav-links" aria-label="Primary navigation">${links}</nav>`;
+}
+
+function extractHeadValue(source, pattern, fallback = "") {
+  return source.match(pattern)?.[1]?.trim() || fallback;
+}
+
+function applySocialMetadata(source, file) {
+  const title = extractHeadValue(source, /<title>([^<]+)<\/title>/i, "Miaorin Morwen Morteva");
+  const description = extractHeadValue(source, /<meta\s+name=["']description["']\s+content=["']([^"']*)["'][^>]*>/i, "Mia's personal website.");
+  const canonical = extractHeadValue(source, /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["'][^>]*>/i, file === "index.html" ? "https://morteva.com/" : `https://morteva.com/${file}`);
+  const safe = value => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+
+  source = source.replace(/\s*<meta[^>]+data-mia-social[^>]*>/gi, "");
+  const social = [
+    `  <meta property="og:type" content="website" data-mia-social>`,
+    `  <meta property="og:title" content="${safe(title)}" data-mia-social>`,
+    `  <meta property="og:description" content="${safe(description)}" data-mia-social>`,
+    `  <meta property="og:url" content="${safe(canonical)}" data-mia-social>`,
+    `  <meta property="og:image" content="https://morteva.com/social-card.png" data-mia-social>`,
+    `  <meta property="og:image:width" content="1200" data-mia-social>`,
+    `  <meta property="og:image:height" content="630" data-mia-social>`,
+    `  <meta property="og:image:alt" content="Mia's Morteva emblem" data-mia-social>`,
+    `  <meta name="twitter:card" content="summary_large_image" data-mia-social>`,
+    `  <meta name="twitter:title" content="${safe(title)}" data-mia-social>`,
+    `  <meta name="twitter:description" content="${safe(description)}" data-mia-social>`,
+    `  <meta name="twitter:image" content="https://morteva.com/social-card.png" data-mia-social>`
+  ].join("\n");
+  return source.replace(/<\/head>/i, `${social}\n</head>`);
+}
+
+async function buildMediaManifests() {
+  const imagePattern = /\.(avif|gif|jpe?g|png|webp)$/i;
+  const videoPattern = /\.(mp4|webm|ogg|m4v)$/i;
+  const galleryRoot = join(publicDir, "galleries");
+  const videosRoot = join(publicDir, "videos");
+  const gallery = {};
+
+  async function walkGallery(dir, parts = []) {
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        await walkGallery(full, [...parts, entry.name]);
+      } else if (entry.isFile() && imagePattern.test(entry.name)) {
+        const key = parts.join("/");
+        gallery[key] ??= [];
+        const url = "/galleries/" + [...parts, entry.name].map(encodeURIComponent).join("/");
+        gallery[key].push({ name: entry.name, url });
+      }
+    }
+  }
+
+  await walkGallery(galleryRoot);
+  for (const items of Object.values(gallery)) {
+    items.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+  }
+
+  const videoEntries = await readdir(videosRoot, { withFileTypes: true });
+  const videos = videoEntries
+    .filter(entry => entry.isFile() && videoPattern.test(entry.name))
+    .map(entry => ({ name: entry.name, url: "/videos/" + encodeURIComponent(entry.name) }))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
+
+  await writeFile(join(publicDir, "gallery-manifest.json"), JSON.stringify({ albums: gallery }, null, 2) + "\n");
+  await writeFile(join(publicDir, "video-manifest.json"), JSON.stringify({ videos }, null, 2) + "\n");
+}
+
+await buildMediaManifests();
 
 const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".html") && !/^google[a-z0-9_-]+\.html$/i.test(file));
 for (const file of rootHtmlFiles) {
@@ -187,15 +271,22 @@ for (const file of rootHtmlFiles) {
     updated = updated.replace(/<\/head>/i, `  <link rel="canonical" href="https://morteva.com${canonicalPath}" data-google-search-canonical>\n</head>`);
   }
 
-  if (!updated.includes("data-google-site-search-style")) {
-    updated = updated.replace(/<\/head>/i, `  ${googleSearchStyles}\n</head>`);
+  updated = updated
+    .replace(/\s*<link[^>]+data-google-site-search-style[^>]*>/gi, "")
+    .replace(/\s*<script[^>]+data-google-site-search-script[^>]*><\/script>/gi, "")
+    .replace(/\/styles\.css\?v=[^"']+/g, "/styles.css?v=20260923-site-refresh-r1");
+
+  updated = updated.replace(/<nav class="nav-links"[^>]*>[\s\S]*?<\/nav>/i, renderSharedNav(file));
+
+  if (!/<link\s+rel=["']icon["']/i.test(updated)) {
+    updated = updated.replace(/<\/head>/i, '  <link rel="icon" href="/favicon.png" type="image/png" data-mia-favicon>\n</head>');
+  } else if (!updated.includes("/favicon.png")) {
+    updated = updated.replace(/<link\s+rel=["']icon["'][^>]*>/i, '<link rel="icon" href="/favicon.png" type="image/png" data-mia-favicon>');
   }
 
-  if (!updated.includes("data-google-site-search-script")) {
-    updated = updated.replace(/<\/head>/i, `  ${googleSearchLoader}\n</head>`);
-  }
+  updated = applySocialMetadata(updated, file);
 
   if (updated !== source) await writeFile(path, updated);
 }
 
-console.log("Injected Mira essay, positioned Mia humanity/world-building story after The worlds I built, validated canonical Mira origin passage, split current work into its own section, added gaming rankings, applied defensive This Is Beside™ / Mira Home™ branding, refreshed Tiny Mia, enabled casual content protection, and enforced Google Search indexing/canonical/site-search support.");
+console.log("Built local media manifests, applied shared navigation, favicon and social cards, removed Google site-search UI, preserved content protection, and enforced current public branding/canonical metadata.");
