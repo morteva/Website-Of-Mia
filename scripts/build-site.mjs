@@ -127,6 +127,25 @@ ${renamedNowSection}
 
 await writeFile(indexPath, html);
 
+const homepageContentMatch = html.match(/<section class="section shell" id="links">[\s\S]*?<div class="links-grid">([\s\S]*?)<\/div>\s*<\/section>/i);
+if (!homepageContentMatch) throw new Error("Homepage Content links block not found; refusing gallery drift.");
+
+function syncGalleryContent(source) {
+  const links = homepageContentMatch[1].replace(
+    'class="link-card exclusive-media" href="/gallery.html"',
+    'class="link-card exclusive-media" href="/gallery.html" aria-current="page"'
+  );
+  const replacement = `    <section class="find-section" aria-label="Content">
+      <div class="section-head"><h2>Content</h2><p>The things I make, say, and the places I actually use.</p></div>
+      <div class="links-grid">${links}</div>
+    </section>`;
+
+  if (!/<section class="find-section"[\s\S]*?<\/section>/i.test(source)) {
+    throw new Error("Gallery content section not found; refusing silent drift.");
+  }
+  return source.replace(/<section class="find-section"[\s\S]*?<\/section>/i, replacement);
+}
+
 const legacyBesideHost = ["thisisbeside", "morteva", "workers", "dev"].join(".");
 
 function applyDefensiveBranding(source) {
@@ -258,7 +277,8 @@ const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".
 for (const file of rootHtmlFiles) {
   const path = join(publicDir, file);
   const source = await readFile(path, "utf8");
-  let updated = applyDefensiveBranding(source);
+  const pageSource = file === "gallery.html" ? syncGalleryContent(source) : source;
+  let updated = applyDefensiveBranding(pageSource);
 
   for (const check of forbiddenPublicPatterns) {
     if (check.pattern.test(updated)) {
