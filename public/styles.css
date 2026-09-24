@@ -1753,8 +1753,18 @@ body::after {
 }
 
 
-/* Gallery hologram: preserve the editor-composed desktop position, tame it on small screens. */
-@media (max-width: 760px) {
+/* Gallery hologram: keep the editor-composed vertical hook, but anchor its
+   horizontal position to the live gallery shell instead of a fixed pixel drag.
+   This keeps its right edge attached to the Personality column as the viewport
+   grows or shrinks. */
+.gallery-hero-hologram {
+  translate: 0 -133px !important;
+  left: auto !important;
+  right: 0 !important;
+  pointer-events: none;
+}
+
+@media (max-width: 800px) {
   .gallery-hero-hologram {
     translate: 0 0 !important;
     width: clamp(108px, 34vw, 142px) !important;
@@ -1762,7 +1772,6 @@ body::after {
     left: auto !important;
     right: -4px !important;
     top: -34px !important;
-    pointer-events: none;
   }
   .intro h1:has(.gallery-hero-hologram) {
     padding-right: 26vw;
