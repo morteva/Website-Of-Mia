@@ -1753,18 +1753,29 @@ body::after {
 }
 
 
-/* Gallery hologram: keep the editor-composed vertical hook, but anchor its
-   horizontal position to the live gallery shell instead of a fixed pixel drag.
-   This keeps its right edge attached to the Personality column as the viewport
-   grows or shrinks. */
+/* Gallery hologram: on two-column layouts, anchor the image to the intro
+   box itself so its feet land exactly on the top edge of the album grid.
+   The Personality card shares the shell's right edge, so this keeps the
+   hologram hooked to that card without fixed editor drag coordinates. */
+.intro h1:has(.gallery-hero-hologram) {
+  position: static !important;
+}
 .gallery-hero-hologram {
-  translate: 0 -133px !important;
+  position: absolute !important;
+  translate: none !important;
   left: auto !important;
   right: 0 !important;
+  top: auto !important;
+  bottom: -10px !important;
+  height: auto !important;
   pointer-events: none;
 }
 
 @media (max-width: 800px) {
+  .intro h1:has(.gallery-hero-hologram) {
+    position: relative !important;
+    padding-right: 26vw;
+  }
   .gallery-hero-hologram {
     translate: 0 0 !important;
     width: clamp(108px, 34vw, 142px) !important;
@@ -1772,9 +1783,7 @@ body::after {
     left: auto !important;
     right: -4px !important;
     top: -34px !important;
-  }
-  .intro h1:has(.gallery-hero-hologram) {
-    padding-right: 26vw;
+    bottom: auto !important;
   }
 }
 @media (max-width: 430px) {
