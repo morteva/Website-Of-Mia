@@ -1,3 +1,131 @@
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Extraleicht-BF663d89cd3f5c5.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-ExtraleichtKursiv-BF663d89cd3f0d1.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Leicht-BF663d89cd4952e.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-LeichtKursiv-BF663d89cd9a361.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Buch-BF663d89cd32e6a.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-BuchKursiv-BF663d89cd3e887.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Kraftig-BF663d89cd37e26.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-KraftigKursiv-BF663d89cd2bd4b.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Halbfett-BF663d89cd2d67b.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-HalbfettKursiv-BF663d89cd41624.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Dreiviertelfett-BF663d89ccc5f66.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-DreiviertelfettKursiv-BF663d89cd2f687.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Fett-BF663d89cca89ff.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-FettKursiv-BF663d89cc64878.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-Extrafett-BF663d89cc9f2c0.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SohneWeb";
+  src: url("/fonts/TestSohne-ExtrafettKursiv-BF663d89ccb8000.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --ink: #070709;
@@ -15,8 +143,8 @@
   --blood-deep: #7f0d35;
   --blood-dark: #2a0b17;
   --blush: #f19ab9;
-  --serif: "Söhne", "Sohne", "Helvetica Neue", Arial, ui-sans-serif, system-ui, sans-serif;
-  --sans: "Söhne", "Sohne", "Helvetica Neue", Arial, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --serif: "SohneWeb", "Söhne", "Sohne", "Helvetica Neue", Arial, ui-sans-serif, system-ui, sans-serif;
+  --sans: "SohneWeb", "Söhne", "Sohne", "Helvetica Neue", Arial, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --radius-sm: 12px;
   --radius-md: 18px;
   --radius-lg: 28px;
