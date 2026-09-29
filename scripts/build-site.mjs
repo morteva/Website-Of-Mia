@@ -132,18 +132,18 @@ if (!homepageContentMatch) throw new Error("Homepage Content links block not fou
 
 function syncGalleryContent(source) {
   const links = homepageContentMatch[1].replace(
-    'class="link-card exclusive-media" href="/gallery.html"',
-    'class="link-card exclusive-media" href="/gallery.html" aria-current="page"'
+    /\s*<a class="link-card exclusive-media" href="\/gallery\.html"[^>]*>[\s\S]*?<\/a>/i,
+    ""
   );
-  const replacement = `    <section class="find-section" aria-label="Content">
-      <div class="section-head"><h2>Content</h2><p>The things I make, say, and the places I actually use.</p></div>
+  const replacement = `    <section class="find-section gallery-keep-exploring" aria-label="Keep exploring">
+      <div class="section-head"><h2>Keep Exploring</h2><p>More of me, here and elsewhere.</p></div>
       <div class="links-grid">${links}</div>
     </section>`;
 
-  if (!/<section class="find-section"[\s\S]*?<\/section>/i.test(source)) {
-    throw new Error("Gallery content section not found; refusing silent drift.");
+  if (!/<section class="find-section(?: gallery-keep-exploring)?"[\s\S]*?<\/section>/i.test(source)) {
+    throw new Error("Gallery exploration section not found; refusing silent drift.");
   }
-  return source.replace(/<section class="find-section"[\s\S]*?<\/section>/i, replacement);
+  return source.replace(/<section class="find-section(?: gallery-keep-exploring)?"[\s\S]*?<\/section>/i, replacement);
 }
 
 const legacyBesideHost = ["thisisbeside", "morteva", "workers", "dev"].join(".");
