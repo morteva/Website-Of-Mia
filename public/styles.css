@@ -1076,19 +1076,6 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   width: auto;
   justify-self: stretch;
 }
-.gallery-keep-exploring {
-  padding-top: clamp(46px, 6vw, 72px);
-  border-top: 1px solid rgba(255,255,255,.055);
-}
-.gallery-keep-exploring .section-head {
-  margin-bottom: 28px;
-}
-.gallery-keep-exploring .section-head h2 {
-  font-size: clamp(2.2rem, 4.2vw, 3.8rem);
-}
-.gallery-keep-exploring .section-head p {
-  max-width: 290px;
-}
 
 @media (max-width: 800px) {
   .gallery-archive {
