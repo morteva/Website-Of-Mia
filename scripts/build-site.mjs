@@ -127,26 +127,22 @@ ${renamedNowSection}
 
 await writeFile(indexPath, html);
 
-const homepageContentMatch = html.match(/<section class="section shell" id="links">[\s\S]*?<div class="links-grid">([\s\S]*?)<\/div>\s*<\/section>/i);
-if (!homepageContentMatch) throw new Error("Homepage Content links block not found; refusing gallery drift.");
+const homepageContentSectionMatch = html.match(/<section class="section shell" id="links">[\s\S]*?<\/section>/i);
+if (!homepageContentSectionMatch) throw new Error("Homepage Content section not found; refusing shared-content drift.");
+const sharedContentSection = homepageContentSectionMatch[0];
 
-function syncGalleryContent(source) {
-  const links = homepageContentMatch[1].replace(
-    'class="link-card exclusive-media" href="/gallery.html"',
-    'class="link-card exclusive-media" href="/gallery.html" aria-current="page"'
-  );
-  const replacement = `    <section class="find-section" aria-label="Content">
-      <div class="section-head">
-        <h2>Content</h2>
-        <p>The things I make, say, and the places I actually use.</p>
-      </div>
-      <div class="links-grid">${links}</div>
-    </section>`;
+function syncSharedContent(source, file) {
+  if (file === "index.html") return source;
 
-  if (!/<section class="find-section(?: gallery-keep-exploring)?"[\s\S]*?<\/section>/i.test(source)) {
-    throw new Error("Gallery content section not found; refusing silent drift.");
+  let updated = source
+    .replace(/\s*<section class="section shell" id="links">[\s\S]*?<\/section>/i, "")
+    .replace(/\s*<section class="find-section(?: gallery-keep-exploring)?"[^>]*>[\s\S]*?<\/section>/i, "");
+
+  if (!/<footer\b/i.test(updated)) {
+    throw new Error(`Footer not found in public page: ${file}`);
   }
-  return source.replace(/<section class="find-section(?: gallery-keep-exploring)?"[\s\S]*?<\/section>/i, replacement);
+
+  return updated.replace(/\s*<footer\b/i, `\n\n${sharedContentSection}\n\n  <footer`);
 }
 
 const legacyBesideHost = ["thisisbeside", "morteva", "workers", "dev"].join(".");
@@ -298,7 +294,7 @@ const rootHtmlFiles = (await readdir(publicDir)).filter(file => file.endsWith(".
 for (const file of rootHtmlFiles) {
   const path = join(publicDir, file);
   const source = await readFile(path, "utf8");
-  const pageSource = file === "gallery.html" ? syncGalleryContent(source) : source;
+  const pageSource = syncSharedContent(source, file);
   let updated = applyDefensiveBranding(pageSource);
 
   for (const check of forbiddenPublicPatterns) {
