@@ -197,6 +197,18 @@ function renderSharedNav(file) {
   return `<nav class="nav-links" aria-label="Primary navigation">${links}</nav>`;
 }
 
+function renderSharedFooter(file) {
+  const current = file === "hello.html" ? ' aria-current="page"' : "";
+  return `<footer>
+    <div class="shell footer-shell">
+      <div class="footer-credit">Mia · Built from scratch · No beige allowed</div>
+      <div class="footer-quiet-wrap">
+        <a class="footer-quiet-link" href="/hello.html"${current}>A Quiet Hello</a>
+      </div>
+    </div>
+  </footer>`;
+}
+
 function extractHeadValue(source, pattern, fallback = "") {
   return source.match(pattern)?.[1]?.trim() || fallback;
 }
@@ -312,6 +324,11 @@ for (const file of rootHtmlFiles) {
     .replace(/\/styles\.css\?v=[^"']+/g, "/styles.css?v=20260923-site-refresh-r2");
 
   updated = updated.replace(/<nav class="nav-links"[^>]*>[\s\S]*?<\/nav>/i, renderSharedNav(file));
+
+  if (!/<footer\b[^>]*>[\s\S]*?<\/footer>/i.test(updated)) {
+    throw new Error(`Missing footer in public page: ${path}`);
+  }
+  updated = updated.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/i, renderSharedFooter(file));
 
   if (!/<link\s+rel=["']icon["']/i.test(updated)) {
     updated = updated.replace(/<\/head>/i, '  <link rel="icon" href="/favicon.png" type="image/png" data-mia-favicon>\n</head>');
