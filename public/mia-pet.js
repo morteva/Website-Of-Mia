@@ -1,4 +1,4 @@
-/* Tiny Mia static corner gremlin, 2026-09-10.
+/* MySpace Mia corner gremlin, refreshed 2026-09-30.
    Keeps the prewritten imagined-thought pool, but replaces the animated Vesper sprite
    with Mia's chosen static creature in the far lower-right corner. */
 (() => {
@@ -9,7 +9,7 @@
   const options = window.MIA_PET_CONFIG || {};
   const base = document.currentScript?.src || document.baseURI;
   const asset = (name) => new URL(name, base).href;
-  const storageKey = 'tiny-mia-v4-static';
+  const storageKey = 'myspace-mia-v1';
 
   const path = (options.page || location.pathname).toLowerCase();
   const page = path.includes('gallery') ? 'gallery'
@@ -62,7 +62,7 @@
   }
 
   function pickLine() {
-    if (!lines.length) return 'Tiny Mia is loading opinions at an alarming rate.';
+    if (!lines.length) return 'MySpace Mia is loading opinions at an alarming rate.';
 
     let available = lines.filter((entry) => !seen.has(entry.text));
     if (!available.length) {
@@ -231,14 +231,14 @@
   root.className = 'tm-root';
   root.hidden = true;
   root.setAttribute('role', 'group');
-  root.setAttribute('aria-label', 'Tiny Mia website mascot');
-  root.title = 'Playful prewritten lines inspired by Mia, not live thoughts or recorded quotations.';
+  root.setAttribute('aria-label', 'MySpace Mia website gremlin');
+  root.title = 'Prewritten MySpace Mia lines based on Mia’s voice and history, not live thoughts unless explicitly marked as a quote.';
 
   const sprite = document.createElement('button');
   sprite.type = 'button';
   sprite.className = 'tm-sprite';
-  sprite.setAttribute('aria-label', 'Ask Tiny Mia for another thought');
-  sprite.title = 'Click for another Tiny Mia thought';
+  sprite.setAttribute('aria-label', 'Ask MySpace Mia for another thought');
+  sprite.title = 'Click for another MySpace Mia thought';
 
   const img = document.createElement('img');
   img.src = asset('tiny-mia-gothic.png?v=20260918-doll1');
@@ -250,21 +250,21 @@
   hide.type = 'button';
   hide.className = 'tm-hide';
   hide.textContent = '×';
-  hide.title = 'Hide Tiny Mia';
-  hide.setAttribute('aria-label', 'Hide Tiny Mia');
+  hide.title = 'Hide MySpace Mia';
+  hide.setAttribute('aria-label', 'Hide MySpace Mia');
 
   const expand = document.createElement('button');
   expand.type = 'button';
   expand.className = 'tm-expand';
   expand.textContent = '⛶';
-  expand.title = 'Make Tiny Mia full size';
-  expand.setAttribute('aria-label', 'Make Tiny Mia full size');
+  expand.title = 'Make MySpace Mia full size';
+  expand.setAttribute('aria-label', 'Make MySpace Mia full size');
 
   const minimizeBack = document.createElement('button');
   minimizeBack.type = 'button';
   minimizeBack.className = 'tm-minimize-back';
   minimizeBack.textContent = 'Minimize Back';
-  minimizeBack.setAttribute('aria-label', 'Minimize Tiny Mia back to normal size');
+  minimizeBack.setAttribute('aria-label', 'Minimize MySpace Mia back to normal size');
 
   root.append(sprite, expand, hide, minimizeBack);
 
@@ -276,7 +276,7 @@
   bubble.setAttribute('aria-atomic', 'true');
 
   const label = document.createElement('small');
-  label.textContent = 'Tiny Mia';
+  label.textContent = 'MySpace Mia';
 
   const copy = document.createElement('p');
   bubble.append(label, copy);
@@ -284,7 +284,7 @@
   const restore = document.createElement('button');
   restore.type = 'button';
   restore.className = 'tm-restore';
-  restore.textContent = 'Show Tiny Mia';
+  restore.textContent = 'Show MySpace Mia';
   restore.hidden = true;
 
   document.body.append(root, bubble, restore);
@@ -357,9 +357,9 @@
       }
     })
     .catch((error) => {
-      console.warn(error);
+      console.warn('MySpace Mia:', error);
       restore.hidden = !hidden;
       root.hidden = hidden;
-      if (!hidden) say('Tiny Mia has become temporarily unavailable for comment. Suspicious.');
+      if (!hidden) say('MySpace Mia has become temporarily unavailable for comment. Suspicious.');
     });
 })();
