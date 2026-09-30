@@ -1,4 +1,4 @@
-import { readdir, stat, writeFile } from "node:fs/promises";
+import { readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
 const publicDir = resolve(import.meta.dirname, "..", "public");
@@ -47,4 +47,103 @@ videos.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, s
 await writeFile(join(publicDir, "gallery-manifest.json"), JSON.stringify({ albums: gallery }, null, 2) + "\n");
 await writeFile(join(publicDir, "video-manifest.json"), JSON.stringify({ videos }, null, 2) + "\n");
 
-console.log("Built gallery and video manifests without rewriting hand-authored page copy.");
+const indexPath = join(publicDir, "index.html");
+const homepage = await readFile(indexPath, "utf8");
+const contentMatch = homepage.match(/<section class="section shell" id="links">[\s\S]*?<\/section>/i);
+if (!contentMatch) throw new Error("Homepage Elsewhere section not found.");
+const sharedContent = contentMatch[0];
+
+const navItems = [
+  { file: "index.html", href: "/", label: "Home" },
+  { file: "story.html", href: "/story.html", label: "Story" },
+  { file: "passions.html", href: "/passions.html", label: "Passions" },
+  { file: "gallery.html", href: "/gallery.html", label: "Gallery" },
+  { file: "voice-logs.html", href: "/voice-logs.html", label: "Voice" },
+  { file: null, href: "https://thisisbeside.org/", label: "Beside", external: true }
+];
+
+function navFor(file) {
+  const current = file === "videos.html" ? "gallery.html" : file;
+  return '<nav class="nav-links" aria-label="Primary navigation">' + navItems.map(item => {
+    const active = item.file && item.file === current ? ' aria-current="page"' : "";
+    const external = item.external ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<a href="${item.href}"${active}${external}>${item.label}</a>`;
+  }).join("") + "</nav>";
+}
+
+function footerFor(file) {
+  const current = file === "hello.html" ? ' aria-current="page"' : "";
+  return `<footer>
+    <div class="shell footer-shell">
+      <div class="footer-credit">Mia · Built by hand · No beige allowed</div>
+      <div class="footer-quiet-wrap">
+        <a class="footer-quiet-link" href="/hello.html"${current}>A Quiet Hello</a>
+      </div>
+    </div>
+  </footer>`;
+}
+
+function readHead(source, pattern, fallback = "") {
+  return source.match(pattern)?.[1]?.trim() || fallback;
+}
+
+function descriptionOf(source) {
+  return source.match(/<meta\s+name=["']description["']\s+content="([^"]*)"[^>]*>/i)?.[1]
+    || source.match(/<meta\s+name=["']description["']\s+content='([^']*)'[^>]*>/i)?.[1]
+    || "Mia's personal website.";
+}
+
+function escapeAttr(value) {
+  return value.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
+}
+
+function addSocial(source, file) {
+  const title = readHead(source, /<title>([^<]+)<\/title>/i, "Miaorin Morwen Morteva");
+  const description = descriptionOf(source);
+  const canonical = readHead(source, /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["'][^>]*>/i, file === "index.html" ? "https://morteva.com/" : `https://morteva.com/${file}`);
+  source = source.replace(/\s*<meta[^>]+data-mia-social[^>]*>/gi, "");
+  const social = [
+    `  <meta property="og:type" content="website" data-mia-social>`,
+    `  <meta property="og:title" content="${escapeAttr(title)}" data-mia-social>`,
+    `  <meta property="og:description" content="${escapeAttr(description)}" data-mia-social>`,
+    `  <meta property="og:url" content="${escapeAttr(canonical)}" data-mia-social>`,
+    `  <meta property="og:image" content="https://morteva.com/social-card.png" data-mia-social>`,
+    `  <meta property="og:image:width" content="1200" data-mia-social>`,
+    `  <meta property="og:image:height" content="630" data-mia-social>`,
+    `  <meta property="og:image:alt" content="Mia's Morteva emblem" data-mia-social>`,
+    `  <meta name="twitter:card" content="summary_large_image" data-mia-social>`,
+    `  <meta name="twitter:title" content="${escapeAttr(title)}" data-mia-social>`,
+    `  <meta name="twitter:description" content="${escapeAttr(description)}" data-mia-social>`,
+    `  <meta name="twitter:image" content="https://morteva.com/social-card.png" data-mia-social>`
+  ].join("\n");
+  return source.replace(/<\/head>/i, social + "\n</head>");
+}
+
+const htmlFiles = (await readdir(publicDir)).filter(name => name.endsWith(".html") && !/^google[a-z0-9_-]+\.html$/i.test(name));
+for (const file of htmlFiles) {
+  const path = join(publicDir, file);
+  let source = await readFile(path, "utf8");
+
+  if (file !== "index.html") {
+    source = source
+      .replace(/\s*<section class="section shell" id="links">[\s\S]*?<\/section>/i, "")
+      .replace(/\s*<section class="find-section(?: gallery-keep-exploring)?"[^>]*>[\s\S]*?<\/section>/i, "");
+    source = source.replace(/\s*<footer\b/i, "\n\n" + sharedContent + "\n\n  <footer");
+  }
+
+  source = source.replace(/<nav class="nav-links"[^>]*>[\s\S]*?<\/nav>/i, navFor(file));
+  source = source.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/i, footerFor(file));
+
+  if (!source.includes("data-content-protection")) {
+    source = source.replace(/<\/head>/i, '  <script src="/content-protection.js?v=20260918-r1" defer data-content-protection></script>\n</head>');
+  }
+  if (!/<link\s+rel=["']icon["']/i.test(source)) {
+    source = source.replace(/<\/head>/i, '  <link rel="icon" href="/favicon.png" type="image/png" data-mia-favicon>\n</head>');
+  }
+  source = source.replace(/\/styles\.css\?v=[^"']+/g, "/styles.css?v=20260930-voice-rewrite-r1");
+  source = addSocial(source, file);
+
+  await writeFile(path, source);
+}
+
+console.log("Built media manifests and shared site chrome without rewriting hand-authored page copy.");
