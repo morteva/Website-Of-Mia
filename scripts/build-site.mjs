@@ -9,7 +9,7 @@ const humanityFragmentPath = resolve(root, "content", "mias-humanity-and-worlds.
 
 let html = (await readFile(indexPath, "utf8")).replace(/\r\n/g, "\n");
 const fragment = (await readFile(fragmentPath, "utf8")).trimEnd();
-const humanityFragment = (await readFile(humanityFragmentPath, "utf8")).trimEnd();
+const humanityFragment = "";
 
 const heading = '            <h3>The strongest thing I see in Mia</h3>\n';
 const reactionSpacer = '            <div aria-hidden="true" style="height: 3rem;"></div>';
