@@ -25,23 +25,27 @@
   <main>
     <section class="hello-page shell">
       <div class="hello-head">
-        <div class="eyebrow">A private little corner</div>
+        <div class="eyebrow">Say whatever you came to say</div>
         <h1>A Quiet Hello</h1>
-        <p class="hello-intro">If you have something you want to say, say it. Just read the disclaimer first so we understand each other.</p>
+        <p class="hello-intro">If you want to say something, say it. Just read the note first so neither of us has to pretend the internet comes with mind-reading.</p>
       </div>
 
       <div class="hello-card">
         <details class="hello-disclaimer" id="hello-disclaimer">
-          <summary><span class="hello-disclaimer-closed">Disclaimer - Click to Open</span><span class="hello-disclaimer-open">Disclaimer - Click to Close</span></summary>
+          <summary><span class="hello-disclaimer-closed">A note before you send</span><span class="hello-disclaimer-open">Close the note</span></summary>
           <div class="hello-disclaimer-body">
-            <p>I may not reply, but I read every message that reaches me. Silence doesn’t mean it went unnoticed.</p>
-            <p>If you want a reply, leave a real email address. If you don’t hear from me within a day, you probably won’t. That doesn’t mean I disliked what you said or that your message didn’t matter.</p>
-            <p>I’m simply very private about opening my life beyond this website to people I don’t know. This space lets me share parts of myself on my own terms, and I’d appreciate that boundary being respected.</p>
-            <p>Cruel, threatening, or deliberately fucked-up messages aren’t going to ruin my day. They’ll get a shrug, a delete, and if needed a block.</p>
-            <p>Messages include the originating IP address for abuse prevention and site security. I don't sell, rent, trade, or use your information for marketing.</p>
-            <p>I’m happy to hear what you’d like to see on this site. Ask me questions. Tell me what you think I should expand on. Tell me what helped you, what made something harder, or what you wish I had talked about.</p>
-            <p>Suggestions are welcome. Instructions on who I should be are not. This website exists because I chose to be honest about who I am. That part isn’t up for editing.</p>
-          </div>
+  <p>I read the messages that actually make it through, but I may not reply. That isn’t a game and it does not mean I hated what you wrote. If you want a reply, leave a real email address. If you don’t hear back, don’t invent a hidden message inside the silence. I probably just didn’t answer.</p>
+
+  <p>I’m private. This website is me opening a window into my life; it is not me handing strangers the front-door key.</p>
+
+  <p>Cruel, threatening, or deliberately fucked-up messages get deleted, blocked, or reported if they need to be. I’m not keeping a museum of abuse.</p>
+
+  <p>Messages include the originating IP address for abuse prevention and site security. I don’t sell, rent, trade, or use your information for marketing.</p>
+
+  <p>Questions are fine. Suggestions are fine. Tell me what made sense, what didn’t, what helped, or what you think deserves more detail.</p>
+
+  <p>You can have an opinion about me. You do not get editing rights over who I am.</p>
+</div>
         </details>
 
         <form class="hello-form" id="quiet-hello-form" novalidate>
@@ -57,7 +61,7 @@
               <label for="hello-name">Name</label>
               <span class="hello-optional">Optional</span>
             </div>
-            <input id="hello-name" name="name" type="text" maxlength="120" autocomplete="name" placeholder="Whatever you want me to call you" />
+            <input id="hello-name" name="name" type="text" maxlength="120" autocomplete="name" placeholder="Whatever you want to be called" />
           </div>
 
           <div class="hello-field">
@@ -66,7 +70,7 @@
               <span class="hello-optional">Optional</span>
             </div>
             <input id="hello-email" name="email" type="email" maxlength="254" autocomplete="email" placeholder="you@example.com" />
-            <p class="hello-help">Leave this blank if you do not want a reply. It will not be published.</p>
+            <p class="hello-help">Leave it blank if you don’t want a reply. I’m not publishing it.</p>
           </div>
 
           <div class="hello-field">
@@ -74,7 +78,7 @@
               <label for="hello-subject">Subject</label>
               <span class="hello-optional">Optional</span>
             </div>
-            <input id="hello-subject" name="subject" type="text" maxlength="160" placeholder="A few words is enough" />
+            <input id="hello-subject" name="subject" type="text" maxlength="160" placeholder="A few words is fine" />
           </div>
 
           <div class="hello-field">
@@ -86,7 +90,7 @@
 
           <div class="hello-consent">
             <input id="hello-consent" name="consent" type="checkbox" required />
-            <label for="hello-consent">I’ve read the <a class="hello-disclaimer-jump" href="#hello-disclaimer">disclaimer</a> and understand that a reply isn’t promised.</label>
+            <label for="hello-consent">I read the <a class="hello-disclaimer-jump" href="#hello-disclaimer">note</a> and understand Mia might not reply.</label>
           </div>
 
           <div class="hello-actions">

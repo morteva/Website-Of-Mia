@@ -59,7 +59,7 @@
 
     if (String(formData.get("website") || "").trim()) {
       form.reset();
-      setStatus("Message sent. Thank you for trusting me with it.", "success");
+      setStatus("Sent. I’ve got it.", "success");
       return;
     }
 
@@ -89,13 +89,13 @@
       const result = await response.json().catch(() => ({}));
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || "Something went wrong.");
+        throw new Error(result.message || "Something went wrong while sending it. Try again.");
       }
 
       form.reset();
-      setStatus("Message sent. Thank you for trusting me with it.", "success");
+      setStatus("Sent. I’ve got it.", "success");
     } catch (error) {
-      setStatus(error.message || "Something went wrong. Please try again.", "error");
+      setStatus(error.message || "Something went wrong while sending it. Try again.", "error");
     } finally {
       button.disabled = false;
       button.textContent = "Send message";

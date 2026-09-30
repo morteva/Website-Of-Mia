@@ -1,13 +1,13 @@
-// Verify and publish the current Tiny Mia mascot without overwriting it.
+// Verify and publish the current MySpace Mia mascot without overwriting it.
 // The previous static creature remains preserved as backup binary parts and as a public backup asset.
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-gothic.png', publicDir);
-const release = 'tiny-gothic-doll-20260918-r2';
+const release = 'myspace-final-20260930-r1';
 
 const image = await readFile(imagePath);
 if (image.length < 1000) {
-  throw new Error('Tiny Mia current image is missing or unexpectedly empty; refusing to publish.');
+  throw new Error('MySpace Mia current image is missing or unexpectedly empty; refusing to publish.');
 }
 
 const petPath = new URL('mia-pet.js', publicDir);
@@ -16,7 +16,7 @@ const [pet, orbs] = await Promise.all([readFile(petPath, 'utf8'), readFile(orbsP
 const imageAssignment = /img\.src = asset\('tiny-mia-gothic\.png(?:\?[^']*)?'\);/;
 const petLoader = /script\.src = '\/mia-pet\.js(?:\?[^']*)?';/;
 if (!imageAssignment.test(pet) || !petLoader.test(orbs)) {
-  throw new Error('Tiny Mia image or loader reference changed; refusing silent build drift.');
+  throw new Error('MySpace Mia image or loader reference changed; refusing silent build drift.');
 }
 
 const updatedPet = pet.replace(imageAssignment, `img.src = asset('tiny-mia-gothic.png?v=20260918-doll1');`);
@@ -34,4 +34,4 @@ for (const page of pages) {
   if (page.updated !== page.source) await writeFile(page.path, page.updated);
 }
 
-console.log(`Tiny Mia: gothic doll cutout present; previous mascot preserved as OLD-BACKUP.`);
+console.log(`MySpace Mia: gothic doll cutout present; previous mascot preserved as OLD-BACKUP.`);

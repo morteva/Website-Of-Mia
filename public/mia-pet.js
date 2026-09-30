@@ -341,8 +341,8 @@
   });
 
   Promise.all([
-    fetch(asset('tiny-mia-thoughts.json?v=20260910-static1'), { cache: 'force-cache' }).then((r) => {
-      if (!r.ok) throw new Error(`Tiny Mia thoughts failed: ${r.status}`);
+    fetch(asset('myspace-mia-thoughts.json?v=20260930-myspace-final'), { cache: 'force-cache' }).then((r) => {
+      if (!r.ok) throw new Error(`MySpace Mia thoughts failed: ${r.status}`);
       return r.json();
     }),
     img.decode?.().catch(() => {}) || Promise.resolve()
