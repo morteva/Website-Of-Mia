@@ -67,7 +67,7 @@ html = html.slice(0, worldsSectionEndExclusive) + "\n\n" + humanityFragment + ht
 const worldsMarker = `          <section class="bio-section">
             <h3>🎮 The worlds I built</h3>`;
 
-if (!html.includes('<h3>🏆 The rankings</h3>')) {
+if (!html.includes('<h3>🎮 The worlds I built</h3>')) {
   const rankings = `          <section class="bio-section">
             <h3>🏆 The rankings</h3>
             <p>I spent years competing near the top across multiple MMOs: Top 5,000 in RS2, server Top 3 progression in SWTOR, roughly top 0.8% WoW Arena, 44th Blizzard-side Frost DK in TWW S2, and Top 1% Raider.IO PvE in TWW S2 and S3.</p>
