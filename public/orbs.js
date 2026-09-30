@@ -159,3 +159,53 @@
   requestAnimationFrame(frame);
   loadTinyMiaPet();
 })();
+
+/* Decorative cursor, fine mouse pointers only. */
+(() => {
+  function bootCursor() {
+    if (document.getElementById('site-custom-cursor')) return;
+    const fine = matchMedia('(any-hover: hover) and (any-pointer: fine)');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const pearl = document.currentScript?.dataset.cursorStyle === 'pearl' || false;
+    const style = document.createElement('style');
+    style.textContent = `
+      html.site-cursor-active,html.site-cursor-active * { cursor:none!important; }
+      #site-custom-cursor,#site-cursor-trail {position:fixed;left:0;top:0;pointer-events:none!important;z-index:2147483647;user-select:none;}
+      #site-custom-cursor {display:none;will-change:transform;}
+      #site-custom-cursor.visible {display:block;}
+      #site-custom-cursor.purple {width:18px;height:18px;margin:-9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#edceff,#bd68fa 45%,#8c35da);box-shadow:0 0 9px #ba60faac,0 0 22px #9c39eb66;}
+      #site-custom-cursor.purple.engaged {box-shadow:0 0 0 2px #ebcdff99,0 0 16px #c775ffcc;}
+      #site-custom-cursor.pearl {width:26px;height:32px;filter:drop-shadow(0 0 3px #d5e7ff88);}
+      #site-custom-cursor.pearl::before {content:'';position:absolute;inset:0;background:linear-gradient(135deg,#fffef5 5%,#e6f6ff 27%,#f5ddf3 48%,#e9e6ff 67%,#fffce9);clip-path:polygon(0 0,94% 62%,57% 67%,43% 100%,25% 91%,36% 61%,0 72%);}
+      #site-custom-cursor.pearl::after {content:'';position:absolute;left:4px;top:7px;width:2px;height:12px;transform:rotate(-33deg);background:#57677b88;}
+      #site-custom-cursor.pearl.engaged {filter:drop-shadow(0 0 5px #fffafddd);}
+      #site-cursor-trail {inset:0;overflow:hidden;}
+      #site-cursor-trail i {position:absolute;width:5px;height:5px;margin:-2.5px;border-radius:50%;background:#bc71f3;opacity:.075;animation:cursor-fade 150ms linear forwards;}
+      @keyframes cursor-fade {to{opacity:0;}}
+      @media print {#site-custom-cursor,#site-cursor-trail{display:none!important;}}
+    `;
+    const cursor=document.createElement('div');cursor.id='site-custom-cursor';cursor.className=pearl?'pearl':'purple';cursor.setAttribute('aria-hidden','true');
+    const trail=document.createElement('div');trail.id='site-cursor-trail';trail.setAttribute('aria-hidden','true');
+    document.head.append(style);document.body.append(cursor,trail);
+    let lastTrail=0;
+    function hide(){cursor.classList.remove('visible');document.documentElement.classList.remove('site-cursor-active');trail.replaceChildren();}
+    function move(event){
+      if(!fine.matches || event.pointerType!=='mouse' || document.fullscreenElement){hide();return;}
+      const target=event.target instanceof Element?event.target:null;
+      if(target?.closest('input,textarea,select,[contenteditable]:not([contenteditable="false"]),iframe,video,audio,[disabled],[aria-disabled="true"]')){hide();return;}
+      cursor.style.transform=`translate3d(${event.clientX}px,${event.clientY}px,0)`;
+      cursor.classList.add('visible');document.documentElement.classList.add('site-cursor-active');
+      cursor.classList.toggle('engaged',Boolean(target?.closest('a,button,summary,[role="button"],[role="link"]')));
+      if(!pearl&&!reduced.matches&&event.timeStamp-lastTrail>35){lastTrail=event.timeStamp;const dot=document.createElement('i');dot.style.left=event.clientX+'px';dot.style.top=event.clientY+'px';trail.append(dot);setTimeout(()=>dot.remove(),160);}
+    }
+    document.addEventListener('pointermove',move,{passive:true});
+    document.documentElement.addEventListener('pointerleave',hide);
+    document.addEventListener('pointerdown',event=>{if(event.pointerType!=='mouse')hide();},{passive:true});
+    document.addEventListener('focusin',event=>{if(event.target?.matches('input,textarea,select,[contenteditable]'))hide();});
+    window.addEventListener('blur',hide);window.addEventListener('pagehide',hide);
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)hide();});
+    document.addEventListener('fullscreenchange',hide);fine.addEventListener('change',hide);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootCursor,{once:true});else bootCursor();
+})();
+
