@@ -200,7 +200,7 @@ function renderSharedFooter(file) {
   const current = file === "hello.html" ? ' aria-current="page"' : "";
   return `<footer>
     <div class="shell footer-shell">
-      <div class="footer-credit">Mia · Built from scratch · No beige allowed</div>
+      <div class="footer-credit">Mia · Built by hand · No beige allowed</div>
       <div class="footer-quiet-wrap">
         <a class="footer-quiet-link" href="/hello.html"${current}>A Quiet Hello</a>
       </div>
