@@ -173,8 +173,9 @@
       #site-custom-cursor,#site-cursor-trail {position:fixed;left:0;top:0;pointer-events:none!important;z-index:2147483647;user-select:none;}
       #site-custom-cursor {display:none;will-change:transform;}
       #site-custom-cursor.visible {display:block;}
-      #site-custom-cursor.purple {width:18px;height:18px;margin:-9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#edceff,#bd68fa 45%,#8c35da);box-shadow:0 0 9px #ba60faac,0 0 22px #9c39eb66;}
-      #site-custom-cursor.purple.engaged {box-shadow:0 0 0 2px #ebcdff99,0 0 16px #c775ffcc;}
+      /* Morteva Violet Sun: smooth glow, no highlight line. */
+      #site-custom-cursor.purple {width:26px;height:26px;margin:-13px;border-radius:50%;background:radial-gradient(circle,#fff7ff 0,#e8baff 20%,#b847ed 48%,#631b9c 70%);box-shadow:0 0 9px #c562ff,0 0 22px #933bcc77;}
+      #site-custom-cursor.purple.engaged {box-shadow:0 0 12px #d488ff,0 0 26px #a14ae999;}
       #site-custom-cursor.pearl {width:26px;height:32px;filter:drop-shadow(0 0 3px #d5e7ff88);}
       #site-custom-cursor.pearl::before {content:'';position:absolute;inset:0;background:linear-gradient(135deg,#fffef5 5%,#e6f6ff 27%,#f5ddf3 48%,#e9e6ff 67%,#fffce9);clip-path:polygon(0 0,94% 62%,57% 67%,43% 100%,25% 91%,36% 61%,0 72%);}
       #site-custom-cursor.pearl::after {content:'';position:absolute;left:4px;top:7px;width:2px;height:12px;transform:rotate(-33deg);background:#57677b88;}
@@ -196,7 +197,6 @@
       cursor.style.transform=`translate3d(${event.clientX}px,${event.clientY}px,0)`;
       cursor.classList.add('visible');document.documentElement.classList.add('site-cursor-active');
       cursor.classList.toggle('engaged',Boolean(target?.closest('a,button,summary,[role="button"],[role="link"]')));
-      if(!pearl&&!reduced.matches&&event.timeStamp-lastTrail>35){lastTrail=event.timeStamp;const dot=document.createElement('i');dot.style.left=event.clientX+'px';dot.style.top=event.clientY+'px';trail.append(dot);setTimeout(()=>dot.remove(),160);}
     }
     document.addEventListener('pointermove',move,{passive:true});
     document.documentElement.addEventListener('pointerleave',hide);
