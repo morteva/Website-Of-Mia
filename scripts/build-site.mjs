@@ -79,7 +79,7 @@ if (!html.includes('<h3>🎮 The worlds I built</h3>')) {
   html = html.replace(worldsMarker, rankings + "\n\n" + worldsMarker);
 }
 
-const standaloneNowTitle = '<span class="bio-summary-title">Where I Am Now</span>';
+const standaloneNowTitle = '<span class="bio-summary-title">A Quick Catch-Up</span>';
 
 if (!html.includes(standaloneNowTitle)) {
   const nowHeading = '            <h3>🫂 What I’m building now</h3>';
