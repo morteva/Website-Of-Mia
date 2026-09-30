@@ -174,8 +174,8 @@
       #site-custom-cursor {display:none;will-change:transform;}
       #site-custom-cursor.visible {display:block;}
       /* Morteva Violet Sun: smooth glow, no highlight line. */
-      #site-custom-cursor.purple {width:26px;height:26px;margin:-13px;border-radius:50%;background:radial-gradient(circle,#fff7ff 0,#e8baff 20%,#b847ed 48%,#631b9c 70%);box-shadow:0 0 9px #c562ff,0 0 22px #933bcc77;}
-      #site-custom-cursor.purple.engaged {background:radial-gradient(circle,#fff7ff 0,#e8baff 20%,#c666f2 48%,#ad4ce4 70%,#ad4ce4 100%);box-shadow:0 0 12px 3px #cf78ff99,0 0 28px 7px #b452ef66;border:0;outline:0;}
+      #site-custom-cursor.purple {width:26px;height:26px;margin:-13px;border-radius:50%;background:radial-gradient(circle,#fff2ff 0%,#efd0ff 20%,#d794ff 40%,rgba(194,105,255,.85) 58%,rgba(194,105,255,.4) 76%,rgba(194,105,255,0) 100%);box-shadow:0 0 10px 2px #c56bff55,0 0 24px 4px #bd64ff33;border:0;outline:0;}
+      #site-custom-cursor.purple.engaged {background:radial-gradient(circle,#fff8ff 0%,#f2d9ff 20%,#deaaff 40%,rgba(205,128,255,.9) 58%,rgba(205,128,255,.45) 76%,rgba(205,128,255,0) 100%);box-shadow:0 0 14px 4px #d48aff66,0 0 30px 8px #c878ff44;border:0;outline:0;}
       #site-custom-cursor.pearl {width:26px;height:32px;filter:drop-shadow(0 0 3px #d5e7ff88);}
       #site-custom-cursor.pearl::before {content:'';position:absolute;inset:0;background:linear-gradient(135deg,#fffef5 5%,#e6f6ff 27%,#f5ddf3 48%,#e9e6ff 67%,#fffce9);clip-path:polygon(0 0,94% 62%,57% 67%,43% 100%,25% 91%,36% 61%,0 72%);}
       #site-custom-cursor.pearl::after {content:'';position:absolute;left:4px;top:7px;width:2px;height:12px;transform:rotate(-33deg);background:#57677b88;}
