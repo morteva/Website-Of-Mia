@@ -67,7 +67,7 @@
         if(!response.ok) throw new Error(`Video manifest returned ${response.status}`);
         const {videos=[]}=await response.json();
         if(!videos.length){
-          status.textContent='No videos published here yet.';
+          status.textContent='Nothing here yet. I haven’t uploaded the damn things.';
           return;
         }
         for(const item of videos){
@@ -91,7 +91,7 @@
         grid.hidden=false;
       }catch(error){
         status.classList.add('error');
-        status.textContent='Could not load videos right now. Try again in a moment.';
+        status.textContent='Videos aren’t loading right now. Try again in a minute.';
       }
     }
 
