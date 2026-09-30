@@ -2024,3 +2024,9 @@ body::after {
     padding-right: 84px;
   }
 }
+
+/* Let the short version actually stay short, without stranding its last word. */
+#about .section-head p { max-width: 440px; text-wrap: pretty; }
+.keep-together { white-space: nowrap; }
+.language-list { display: flex; flex-wrap: wrap; gap: 10px 24px; margin: 20px 0 0; padding: 0; list-style: none; color: #d0c5c5; }
+.language-list li { padding-bottom: 5px; border-bottom: 1px solid var(--line); }
