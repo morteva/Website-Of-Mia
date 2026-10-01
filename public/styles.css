@@ -1981,10 +1981,14 @@ body::after {
 }
 
 
-/* Gallery personality GIF: stand the hologram directly on the top border of the Personality card. */
-.personality-album {
+/* Gallery personality GIF: wrapper owns the overlay so the GIF stays visible above the Personality card. */
+.personality-slot {
   position: relative;
+  min-width: 0;
   overflow: visible;
+}
+.personality-album {
+  width: 100%;
 }
 .personality-album > summary {
   border-radius: var(--radius-md);
@@ -1994,7 +1998,6 @@ body::after {
 }
 .personality-summary {
   min-height: 100px !important;
-  overflow: hidden;
 }
 .personality-summary .album-title,
 .personality-summary::after {
@@ -2004,12 +2007,13 @@ body::after {
 .personality-panel-gif {
   position: absolute;
   left: 50%;
-  top: 0;
-  z-index: 4;
+  bottom: calc(100% - 1px);
+  z-index: 8;
   width: clamp(163px, 13.75vw, 206px);
-  max-width: none;
+  max-width: none !important;
   height: auto;
-  transform: translate(-50%, -100%);
+  display: block;
+  transform: translateX(-50%);
   pointer-events: none;
   user-select: none;
 }
