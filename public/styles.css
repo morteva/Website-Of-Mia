@@ -1981,17 +1981,25 @@ body::after {
 }
 
 
-/* Gallery personality GIF: keep the hologram physically connected to the Personality card. */
-.personality-summary {
+/* Gallery personality GIF: attach the hologram to the top center of the Personality card without changing card height. */
+.personality-album {
   position: relative;
-  min-height: 220px !important;
-  overflow: hidden;
-  isolation: isolate;
+  overflow: visible;
+}
+.personality-album > summary {
+  border-radius: var(--radius-md);
+}
+.personality-album[open] > summary {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.personality-summary {
+  min-height: 100px !important;
+  overflow: visible;
 }
 .personality-summary .album-title {
   position: relative;
   z-index: 2;
-  max-width: 42%;
+  max-width: none;
 }
 .personality-summary::after {
   position: relative;
@@ -2000,9 +2008,9 @@ body::after {
 .personality-panel-gif {
   position: absolute;
   left: 50%;
-  bottom: 0;
-  z-index: 1;
-  width: clamp(138px, 14vw, 178px);
+  bottom: calc(100% - 1px);
+  z-index: 3;
+  width: clamp(130px, 11vw, 165px);
   max-width: none;
   height: auto;
   transform: translateX(-50%);
@@ -2011,27 +2019,14 @@ body::after {
 }
 
 @media (max-width: 800px) {
-  .personality-summary {
-    min-height: 205px !important;
-  }
-  .personality-summary .album-title {
-    max-width: 46%;
-  }
   .personality-panel-gif {
-    width: clamp(126px, 31vw, 162px);
+    width: clamp(116px, 28vw, 148px);
   }
 }
 
 @media (max-width: 520px) {
-  .personality-summary {
-    min-height: 190px !important;
-    align-items: flex-start !important;
-  }
-  .personality-summary .album-title {
-    max-width: 58%;
-  }
   .personality-panel-gif {
-    width: 126px;
+    width: 116px;
   }
 }
 
