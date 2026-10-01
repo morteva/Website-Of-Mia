@@ -1981,47 +1981,57 @@ body::after {
 }
 
 
-/* Gallery hologram: on two-column layouts, anchor the image to the intro
-   box itself so its feet land exactly on the top edge of the album grid.
-   The Personality card shares the shell's right edge, so this keeps the
-   hologram hooked to that card without fixed editor drag coordinates. */
-.intro h1:has(.gallery-hero-hologram) {
-  position: static !important;
+/* Gallery personality GIF: keep the hologram physically connected to the Personality card. */
+.personality-summary {
+  position: relative;
+  min-height: 220px !important;
+  overflow: hidden;
+  isolation: isolate;
 }
-.gallery-hero-hologram {
-  position: absolute !important;
-  translate: none !important;
-  left: auto !important;
-  right: 0 !important;
-  top: auto !important;
-  bottom: -10px !important;
-  height: auto !important;
+.personality-summary .album-title {
+  position: relative;
+  z-index: 2;
+  max-width: 42%;
+}
+.personality-summary::after {
+  position: relative;
+  z-index: 2;
+}
+.personality-panel-gif {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 1;
+  width: clamp(138px, 14vw, 178px);
+  max-width: none;
+  height: auto;
+  transform: translateX(-50%);
   pointer-events: none;
+  user-select: none;
 }
 
 @media (max-width: 800px) {
-  .intro h1:has(.gallery-hero-hologram) {
-    position: relative !important;
-    padding-right: 26vw;
+  .personality-summary {
+    min-height: 205px !important;
   }
-  .gallery-hero-hologram {
-    translate: 0 0 !important;
-    width: clamp(108px, 34vw, 142px) !important;
-    height: auto !important;
-    left: auto !important;
-    right: -4px !important;
-    top: -34px !important;
-    bottom: auto !important;
+  .personality-summary .album-title {
+    max-width: 46%;
+  }
+  .personality-panel-gif {
+    width: clamp(126px, 31vw, 162px);
   }
 }
-@media (max-width: 430px) {
-  .gallery-hero-hologram {
-    width: 104px !important;
-    right: -8px !important;
-    top: -22px !important;
+
+@media (max-width: 520px) {
+  .personality-summary {
+    min-height: 190px !important;
+    align-items: flex-start !important;
   }
-  .intro h1:has(.gallery-hero-hologram) {
-    padding-right: 84px;
+  .personality-summary .album-title {
+    max-width: 58%;
+  }
+  .personality-panel-gif {
+    width: 126px;
   }
 }
 
