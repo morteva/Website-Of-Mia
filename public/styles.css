@@ -2009,24 +2009,28 @@ body::after {
   left: 50%;
   bottom: calc(100% - 1px);
   z-index: 8;
-  width: clamp(163px, 13.75vw, 206px);
-  max-width: none !important;
-  height: auto;
+  width: auto;
+  height: min(46vh, 500px);
+  max-width: min(42vw, 340px) !important;
+  max-height: calc(100vh - 165px);
   display: block;
   transform: translateX(-50%);
+  object-fit: contain;
   pointer-events: none;
   user-select: none;
 }
 
 @media (max-width: 800px) {
   .personality-panel-gif {
-    width: clamp(145px, 35vw, 185px);
+    height: min(38vh, 360px);
+    max-width: min(48vw, 250px) !important;
   }
 }
 
 @media (max-width: 520px) {
   .personality-panel-gif {
-    width: 145px;
+    height: min(32vh, 280px);
+    max-width: 46vw !important;
   }
 }
 
