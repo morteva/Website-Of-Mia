@@ -3,7 +3,7 @@
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-anime.webp', publicDir);
-const release = 'myspace-anime-20261001-r1';
+const release = 'myspace-anime-20261001-r2';
 
 const image = await readFile(imagePath);
 if (image.length < 1000) {
@@ -19,7 +19,7 @@ if (!imageAssignment.test(pet) || !petLoader.test(orbs)) {
   throw new Error('MySpace Mia image or loader reference changed; refusing silent build drift.');
 }
 
-const updatedPet = pet.replace(imageAssignment, `img.src = asset('tiny-mia-anime.webp?v=myspace-anime-20261001-r1');`);
+const updatedPet = pet.replace(imageAssignment, `img.src = asset('tiny-mia-anime.webp?v=myspace-anime-20261001-r2');`);
 const updatedOrbs = orbs.replace(petLoader, `script.src = '/mia-pet.js?v=${release}';`);
 const htmlFiles = (await readdir(publicDir)).filter(name => name.endsWith('.html'));
 const pages = await Promise.all(htmlFiles.map(async name => {

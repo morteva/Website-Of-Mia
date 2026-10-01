@@ -241,7 +241,7 @@
   sprite.title = 'Click for another MySpace Mia thought';
 
   const img = document.createElement('img');
-  img.src = asset('tiny-mia-anime.webp?v=myspace-anime-20261001-r1');
+  img.src = asset('tiny-mia-anime.webp?v=myspace-anime-20261001-r2');
   img.alt = '';
   img.setAttribute('aria-hidden', 'true');
   sprite.append(img);
