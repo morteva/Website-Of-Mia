@@ -1981,7 +1981,7 @@ body::after {
 }
 
 
-/* Gallery personality GIF: attach the hologram to the top center of the Personality card without changing card height. */
+/* Gallery personality GIF: stand the hologram directly on the top border of the Personality card. */
 .personality-album {
   position: relative;
   overflow: visible;
@@ -1994,13 +1994,9 @@ body::after {
 }
 .personality-summary {
   min-height: 100px !important;
-  overflow: visible;
+  overflow: hidden;
 }
-.personality-summary .album-title {
-  position: relative;
-  z-index: 2;
-  max-width: none;
-}
+.personality-summary .album-title,
 .personality-summary::after {
   position: relative;
   z-index: 2;
@@ -2008,12 +2004,12 @@ body::after {
 .personality-panel-gif {
   position: absolute;
   left: 50%;
-  bottom: calc(100% - 1px);
-  z-index: 3;
+  top: 0;
+  z-index: 4;
   width: clamp(130px, 11vw, 165px);
   max-width: none;
   height: auto;
-  transform: translateX(-50%);
+  transform: translate(-50%, -100%);
   pointer-events: none;
   user-select: none;
 }
