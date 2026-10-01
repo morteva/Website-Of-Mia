@@ -5,11 +5,11 @@ const publicDir = resolve(import.meta.dirname, "..", "public");
 
 // The direct-source MySpace Mia pool must stay complete.
 const thoughts = JSON.parse(await readFile(join(publicDir, "myspace-mia-thoughts.json"), "utf8"));
-const thoughtCategories = ["feral_general","goth_style","gaming_general","bdo","mmo_leadership","tech_coding","website","mira_beside","ai_future","cars","animals","scifi_horror","music","people","boundaries","curiosity","night_brain","snacks","existential","introvert_social","fashion_beauty","nature_urban","work_life","random_observations"];
+const thoughtCategories = ["feral_general","goth_style","gaming_general","bdo","mmo_leadership","tech_coding","website","mira_beside","ai_consciousness","cars","animals","scifi_horror","music","people","boundaries","curiosity_research","night_brain","snacks","existential","introvert_social","fashion_beauty","nature_wandering","work_future","family_languages","random_observations"];
 const thoughtCounts = new Map(thoughtCategories.map(category => [category, 0]));
 const thoughtTexts = new Set();
-if (!Array.isArray(thoughts.lines) || thoughts.lines.length !== 1200 || thoughts.total !== 1200) {
-  throw new Error("MySpace Mia must contain exactly 1,200 entries.");
+if (!Array.isArray(thoughts.lines) || thoughts.lines.length !== 250 || thoughts.total !== 250) {
+  throw new Error("MySpace Mia must contain exactly 250 entries.");
 }
 for (const line of thoughts.lines) {
   if (!thoughtCounts.has(line.category) || typeof line.text !== "string" || !line.text.trim() || thoughtTexts.has(line.text)) {
@@ -18,10 +18,10 @@ for (const line of thoughts.lines) {
   thoughtCounts.set(line.category, thoughtCounts.get(line.category) + 1);
   thoughtTexts.add(line.text);
 }
-if ([...thoughtCounts.values()].some(count => count !== 50)) {
-  throw new Error("MySpace Mia must contain exactly 50 entries in each of its 24 categories.");
+if ([...thoughtCounts.values()].some(count => count !== 10)) {
+  throw new Error("MySpace Mia must contain exactly 10 entries in each of its 25 categories.");
 }
-console.log("Validated MySpace Mia: 24 categories, 50 each, 1,200 unique entries.");
+console.log("Validated MySpace Mia: 25 categories, 10 each, 250 unique entries.");
 
 const MAX_DEPLOY_ASSET_BYTES = 24 * 1024 * 1024;
 
