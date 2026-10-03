@@ -161,7 +161,7 @@ for (const file of htmlFiles) {
   if (!/<link\s+rel=["']icon["']/i.test(source)) {
     source = source.replace(/<\/head>/i, '  <link rel="icon" href="/favicon.png" type="image/png" data-mia-favicon>\n</head>');
   }
-  source = source.replace(/\/styles\.css\?v=[^"']+/g, "/styles.css?v=20261002-gaming-status-r2");
+  source = source.replace(/\/styles\.css\?v=[^"']+/g, "/styles.css?v=20261003-fixed-hand-r1");
   source = addSocial(source, file);
 
   await writeFile(path, source);
