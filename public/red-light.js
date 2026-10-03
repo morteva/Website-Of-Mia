@@ -61,7 +61,7 @@
     const progress = phase / 28;
     const strength = Math.sin(Math.PI * progress) ** .8;
     const x = width * (-.3 + 1.6 * progress);
-    beam(ctx, x, .11 * strength);
+    beam(ctx, x, .33 * strength);
     layerCtx.clearRect(0, 0, width, height);
     const style = getComputedStyle(hand);
     const w = parseFloat(style.width), h = parseFloat(style.height);
@@ -77,7 +77,12 @@
     layerCtx.globalCompositeOperation = 'destination-in';
     beam(layerCtx, x, strength * .8);
     layerCtx.globalCompositeOperation = 'source-over';
+    // Add three copies of the original light energy, preserving the red hue.
+    ctx.globalCompositeOperation = 'lighter';
     ctx.drawImage(layer, 0, 0);
+    ctx.drawImage(layer, 0, 0);
+    ctx.drawImage(layer, 0, 0);
+    ctx.globalCompositeOperation = 'source-over';
   }
   resize();
   addEventListener('resize', resize, { passive: true });
