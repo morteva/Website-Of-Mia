@@ -1,4 +1,8 @@
 (() => {
+  const lightScript = document.createElement('script');
+  lightScript.src = '/red-light.js?v=20261003-r1';
+  lightScript.defer = true;
+  document.head.appendChild(lightScript);
   function loadTinyMiaPet() {
     if (window.__miaPetLoaderAdded) return;
     window.__miaPetLoaderAdded = true;
