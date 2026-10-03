@@ -2118,7 +2118,7 @@ body::after {
 }
 
 
-/* Gaming archive identity + current-play status. */
+/* Gaming archive identity inside Info + current-play status. */
 .game-summary {
   position: relative;
   display: flex !important;
@@ -2127,13 +2127,9 @@ body::after {
   gap: 18px;
   padding-bottom: 34px !important;
 }
-.game-summary .game-identity {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  width: min(54%, 560px);
-  min-width: 0;
-  transform: translateX(-50%);
+.info-body > .game-identity {
+  display: block;
+  margin: 0 0 18px;
   color: #a79b9f;
   font-size: .58rem;
   font-weight: 750;
@@ -2141,8 +2137,9 @@ body::after {
   letter-spacing: .035em;
   text-align: center;
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
-.game-summary .game-identity-subline {
+.info-body .game-identity-subline {
   display: inline-block;
   margin-top: 3px;
   color: #81767a;
@@ -2161,26 +2158,11 @@ body::after {
 .game-status--retired { color: #ff4e72; }
 .game-status--active { color: #62a8ff; }
 
-.group-head.game-summary {
-  display: flex !important;
-  align-items: center !important;
-}
-.group-head.game-summary .game-identity {
-  top: 17px;
-  width: min(56%, 660px);
-}
-.group-head.game-summary .group-note {
-  margin-left: auto;
-  align-self: flex-start;
-  white-space: nowrap;
-}
-
 @media (max-width: 760px) {
   .game-summary,
   .group-head.game-summary {
     display: grid !important;
     grid-template-columns: minmax(0,1fr) 24px;
-    row-gap: 8px;
     padding-bottom: 38px !important;
   }
   .game-summary .album-title,
@@ -2192,22 +2174,6 @@ body::after {
   .group-head.game-summary::after {
     grid-column: 2;
     grid-row: 1;
-  }
-  .game-summary .game-identity,
-  .group-head.game-summary .game-identity {
-    position: static;
-    grid-column: 1 / -1;
-    grid-row: 2;
-    width: auto;
-    max-width: 92%;
-    transform: none;
-    text-align: left;
-  }
-  .group-head.game-summary .group-note {
-    grid-column: 1;
-    grid-row: 3;
-    margin-left: 0;
-    font-size: .62rem;
   }
   .game-summary .game-status {
     right: 22px;
