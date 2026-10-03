@@ -83,15 +83,18 @@
     const origin=style.transformOrigin.split(' ').map(Number.parseFloat);
     world=new DOMMatrix().translate(parseFloat(style.left)+origin[0],height-parseFloat(style.bottom)-h+origin[1]).multiply(new DOMMatrix(style.transform)).translate(-origin[0],-origin[1]);
     if(introPhase===null){
-      const handCenter=new DOMPoint(w*.79,h*.52).matrixTransform(world);
-      introPhase=Math.max(0,Math.min(27,(handCenter.x/width+.3)/1.6*28));
+      // Start on the approaching side of the visible fingers, not their far edge.
+      const fingers=[new DOMPoint(w*.79,h*.22),new DOMPoint(w*.79,h*.80)]
+        .map(point=>point.matrixTransform(world));
+      const approachX=Math.min(...fingers.map(point=>point.x))-Math.max(width*.10,100);
+      introPhase=Math.max(0,Math.min(27,(approachX/width+.3)/1.6*28));
     }
     gl.uniform2f(u.size,w,h);gl.uniform2f(u.viewport,width,height);gl.uniform3f(u.worldX,world.a,world.c,world.e);gl.uniform3f(u.worldY,world.b,world.d,world.f);
     gl.uniform1f(u.baseOpacity,parseFloat(style.getPropertyValue('--hand-base-opacity'))||.28);
   }
   function frame(now){
     if(lost)return;requestAnimationFrame(frame);if(!ready||document.hidden||now-previous<40)return;previous=now;
-    // Navigation-relative welcome: first beam meets the hand at 1.5 seconds,
+    // Navigation-relative welcome: first beam approaches the hand at 1.5 seconds,
     // finishes that pass, then returns to the 28-second sweep / 50-second rest.
     const seconds=now/1000,elapsed=seconds-1.5,phase=(Math.max(0,elapsed)+introPhase)%78;
     const active=!reduced.matches&&elapsed>=0&&phase<=28;
