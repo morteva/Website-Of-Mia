@@ -1,0 +1,490 @@
+{
+  "version": 1,
+  "families": [
+    {
+      "family": "Test Söhne Schmal",
+      "cssFamily": "MiraFont_069a564d9a08a9bb",
+      "faces": [
+        {
+          "src": "/fonts/TestSohneSchmal-Buch-BF663d89cacd623.woff2",
+          "weight": "400",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-BuchKursiv-BF663d89caa996a.woff2",
+          "weight": "400",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-Dreiviertelfett-BF663d89cad1b90.woff2",
+          "weight": "700",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-DreiviertelfettKursiv-BF663d89cabe2e7.woff2",
+          "weight": "700",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-Extrafett-BF663d89caa8d99.woff2",
+          "weight": "900",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-ExtrafettKursiv-BF663d89caabd3d.woff2",
+          "weight": "900",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-Extraleicht-BF663d89caa4aa3.woff2",
+          "weight": "250",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-ExtraleichtKursiv-BF663d89cb9a06c.woff2",
+          "weight": "250",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-Fett-BF663d89cadad5a.woff2",
+          "weight": "800",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-FettKursiv-BF663d89cad3975.woff2",
+          "weight": "800",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-Halbfett-BF663d89cb3a34e.woff2",
+          "weight": "600",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-HalbfettKursiv-BF663d89cb96454.woff2",
+          "weight": "600",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-Kraftig-BF663d89cad3ca8.woff2",
+          "weight": "500",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-KraftigKursiv-BF663d89cc20945.woff2",
+          "weight": "500",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-Leicht-BF663d89cbb7c25.woff2",
+          "weight": "300",
+          "style": "normal",
+          "stretch": "75%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneSchmal-LeichtKursiv-BF663d89cbb7427.woff2",
+          "weight": "300",
+          "style": "italic",
+          "stretch": "75%",
+          "format": "woff2"
+        }
+      ]
+    },
+    {
+      "family": "Test Söhne Mono",
+      "cssFamily": "MiraFont_33cf4058fc4a2cb8",
+      "faces": [
+        {
+          "src": "/fonts/TestSohneMono-Buch-BF663d89cbcec64.woff2",
+          "weight": "400",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-BuchKursiv-BF663d89cc8d4c3.woff2",
+          "weight": "400",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-Dreiviertelfett-BF663d89cc62070.woff2",
+          "weight": "700",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-DreiviertelfettKursiv-BF663d89cc69249.woff2",
+          "weight": "700",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-Extrafett-BF663d89cc64878.woff2",
+          "weight": "900",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-ExtrafettKursiv-BF663d89cc6518a.woff2",
+          "weight": "900",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-Extraleicht-BF663d89cd32fa2.woff2",
+          "weight": "250",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-ExtraleichtKursiv-BF663d89cc93455.woff2",
+          "weight": "250",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-Fett-BF663d89cc6a8e8.woff2",
+          "weight": "800",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-FettKursiv-BF663d89cc7b026.woff2",
+          "weight": "800",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-Halbfett-BF663d89cc69f9d.woff2",
+          "weight": "600",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-HalbfettKursiv-BF663d89cc6d0d0.woff2",
+          "weight": "600",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-Kraftig-BF663d89cd2bd2d.woff2",
+          "weight": "500",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-KraftigKursiv-BF663d89ccea359.woff2",
+          "weight": "500",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-Leicht-BF663d89cd4fdd9.woff2",
+          "weight": "300",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneMono-LeichtKursiv-BF663d89cceebee.woff2",
+          "weight": "300",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        }
+      ]
+    },
+    {
+      "family": "Test Söhne Breit",
+      "cssFamily": "MiraFont_0486b4e837f7a33f",
+      "faces": [
+        {
+          "src": "/fonts/TestSohneBreit-Buch-BF663d89ca2ff42.woff2",
+          "weight": "400",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-BuchKursiv-BF663d89ca6008d.woff2",
+          "weight": "400",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-Dreiviertelfett-BF663d89c955618.woff2",
+          "weight": "700",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-DreiviertelfettKursiv-BF663d89c9d74c0.woff2",
+          "weight": "700",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-Extrafett-BF663d89ca5b44e.woff2",
+          "weight": "900",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-ExtrafettKursiv-BF663d89caab90d.woff2",
+          "weight": "900",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-Extraleicht-BF663d89cd9eb84.woff2",
+          "weight": "250",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-ExtraleichtKursiv-BF663d89ca88cf6.woff2",
+          "weight": "250",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-Fett-BF663d89ca84caa.woff2",
+          "weight": "800",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-FettKursiv-BF663d89ca53f0b.woff2",
+          "weight": "800",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-Halbfett-BF663d89cacf645.woff2",
+          "weight": "600",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-HalbfettKursiv-BF663d89ca9627e.woff2",
+          "weight": "600",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-Kraftig-BF663d89caa6b6c.woff2",
+          "weight": "500",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-KraftigKursiv-BF663d89ca9beae.woff2",
+          "weight": "500",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-Leicht-BF663d89cae7333.woff2",
+          "weight": "300",
+          "style": "normal",
+          "stretch": "125%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohneBreit-LeichtKursiv-BF663d89ca7f368.woff2",
+          "weight": "300",
+          "style": "italic",
+          "stretch": "125%",
+          "format": "woff2"
+        }
+      ]
+    },
+    {
+      "family": "Test Söhne",
+      "cssFamily": "MiraFont_032f595d0b7d1cdd",
+      "faces": [
+        {
+          "src": "/fonts/TestSohne-Buch-BF663d89cd32e6a.woff2",
+          "weight": "400",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-BuchKursiv-BF663d89cd3e887.woff2",
+          "weight": "400",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-Dreiviertelfett-BF663d89ccc5f66.woff2",
+          "weight": "700",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-DreiviertelfettKursiv-BF663d89cd2f687.woff2",
+          "weight": "700",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-Extrafett-BF663d89cc9f2c0.woff2",
+          "weight": "900",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-ExtrafettKursiv-BF663d89ccb8000.woff2",
+          "weight": "900",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-Extraleicht-BF663d89cd3f5c5.woff2",
+          "weight": "250",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-ExtraleichtKursiv-BF663d89cd3f0d1.woff2",
+          "weight": "250",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-Fett-BF663d89cca89ff.woff2",
+          "weight": "800",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-FettKursiv-BF663d89cc64878.woff2",
+          "weight": "800",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-Halbfett-BF663d89cd2d67b.woff2",
+          "weight": "600",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-HalbfettKursiv-BF663d89cd41624.woff2",
+          "weight": "600",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-Kraftig-BF663d89cd37e26.woff2",
+          "weight": "500",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-KraftigKursiv-BF663d89cd2bd4b.woff2",
+          "weight": "500",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-Leicht-BF663d89cd4952e.woff2",
+          "weight": "300",
+          "style": "normal",
+          "stretch": "100%",
+          "format": "woff2"
+        },
+        {
+          "src": "/fonts/TestSohne-LeichtKursiv-BF663d89cd9a361.woff2",
+          "weight": "300",
+          "style": "italic",
+          "stretch": "100%",
+          "format": "woff2"
+        }
+      ]
+    },
+    {
+      "family": "Fredoka",
+      "cssFamily": "MiraFont_ac329c7edb546d73",
+      "faces": [
+        {
+          "src": "/fonts/fredoka/Fredoka-Variable.ttf",
+          "weight": "300 700",
+          "style": "normal",
+          "stretch": "75% 125%",
+          "format": "truetype"
+        }
+      ]
+    }
+  ]
+}
