@@ -72,7 +72,7 @@
     m.putImageData(pixels,0,0);return map;
   }
   let width=0,height=0,w=0,h=0,world,previous=0,ready=false,lost=false,dirty=true,wasActive=false;
-  const started=performance.now();
+  let introPhase=null;
   function resize(){
     dirty=true;
     width=innerWidth;height=innerHeight;const scale=Math.max(1,devicePixelRatio||1);
@@ -82,15 +82,24 @@
     surface.width=Math.ceil(w*surfaceScale);surface.height=Math.ceil(h*surfaceScale);gl.viewport(0,0,surface.width,surface.height);
     const origin=style.transformOrigin.split(' ').map(Number.parseFloat);
     world=new DOMMatrix().translate(parseFloat(style.left)+origin[0],height-parseFloat(style.bottom)-h+origin[1]).multiply(new DOMMatrix(style.transform)).translate(-origin[0],-origin[1]);
+    if(introPhase===null){
+      const handCenter=new DOMPoint(w*.79,h*.52).matrixTransform(world);
+      introPhase=Math.max(0,Math.min(27,(handCenter.x/width+.3)/1.6*28));
+    }
     gl.uniform2f(u.size,w,h);gl.uniform2f(u.viewport,width,height);gl.uniform3f(u.worldX,world.a,world.c,world.e);gl.uniform3f(u.worldY,world.b,world.d,world.f);
     gl.uniform1f(u.baseOpacity,parseFloat(style.getPropertyValue('--hand-base-opacity'))||.28);
   }
   function frame(now){
     if(lost)return;requestAnimationFrame(frame);if(!ready||document.hidden||now-previous<40)return;previous=now;
-    const seconds=(now-started)/1000,phase=(seconds-4)%78,active=!reduced.matches&&seconds>=4&&phase<=28;
+    // Navigation-relative welcome: first beam meets the hand at 1.5 seconds,
+    // finishes that pass, then returns to the 28-second sweep / 50-second rest.
+    const seconds=now/1000,elapsed=seconds-1.5,phase=(Math.max(0,elapsed)+introPhase)%78;
+    const active=!reduced.matches&&elapsed>=0&&phase<=28;
     if(!active&&!wasActive&&!dirty)return;
     wasActive=active;dirty=false;
-    const progress=active?phase/28:0,strength=active?Math.sin(Math.PI*progress)**.8:0,x=width*(-.3+1.6*progress);
+    const progress=active?phase/28:0;
+    const welcomeFade=Math.min(1,Math.max(0,elapsed)/.4);
+    const strength=active?Math.sin(Math.PI*progress)**.8*welcomeFade:0,x=width*(-.3+1.6*progress);
     ctx.clearRect(0,0,width,height);
     if(active){const radius=Math.max(width*.24,250),glow=ctx.createRadialGradient(x,height*.52,0,x,height*.52,radius);
       glow.addColorStop(0,`rgba(116,12,24,${.33*strength})`);glow.addColorStop(.38,`rgba(86,8,20,${.231*strength})`);glow.addColorStop(1,'rgba(60,0,12,0)');
