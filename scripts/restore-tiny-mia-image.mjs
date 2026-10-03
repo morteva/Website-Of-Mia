@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-anime.webp', publicDir);
 const release = 'myspace-anime-20261001-r3';
+const cursorRelease = 'link-hand-20261003';
 
 const chunkDir = new URL('../content/tiny-mia-anime-base64-v2/', import.meta.url);
 const chunkNames = (await readdir(chunkDir))
@@ -46,7 +47,7 @@ const htmlFiles = (await readdir(publicDir)).filter(name => name.endsWith('.html
 const pages = await Promise.all(htmlFiles.map(async name => {
   const path = new URL(name, publicDir);
   const source = await readFile(path, 'utf8');
-  return { path, source, updated: source.replace(/\/orbs\.js(?:\?v=[^"'<>\s]*)?/g, `/orbs.js?v=${release}`) };
+  return { path, source, updated: source.replace(/\/orbs\.js(?:\?v=[^"'<>\s]*)?/g, `/orbs.js?v=${cursorRelease}`) };
 }));
 
 if (updatedPet !== pet) await writeFile(petPath, updatedPet);
