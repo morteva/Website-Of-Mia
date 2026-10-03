@@ -37,9 +37,7 @@ async function copyTree(source, destination) {
 await copyTree(sourceDir, deployDir);
 
 if (skipped.length) {
-  for (const item of skipped) {
-    console.warn(`Deploy asset omitted because it exceeds Cloudflare's asset limit: ${item.path} (${(item.bytes / 1024 / 1024).toFixed(1)} MiB)`);
-  }
+  throw new Error('Assets exceed the deploy size limit; no incomplete deployment is allowed:\n' + skipped.map(item => `${item.path} (${(item.bytes / 1024 / 1024).toFixed(1)} MiB)`).join('\n'));
 }
 
-console.log(`Prepared deploy assets in dist (${skipped.length} oversized asset${skipped.length === 1 ? "" : "s"} omitted).`);
+console.log('Prepared all deploy assets in dist.');

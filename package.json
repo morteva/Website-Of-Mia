@@ -1,0 +1,13 @@
+{
+  "name": "website-of-mia",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-media-manifests.mjs && node scripts/restore-tiny-mia-image.mjs && node scripts/build-deploy-assets.mjs",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "4.147.0"
+  }
+}

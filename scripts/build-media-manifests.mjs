@@ -41,7 +41,7 @@ async function walkGallery(dir, parts = []) {
     }
     if (!entry.isFile() || !imagePattern.test(entry.name)) continue;
     const info = await stat(full);
-    if (info.size > MAX_DEPLOY_ASSET_BYTES) continue;
+    if (info.size > MAX_DEPLOY_ASSET_BYTES) throw new Error(`Gallery asset is too large to deploy: ${full}. Optimize it before publishing.`);
     const key = parts.join("/");
     gallery[key] ??= [];
     const url = "/galleries/" + [...parts, entry.name].map(encodeURIComponent).join("/");
@@ -60,7 +60,7 @@ for (const entry of videoEntries) {
   if (!entry.isFile() || !videoPattern.test(entry.name)) continue;
   const full = join(videosRoot, entry.name);
   const info = await stat(full);
-  if (info.size > MAX_DEPLOY_ASSET_BYTES) continue;
+  if (info.size > MAX_DEPLOY_ASSET_BYTES) throw new Error(`Video asset is too large to deploy: ${full}. Optimize it before publishing.`);
   videos.push({ name: entry.name, url: "/videos/" + encodeURIComponent(entry.name) });
 }
 videos.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" }));
