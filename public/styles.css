@@ -982,7 +982,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
 .subalbums { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
 .subalbums .album { background: rgba(255,255,255,.0135); box-shadow: none; }
 .info-tab { margin-bottom: 18px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-sm); background: rgba(255,255,255,.0162); }
-.info-tab summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px 18px; color: #d6cacc; font-size: .68rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+.info-tab summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 15px 18px; color: #d6cacc; font-size: 1.02rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
 .info-tab[open] summary { border-bottom: 1px solid var(--line); background: rgba(215,25,93,.04125); }
 .info-body { padding: 20px 22px 22px; color: #c5babc; line-height: 1.8; }
 .info-body p { margin: 0; }
