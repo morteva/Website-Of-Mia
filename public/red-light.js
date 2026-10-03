@@ -31,9 +31,15 @@
   image.src = '/gothic-hand-background.png';
   function resize() {
     width = innerWidth; height = innerHeight;
-    // Decorative light needs no high-DPI framebuffer.
-    canvas.width = layer.width = width;
-    canvas.height = layer.height = height;
+    // Match the display's physical pixels so rotated highlights stay sharp.
+    const scale = Math.max(1, devicePixelRatio || 1);
+    canvas.width = layer.width = Math.ceil(width * scale);
+    canvas.height = layer.height = Math.ceil(height * scale);
+    for (const context of [ctx, layerCtx]) {
+      context.setTransform(scale, 0, 0, scale, 0, 0);
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = 'high';
+    }
   }
   function beam(context, x, alpha) {
     const radius = Math.max(width * .24, 250);
@@ -72,16 +78,18 @@
     const matrix = new DOMMatrix(style.transform);
     layerCtx.transform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.e, matrix.f);
     layerCtx.translate(-origin[0], -origin[1]);
-    layerCtx.drawImage(relief, 0, 0, w, h);
+    // Use the same width-based sizing and bottom alignment as the CSS artwork.
+    const artHeight = w * image.naturalHeight / image.naturalWidth;
+    layerCtx.drawImage(relief, 0, h - artHeight, w, artHeight);
     layerCtx.restore();
     layerCtx.globalCompositeOperation = 'destination-in';
     beam(layerCtx, x, strength * .8);
     layerCtx.globalCompositeOperation = 'source-over';
     // Add three copies of the original light energy, preserving the red hue.
     ctx.globalCompositeOperation = 'lighter';
-    ctx.drawImage(layer, 0, 0);
-    ctx.drawImage(layer, 0, 0);
-    ctx.drawImage(layer, 0, 0);
+    ctx.drawImage(layer, 0, 0, width, height);
+    ctx.drawImage(layer, 0, 0, width, height);
+    ctx.drawImage(layer, 0, 0, width, height);
     ctx.globalCompositeOperation = 'source-over';
   }
   resize();
