@@ -70,6 +70,8 @@ await writeFile(join(publicDir, "video-manifest.json"), JSON.stringify({ videos 
 
 const indexPath = join(publicDir, "index.html");
 const homepage = await readFile(indexPath, "utf8");
+const sharedHeader = homepage.match(/<header\b[^>]*>[\s\S]*?<\/header>/i)?.[0];
+if (!sharedHeader) throw new Error("Homepage shared header not found.");
 const contentMatch = homepage.match(/<section class="section shell" id="links">[\s\S]*?<\/section>/i);
 if (!contentMatch) throw new Error("Homepage Elsewhere section not found.");
 const sharedContent = contentMatch[0];
@@ -134,8 +136,15 @@ for (const file of htmlFiles) {
     source = source.replace(/\s*<footer\b/i, "\n\n" + sharedContent + "\n\n  <footer");
   }
 
-  // Navigation is authored in each page, including visual-editor changes.
-  // Replacing it here discards saved links, ordering, and styling at deployment.
+  // The homepage is the editable source for the shared brand and navigation.
+  let header = sharedHeader.replace(/\saria-current="page"/gi, "");
+  header = header.replace(/(<a\b[^>]*class="brand"[^>]*href=")[^"]*(")/i, '$1/$2');
+  const currentPath = file === "index.html" ? "/" : file === "videos.html" ? "/gallery.html" : "/" + file;
+  header = header.replace(/<a\b[^>]*>/gi, tag => {
+    const href = tag.match(/\bhref="([^"]*)"/i)?.[1];
+    return !/\bclass="brand"/i.test(tag) && href === currentPath ? tag.replace(/>$/, ' aria-current="page">') : tag;
+  });
+  source = source.replace(/<header\b[^>]*>[\s\S]*?<\/header>/i, header);
   source = source.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/i, footerFor(file));
 
   if (!source.includes("data-content-protection")) {

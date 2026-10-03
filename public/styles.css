@@ -303,8 +303,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   align-items: center;
   padding-block: clamp(52px, 5.5vw, 74px) clamp(44px, 5vw, 66px);
 }
-.hero::after {
-  content: "01 / MIA";
+.hero-page-label {
   position: absolute;
   right: 0;
   bottom: 8px;
@@ -1228,7 +1227,7 @@ footer {
   .nav-links a { padding-block: 22px 20px; }
   .nav-links a::after { bottom: 14px; }
   .hero { min-height: auto; padding-block: 48px 56px; }
-  .hero::after { bottom: 8px; }
+  .hero-page-label { bottom: 8px; }
   .hero h1 { font-size: clamp(5.5rem, 28vw, 8rem); }
   .hero-signature { grid-template-columns: 1fr; gap: 22px; margin-top: 26px; }
   .hero-photo { width: 250px; max-width: 100%; }
