@@ -2116,3 +2116,87 @@ body::after {
     min-width: 0;
   }
 }
+
+
+/* Gaming archive identity + current-play status. */
+.game-summary {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: minmax(140px, .95fr) minmax(0, 1.3fr) 28px;
+  align-items: center !important;
+  column-gap: 18px;
+  padding-bottom: 34px !important;
+}
+.game-summary .game-identity {
+  min-width: 0;
+  align-self: start;
+  color: #a79b9f;
+  font-size: .58rem;
+  font-weight: 750;
+  line-height: 1.42;
+  letter-spacing: .035em;
+  text-align: center;
+  text-wrap: balance;
+}
+.game-summary .game-identity-subline {
+  display: inline-block;
+  margin-top: 3px;
+  color: #81767a;
+  font-size: .52rem;
+  font-weight: 700;
+}
+.game-summary .game-status {
+  position: absolute;
+  right: 28px;
+  bottom: 12px;
+  font-size: .55rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .11em;
+}
+.game-status--retired { color: #ff4e72; }
+.game-status--active { color: #62a8ff; }
+
+.group-head.game-summary {
+  grid-template-columns: minmax(170px, .8fr) minmax(0, 1.65fr) auto 28px;
+  align-items: center !important;
+}
+.group-head.game-summary .group-note {
+  margin-left: 0;
+  align-self: start;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .game-summary,
+  .group-head.game-summary {
+    grid-template-columns: minmax(0,1fr) 24px;
+    row-gap: 8px;
+    padding-bottom: 38px !important;
+  }
+  .game-summary .album-title,
+  .group-head.game-summary > div:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .game-summary::after,
+  .group-head.game-summary::after {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .game-summary .game-identity {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    max-width: 92%;
+    text-align: left;
+  }
+  .group-head.game-summary .group-note {
+    grid-column: 1;
+    grid-row: 3;
+    font-size: .62rem;
+  }
+  .game-summary .game-status {
+    right: 22px;
+    bottom: 13px;
+  }
+}
