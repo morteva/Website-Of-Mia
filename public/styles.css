@@ -2121,15 +2121,19 @@ body::after {
 /* Gaming archive identity + current-play status. */
 .game-summary {
   position: relative;
-  display: grid !important;
-  grid-template-columns: minmax(140px, .95fr) minmax(0, 1.3fr) 28px;
+  display: flex !important;
   align-items: center !important;
-  column-gap: 18px;
+  justify-content: space-between;
+  gap: 18px;
   padding-bottom: 34px !important;
 }
 .game-summary .game-identity {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: min(54%, 560px);
   min-width: 0;
-  align-self: start;
+  transform: translateX(-50%);
   color: #a79b9f;
   font-size: .58rem;
   font-weight: 750;
@@ -2158,18 +2162,23 @@ body::after {
 .game-status--active { color: #62a8ff; }
 
 .group-head.game-summary {
-  grid-template-columns: minmax(170px, .8fr) minmax(0, 1.65fr) auto 28px;
+  display: flex !important;
   align-items: center !important;
 }
+.group-head.game-summary .game-identity {
+  top: 17px;
+  width: min(56%, 660px);
+}
 .group-head.game-summary .group-note {
-  margin-left: 0;
-  align-self: start;
+  margin-left: auto;
+  align-self: flex-start;
   white-space: nowrap;
 }
 
 @media (max-width: 760px) {
   .game-summary,
   .group-head.game-summary {
+    display: grid !important;
     grid-template-columns: minmax(0,1fr) 24px;
     row-gap: 8px;
     padding-bottom: 38px !important;
@@ -2184,15 +2193,20 @@ body::after {
     grid-column: 2;
     grid-row: 1;
   }
-  .game-summary .game-identity {
+  .game-summary .game-identity,
+  .group-head.game-summary .game-identity {
+    position: static;
     grid-column: 1 / -1;
     grid-row: 2;
+    width: auto;
     max-width: 92%;
+    transform: none;
     text-align: left;
   }
   .group-head.game-summary .group-note {
     grid-column: 1;
     grid-row: 3;
+    margin-left: 0;
     font-size: .62rem;
   }
   .game-summary .game-status {
