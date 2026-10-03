@@ -83,10 +83,12 @@
     const origin=style.transformOrigin.split(' ').map(Number.parseFloat);
     world=new DOMMatrix().translate(parseFloat(style.left)+origin[0],height-parseFloat(style.bottom)-h+origin[1]).multiply(new DOMMatrix(style.transform)).translate(-origin[0],-origin[1]);
     if(introPhase===null){
-      // Start on the approaching side of the visible fingers, not their far edge.
-      const fingers=[new DOMPoint(w*.79,h*.22),new DOMPoint(w*.79,h*.80)]
-        .map(point=>point.matrixTransform(world));
-      const approachX=Math.min(...fingers.map(point=>point.x))-Math.max(width*.10,100);
+      // Start the beam outside the portrait's left edge. On other pages use
+      // the same main-column alignment for a consistent site-wide approach.
+      const portrait=document.querySelector('.hero img');
+      const content=document.querySelector('.hero-content,.shell');
+      const left=(portrait||content)?.getBoundingClientRect().left||width*.15;
+      const approachX=left-Math.max(width*.24,250);
       introPhase=Math.max(0,Math.min(27,(approachX/width+.3)/1.6*28));
     }
     gl.uniform2f(u.size,w,h);gl.uniform2f(u.viewport,width,height);gl.uniform3f(u.worldX,world.a,world.c,world.e);gl.uniform3f(u.worldY,world.b,world.d,world.f);
@@ -101,7 +103,8 @@
     if(!active&&!wasActive&&!dirty)return;
     wasActive=active;dirty=false;
     const progress=active?phase/28:0;
-    const welcomeFade=Math.min(1,Math.max(0,elapsed)/.4);
+    const fadeProgress=Math.min(1,Math.max(0,elapsed)/4);
+    const welcomeFade=fadeProgress*fadeProgress*(3-2*fadeProgress);
     const strength=active?Math.sin(Math.PI*progress)**.8*welcomeFade:0,x=width*(-.3+1.6*progress);
     ctx.clearRect(0,0,width,height);
     if(active){const radius=Math.max(width*.24,250),glow=ctx.createRadialGradient(x,height*.52,0,x,height*.52,radius);
