@@ -74,24 +74,6 @@ const contentMatch = homepage.match(/<section class="section shell" id="links">[
 if (!contentMatch) throw new Error("Homepage Elsewhere section not found.");
 const sharedContent = contentMatch[0];
 
-const navItems = [
-  { file: "index.html", href: "/", label: "Home" },
-  { file: "story.html", href: "/story.html", label: "Story" },
-  { file: "passions.html", href: "/passions.html", label: "Passions" },
-  { file: "gallery.html", href: "/gallery.html", label: "Gallery" },
-  { file: "voice-logs.html", href: "/voice-logs.html", label: "Voice" },
-  { file: null, href: "https://thisisbeside.org/", label: "Beside", external: true }
-];
-
-function navFor(file) {
-  const current = file === "videos.html" ? "gallery.html" : file;
-  return '<nav class="nav-links" aria-label="Primary navigation">' + navItems.map(item => {
-    const active = item.file && item.file === current ? ' aria-current="page"' : "";
-    const external = item.external ? ' target="_blank" rel="noopener noreferrer"' : "";
-    return `<a href="${item.href}"${active}${external}>${item.label}</a>`;
-  }).join("") + "</nav>";
-}
-
 function footerFor(file) {
   const current = file === "hello.html" ? ' aria-current="page"' : "";
   return `<footer>
@@ -152,7 +134,8 @@ for (const file of htmlFiles) {
     source = source.replace(/\s*<footer\b/i, "\n\n" + sharedContent + "\n\n  <footer");
   }
 
-  source = source.replace(/<nav class="nav-links"[^>]*>[\s\S]*?<\/nav>/i, navFor(file));
+  // Navigation is authored in each page, including visual-editor changes.
+  // Replacing it here discards saved links, ordering, and styling at deployment.
   source = source.replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/i, footerFor(file));
 
   if (!source.includes("data-content-protection")) {
