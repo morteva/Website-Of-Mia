@@ -96,9 +96,9 @@
   }
   function frame(now){
     if(lost)return;requestAnimationFrame(frame);if(!ready||document.hidden||now-previous<40)return;previous=now;
-    // Navigation-relative welcome: first beam approaches the hand at 1.5 seconds,
+    // Navigation-relative welcome: the first beam starts fading in immediately,
     // finishes that pass, then returns to the 28-second sweep / 50-second rest.
-    const seconds=now/1000,elapsed=seconds-1.5,phase=(Math.max(0,elapsed)+introPhase)%78;
+    const seconds=now/1000,elapsed=seconds,phase=(Math.max(0,elapsed)+introPhase)%78;
     const active=!reduced.matches&&elapsed>=0&&phase<=28;
     if(!active&&!wasActive&&!dirty)return;
     wasActive=active;dirty=false;
