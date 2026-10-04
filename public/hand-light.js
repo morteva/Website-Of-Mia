@@ -88,7 +88,7 @@
       const portrait=document.querySelector('.hero img');
       const content=document.querySelector('.hero-content,.shell');
       const left=(portrait||content)?.getBoundingClientRect().left||width*.15;
-      const approachX=left-Math.max(width*.24,250)+width*.06;
+      const approachX=left-Math.max(width*.24,250)+width*.12;
       introPhase=Math.max(0,Math.min(27,(approachX/width+.3)/1.6*28));
     }
     gl.uniform2f(u.size,w,h);gl.uniform2f(u.viewport,width,height);gl.uniform3f(u.worldX,world.a,world.c,world.e);gl.uniform3f(u.worldY,world.b,world.d,world.f);
