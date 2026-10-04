@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 const publicDir = new URL('../public/', import.meta.url);
 const imagePath = new URL('tiny-mia-anime.webp', publicDir);
 const release = 'myspace-anime-20261001-r3';
-const cursorRelease = 'hand-light-20261003-r5';
+const cursorRelease = 'hand-light-20261003-r6';
 
 const chunkDir = new URL('../content/tiny-mia-anime-base64-v2/', import.meta.url);
 const chunkNames = (await readdir(chunkDir))

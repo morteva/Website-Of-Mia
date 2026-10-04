@@ -1,6 +1,6 @@
 (() => {
   const lightScript = document.createElement('script');
-  lightScript.src = '/hand-light.js?v=20261003-r5';
+  lightScript.src = '/hand-light.js?v=20261003-r6';
   lightScript.defer = true;
   document.head.appendChild(lightScript);
   function loadTinyMiaPet() {
