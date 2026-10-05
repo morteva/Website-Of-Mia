@@ -5,7 +5,11 @@
     "command": "node scripts/build-media-manifests.mjs && node scripts/restore-tiny-mia-image.mjs && node scripts/build-deploy-assets.mjs"
   },
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/*"
+    ]
   },
   "routes": [
     {
@@ -15,6 +19,13 @@
     {
       "pattern": "www.morteva.com",
       "custom_domain": true
+    }
+  ],
+  "main": "src/worker.ts",
+  "services": [
+    {
+      "binding": "NEWSLETTER",
+      "service": "thisisbeside"
     }
   ]
 }

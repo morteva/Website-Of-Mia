@@ -1,0 +1,1 @@
+document.getElementById('copy-podcast-feed')?.addEventListener('click',async()=>{const status=document.getElementById('podcast-copy-status');try{await navigator.clipboard.writeText('https://morteva.com/podcast.xml');status.textContent='Copied';}catch{status.textContent='Feed: https://morteva.com/podcast.xml';}});
