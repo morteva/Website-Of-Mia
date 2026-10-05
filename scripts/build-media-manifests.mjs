@@ -123,7 +123,7 @@ function addSocial(source, file) {
   return source.replace(/<\/head>/i, social + "\n</head>");
 }
 
-const htmlFiles = (await readdir(publicDir)).filter(name => name.endsWith(".html") && !/^google[a-z0-9_-]+\.html$/i.test(name));
+const htmlFiles = (await readdir(publicDir)).filter(name => name.endsWith(".html") && name !== "cms-admin.html" && !/^google[a-z0-9_-]+\.html$/i.test(name));
 for (const file of htmlFiles) {
   const path = join(publicDir, file);
   let source = await readFile(path, "utf8");
