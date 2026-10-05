@@ -7,3 +7,5 @@ The shared control room stores user-created drafts, published content, logs and 
 Morteva requires the NEWSLETTER service binding to the thisisbeside Worker. Deploy Beside first when changing the shared CMS interface. Both source repositories must retain their Worker configuration; a static-only Morteva release removes the control-room and newsletter routes.
 
 Deployment validates checked-in public files and serves them unchanged. It does not regenerate page content, assign palettes, replace headers/footers or restore archived Beta pages. Historical generation scripts are maintenance tools only and must never be put back into the deployment command. Deliberate maintenance changes must be reviewed and committed before release. CMS content is applied only when explicitly published from the control room.
+
+Control-room public source synchronization is described in [GITHUB-SYNC.md](GITHUB-SYNC.md). Complete its private fine-grained token connection before publishing new CMS content. Public exports go to GitHub; credentials, drafts and subscriber records do not.
