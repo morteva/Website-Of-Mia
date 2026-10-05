@@ -1,0 +1,38 @@
+SITE AUDIT - October 5, 2026
+
+Scope: thisisbeside.org and morteva.com; both GitHub repositories, production Worker code, deployment configuration, public pages and assets, content hubs, support and subscription forms, media and the shared /wmm4 control room.
+
+Findings fixed
+- Deployments ran historical generators that rewrote pages, content and palettes. Both deployment commands now validate saved public files without changing them. Morteva copies those exact files into its deployment directory. No archive restoration, content generation, palette assignment or shared-header rewrite runs during deployment.
+- Added regression checks that make arbitrary editor changes to page body, author text, theme and footer, run builds twice, and compare every public asset. Morteva also compares every deployed copy byte for byte.
+- Default CMS shared-navigation snapshots could override repository navigation before a CMS publication. Shared rewriting now requires an explicit published revision in CMS history. Beside's published navigation also updates its actual menu panel.
+- Morteva's shared HTML gateway discarded original page response headers. It now retains them and handles backend errors and HEAD responses correctly. Retired /miamiamia stays removed.
+- Fixed the obsolete /about.html#beside section link.
+- Fixed phone overflow in standalone About, Mira, Mia, Home, Story, MOSC and six Behind the Scenes entries. Heading wrapping and single-column phone layouts preserve desktop styling and text; architectural diagrams scroll inside their own container.
+- The GitHub browser check still expected an obsolete site layout. It now tests the actual seven hubs, 100 content buttons and Support drawers at 1440, 390 and 320 pixel widths. The static preview server now works on Windows and uses an available port.
+- Added Morteva CI checks, source-preservation checks to both CI workflows, and required automated tests in both normal release commands.
+- Removed a test requirement that forced editor-editable Home and Support to remain exact copies of archived Beta files.
+- Corrected the admin inbox description: it receives Beside Support Hub and professional inquiries. Morteva's A Quiet Hello uses its existing external email delivery service.
+- Login HEAD requests now return the login page's protected headers without a body.
+
+Verification
+- 128 public page URLs fetched, including redirects and site verification pages.
+- 126 rendered pages tested at desktop and two phone widths: 378 layout checks, no remaining overflow, page-script errors or visibly broken images in the final sweep.
+- 129 internal link destinations and 177 referenced resources checked; no failed links or missing anchors after the fixes.
+- All deployable static assets checked, including gallery files and fonts. Retired admin.css is intentionally unavailable; private admin aliases lead to /wmm4.
+- Live public HTML compared with saved repository HTML (normalizing only line endings): no differences.
+- 42 public and maintenance JavaScript files passed syntax checks.
+- 38 Beside automated tests and 3 Morteva automated tests passed, plus all 100 hub entries at three widths and the Support drawer checks.
+- Authenticated GET checks passed for all control-room APIs on both domains. Anonymous private reads return 401 and writes without CSRF return 403. Login pages are no-store, noindex and protected against framing.
+- Invalid public contact and subscription input rejected. Contact, signup, confirmation, unsubscribe, newsletter idempotency, media privacy, draft/publish races and upload preservation are tested with isolated data and mocked delivery.
+- A Quiet Hello and newsletter-tab submissions tested in a browser with intercepted delivery, so no real messages or subscriber emails were sent.
+- Both production control rooms exercised read-only, including all section navigation and switching sites. Existing logs, drafts, subscribers, published documents and media were retained.
+
+Limits and remaining distinctions
+- This audit cannot guarantee the absence of every possible future bug. Third-party email inbox delivery and external social-provider availability were not proven by sending real messages.
+- /wmm4 content is persisted in Cloudflare D1, and uploads in R2. Public CMS publications intentionally affect live content. Automatic CMS-to-GitHub synchronization is not implemented. The Mira Site Editor's repo edits and the CMS remain separate editing surfaces; an explicitly published CMS item can override that item's static repo page. No private draft or subscriber data was committed to GitHub.
+- The shared Worker is still required for CMS, subscriptions and podcast-feed functionality on Morteva. This is an existing runtime integration, not a source-copying deployment layer.
+- Media privacy does not revoke previously published URLs; Trash is archival. Original upload cap remains 95 MB. History has no restore UI. Newsletter failures have delivery history but no manual retry button.
+
+Release workflow
+Edit repository -> validate and check -> commit and push GitHub -> Cloudflare Workers deployment -> verify live. The normal deployment commands reject uncommitted source or a HEAD that differs from GitHub main. Direct manual Cloudflare deployment can bypass those guards; it is not the supported workflow.
