@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node scripts/build-media-manifests.mjs && node scripts/restore-tiny-mia-image.mjs && node scripts/build-deploy-assets.mjs",
+    "build": "node scripts/validate-public.mjs && node scripts/build-deploy-assets.mjs",
     "deploy": "node scripts/deploy-from-git.mjs",
-    "dev": "wrangler dev"
+    "dev": "wrangler dev",
+    "check": "node --test test/*.test.mjs"
   },
   "devDependencies": {
     "wrangler": "4.147.0"

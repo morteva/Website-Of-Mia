@@ -10,6 +10,8 @@ export default {async fetch(request: Request,env: Env){
  const response=await env.ASSETS.fetch(request);
  if(!response.headers.get('Content-Type')?.includes('text/html'))return response;
  const transform=new URL('/cms-transform',url);transform.searchParams.set('path',path);
- const rendered=await env.NEWSLETTER.fetch(new Request(transform,{method:'POST',body:response.body,headers:{'Content-Type':'text/html'}}));
- return new Response(rendered.body,{status:response.status,headers:rendered.headers});
+ const rendered=await env.NEWSLETTER.fetch(new Request(transform,{method:'POST',body:await response.text(),headers:{'Content-Type':'text/html'}}));
+ if(!rendered.ok)return rendered;
+ const headers=new Headers(response.headers);for(const [key,value] of rendered.headers)headers.set(key,value);headers.delete('Content-Length');headers.delete('ETag');
+ return new Response(request.method==='HEAD'?null:rendered.body,{status:response.status,headers});
 }};
