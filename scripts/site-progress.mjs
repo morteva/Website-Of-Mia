@@ -1,13 +1,15 @@
 import {execFileSync} from 'node:child_process';
 import {writeFile} from 'node:fs/promises';
+import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const baseline = '8156ec010e5dc61b411fd6e6ce4e86e6726b24ca';
+const config = JSON.parse(readFileSync(resolve(root, 'public/site-progress-config.json'), 'utf8'));
+const baseline = config.baselineCommit;
 const git = (...args) => execFileSync('git', args, {cwd:root, encoding:'utf8', windowsHide:true}).trim();
 
 export function progressForEdits(edits) {
-  return Math.min(1000, 520 + edits) / 10;
+  return Math.min(1000, config.baselineTenths + edits * config.incrementTenths) / 10;
 }
 
 export async function writeSiteProgress(destination) {

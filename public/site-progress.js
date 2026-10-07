@@ -1,9 +1,9 @@
 document.querySelectorAll('.site-progress').forEach(box => {
-  const label = document.createElement('span');
-  label.textContent = box.textContent;
-  const bar = document.createElement('progress');
+  const label = box.querySelector('[data-site-progress-label]') || document.createElement('span');
+  if (!label.parentNode) label.textContent = box.textContent;
+  const bar = box.querySelector('progress') || document.createElement('progress');
   bar.max = 100;
-  bar.value = 52;
+  if (!bar.parentNode) bar.value = 52;
   bar.setAttribute('aria-label', 'Site progress');
   box.replaceChildren(label, bar);
   fetch('/site-progress.json', {cache:'no-store'})
