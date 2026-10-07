@@ -60,6 +60,14 @@
       "external": false
     },
     {
+      "id": "card-youtube-replies",
+      "group": "card",
+      "title": "My Best uTube Replies",
+      "label": "site exclusive content",
+      "url": "/youtube-replies",
+      "external": false
+    },
+    {
       "id": "card-2",
       "group": "card",
       "title": "Instagram",

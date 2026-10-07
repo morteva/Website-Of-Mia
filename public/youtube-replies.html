@@ -5,24 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="theme-color" content="#08080a" />
-  <link rel="canonical" href="https://morteva.com/videos.html" />
-  <meta name="description" content="Videos Mia keeps on her own site instead of leaving every piece of her life on somebody else’s platform." />
-  <title>Miaorin Morwen Morteva · Videos</title>
+  <link rel="canonical" href="https://morteva.com/youtube-replies" />
+  <meta name="description" content="A collection of Mia’s favorite YouTube replies." />
+  <title>Miaorin Morwen Morteva · My Best uTube Replies</title>
   <link rel="stylesheet" href="/styles.css?v=20261003-hand-light-r1" />
   <script src="/hand-light.js?v=20261003-r8" defer></script>
   <script src="/content-protection.js?v=20260918-r1" defer data-content-protection></script>
   <link rel="icon" href="/favicon.png" type="image/png" data-mia-favicon>
   <meta property="og:type" content="website" data-mia-social>
-  <meta property="og:title" content="Miaorin Morwen Morteva · Videos" data-mia-social>
-  <meta property="og:description" content="Videos Mia keeps on her own site instead of leaving every piece of her life on somebody else’s platform." data-mia-social>
-  <meta property="og:url" content="https://morteva.com/videos.html" data-mia-social>
+  <meta property="og:title" content="Miaorin Morwen Morteva · My Best uTube Replies" data-mia-social>
+  <meta property="og:description" content="A collection of Mia’s favorite YouTube replies." data-mia-social>
+  <meta property="og:url" content="https://morteva.com/youtube-replies" data-mia-social>
   <meta property="og:image" content="https://morteva.com/social-card.png" data-mia-social>
   <meta property="og:image:width" content="1200" data-mia-social>
   <meta property="og:image:height" content="630" data-mia-social>
   <meta property="og:image:alt" content="Mia's Morteva emblem" data-mia-social>
   <meta name="twitter:card" content="summary_large_image" data-mia-social>
-  <meta name="twitter:title" content="Miaorin Morwen Morteva · Videos" data-mia-social>
-  <meta name="twitter:description" content="Videos Mia keeps on her own site instead of leaving every piece of her life on somebody else’s platform." data-mia-social>
+  <meta name="twitter:title" content="Miaorin Morwen Morteva · My Best uTube Replies" data-mia-social>
+  <meta name="twitter:description" content="A collection of Mia’s favorite YouTube replies." data-mia-social>
   <meta name="twitter:image" content="https://morteva.com/social-card.png" data-mia-social>
 </head>
 <body>
@@ -37,13 +37,10 @@
 
   <main class="shell">
     <section class="intro">
-      <div class="eyebrow">Archive</div>
-      <h1>Videos.</h1>
-      <p>Videos I want to keep here because I don’t love leaving every piece of my life on somebody else’s platform.</p>
+      <div class="eyebrow">My corner of the comments</div>
+      <h1>My Best uTube Replies.</h1>
+      <p>Coming soon.</p>
     </section>
-
-    <div id="status" class="status">Loading videos…</div>
-    <section id="videos" class="video-grid" aria-label="Video gallery" hidden></section>
   </main>
 
 <section class="section shell" id="links">
@@ -70,46 +67,5 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    const status=document.getElementById('status');
-    const grid=document.getElementById('videos');
-
-    async function loadVideos(){
-      try{
-        const response=await fetch('/video-manifest.json',{cache:'no-cache'});
-        if(!response.ok) throw new Error(`Video manifest returned ${response.status}`);
-        const {videos=[]}=await response.json();
-        if(!videos.length){
-          status.textContent='Nothing here yet. I haven’t uploaded the damn things.';
-          return;
-        }
-        for(const item of videos){
-          const card=document.createElement('article');
-          card.className='video-card';
-          const video=document.createElement('video');
-          video.controls=true;
-          video.preload='metadata';
-          video.playsInline=true;
-          video.src=item.url;
-          video.addEventListener('play',()=>{
-            document.querySelectorAll('video').forEach(other=>{if(other!==video&&!other.paused)other.pause()});
-          });
-          const title=document.createElement('div');
-          title.className='video-title';
-          title.textContent=item.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ');
-          card.append(video,title);
-          grid.appendChild(card);
-        }
-        status.hidden=true;
-        grid.hidden=false;
-      }catch(error){
-        status.classList.add('error');
-        status.textContent='Videos aren’t loading right now. Try again in a minute.';
-      }
-    }
-
-    loadVideos();
-  </script>
 </body>
 </html>
