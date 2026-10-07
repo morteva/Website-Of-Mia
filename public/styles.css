@@ -2246,7 +2246,7 @@ body::after {
 .replies-table img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px; }
 .replies-table p { margin: 0; white-space: pre-wrap; }
 .reply-picture-placeholder { min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px dashed rgba(239,162,189,.3); border-radius: 8px; color: #efa2bd; }
-.reply-text-placeholder { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+.reply-text-placeholder { min-height: 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 .reply-picture-placeholder span, .reply-text-placeholder span { font-size: .72rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .replies-table .reply-video-context { margin: 0 0 12px; font-size: .7rem; line-height: 1.5; color: var(--muted); }
 .reply-video-context a { color: #efa2bd; text-decoration: underline; text-underline-offset: 3px; }
