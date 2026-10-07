@@ -2254,3 +2254,5 @@ body::after {
 .youtube-replies-intro h1 { font-size: clamp(2.6rem, 6.5vw, 5.25rem); }
 .youtube-replies-intro { padding-bottom: 0; }
 .intro .replies-coming-soon { max-width: 880px; margin: 0 auto; padding: calc((clamp(48px, 6vw, 72px) + 14px) / 2) 0; color: #ff334f; font-family: var(--sans); font-size: .8rem; font-weight: 800; line-height: 1.5; text-align: center; }
+
+.site-progress{display:flex;flex-direction:column;align-items:center;gap:4px}.site-progress progress{display:block;width:200px;height:5px;border:0;border-radius:99px;overflow:hidden;background:#32171c;accent-color:#ff3030}.site-progress progress::-webkit-progress-bar{background:#32171c;border-radius:99px}.site-progress progress::-webkit-progress-value{background:#ff3030;border-radius:99px;box-shadow:0 0 8px #ff303066}.site-progress progress::-moz-progress-bar{background:#ff3030;border-radius:99px}

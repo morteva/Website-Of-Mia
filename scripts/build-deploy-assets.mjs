@@ -1,5 +1,6 @@
 import { copyFile, mkdir, readdir, rm, stat } from "node:fs/promises";
 import { join, relative, resolve } from "node:path";
+import { writeSiteProgress } from './site-progress.mjs';
 
 const root = resolve(import.meta.dirname, "..");
 const sourceDir = join(root, "public");
@@ -35,6 +36,7 @@ async function copyTree(source, destination) {
 }
 
 await copyTree(sourceDir, deployDir);
+await writeSiteProgress(join(deployDir, 'site-progress.json'));
 
 if (skipped.length) {
   throw new Error('Assets exceed the deploy size limit; no incomplete deployment is allowed:\n' + skipped.map(item => `${item.path} (${(item.bytes / 1024 / 1024).toFixed(1)} MiB)`).join('\n'));
