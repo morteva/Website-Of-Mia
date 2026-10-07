@@ -1112,15 +1112,6 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
   width: auto;
   justify-self: stretch;
 }
-.album-section--games > .albums > .album:last-child {
-  grid-column: 1 / -1;
-  width: calc(50% - 8px);
-  justify-self: center;
-}
-.album-section--games > .albums > .album:last-child[open] {
-  width: auto;
-  justify-self: stretch;
-}
 
 @media (max-width: 800px) {
   .gallery-archive {
@@ -1130,8 +1121,7 @@ h1, .section-head h2, .about-main h3, .card h3, .bio-section h3,
     margin-bottom: 12px;
   }
   .gallery-archive > .album-section > .albums > .album[open],
-  .gallery-archive > .album-section > .albums > .album-group[open],
-  .album-section--games > .albums > .album:last-child {
+  .gallery-archive > .album-section > .albums > .album-group[open] {
     grid-column: auto;
     width: auto;
     justify-self: stretch;
