@@ -23,3 +23,9 @@ Authorized scope: morteva.com and thisisbeside.org, their canonical repositories
 ## Limits
 
 This is a scoped code review and application security test, not proof of zero vulnerabilities. Distributed abuse can evade per-IP quotas. There is no full Cloudflare account/IAM, DNS, GitHub account, historical-secret, third-party service, load or authenticated browser penetration audit in this review. CSP intentionally does not impose a new strict script allowlist on existing inline-script pages. Signed sessions remain valid until their thirty-minute expiry if copied; signing-key rotation is the existing revocation mechanism. Future changes require renewed testing and dependency audits.
+
+## Post-deployment results
+
+Both guarded deployments succeeded. The live sweep made 142 small requests, including all 118 sitemap pages across the two sites; all listed pages returned 200 after normal redirects. Both domains returned 403 for the foreign-origin write, 413 for the oversized login request, and 401 for a forged-session logout request. Private APIs/previews still returned 401; retired administration and .git/.env probes still returned 404. All checked routes carried the new framing, nosniff and HSTS headers. No production emails or subscriber changes were performed.
+
+Released code: Beside d5dc83e71338709d2b3d94b4cee901320375a457 (Worker version 31797caa-8181-4637-9b8f-1d5949ccb34a); Morteva dade80e7edb2a0a14ad46815d7b12e1246865f88 (Worker version 4f063a8c-2de2-4663-853d-62d24a455136). Later audit-record-only commits do not change the deployed application or increment site progress.
