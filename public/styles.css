@@ -2252,3 +2252,5 @@ body::after {
 .reply-video-context a { color: #efa2bd; text-decoration: underline; text-underline-offset: 3px; }
 .intro .replies-quote { max-width: 880px; margin: calc(clamp(48px, 6vw, 72px) + 14px) auto 0; text-align: center; text-wrap: balance; }
 .youtube-replies-intro h1 { font-size: clamp(2.6rem, 6.5vw, 5.25rem); }
+.youtube-replies-intro { padding-bottom: 0; }
+.intro .replies-coming-soon { max-width: 880px; margin: 0 auto; padding: calc((clamp(48px, 6vw, 72px) + 14px) / 2) 0; color: #ff334f; font-family: var(--sans); font-size: .8rem; font-weight: 800; line-height: 1.5; text-align: center; }
