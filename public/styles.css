@@ -2251,3 +2251,4 @@ body::after {
 .replies-table .reply-video-context { margin: 0 0 12px; font-size: .7rem; line-height: 1.5; color: var(--muted); }
 .reply-video-context a { color: #efa2bd; text-decoration: underline; text-underline-offset: 3px; }
 .intro .replies-quote { max-width: 880px; margin: calc(clamp(48px, 6vw, 72px) + 14px) auto 0; text-align: center; text-wrap: balance; }
+.youtube-replies-intro h1 { font-size: clamp(2.6rem, 6.5vw, 5.25rem); }
