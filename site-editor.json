@@ -1,3 +1,4 @@
 {
-  "sourceMode": "checked-in-public"
+  "sourceMode": "checked-in-public",
+  "editableRoutes": [{"route":"/wmm4","label":"Control Room (shared source)","repository":"thisisbeside","page":"cms-admin.html"}]
 }
