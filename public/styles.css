@@ -2250,4 +2250,4 @@ body::after {
 .reply-picture-placeholder span, .reply-text-placeholder span { font-size: .72rem; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .replies-table .reply-video-context { margin: 0 0 12px; font-size: .7rem; line-height: 1.5; color: var(--muted); }
 .reply-video-context a { color: #efa2bd; text-decoration: underline; text-underline-offset: 3px; }
-.intro .replies-quote { max-width: 880px; margin: 34px auto 0; text-align: center; text-wrap: balance; }
+.intro .replies-quote { max-width: 880px; margin: calc(clamp(48px, 6vw, 72px) + 14px) auto 0; text-align: center; text-wrap: balance; }
