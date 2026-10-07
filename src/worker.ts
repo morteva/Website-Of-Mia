@@ -1,5 +1,9 @@
 interface Env { ASSETS: Fetcher; NEWSLETTER: Fetcher; }
+import {guardRequest, secureResponse} from './security.ts';
 export default {async fetch(request: Request,env: Env){
+ return secureResponse(request,await guardRequest(request)||await handleRequest(request,env));
+}};
+async function handleRequest(request: Request,env: Env){
  const url=new URL(request.url),path=url.pathname;
  if(path==='/cms-admin.html')return new Response(null,{status:302,headers:{Location:'/wmm4','Cache-Control':'no-store'}});
  if(path==='/miamiamia'||path.startsWith('/miamiamia/'))return new Response('Not found',{status:404,headers:{'Cache-Control':'no-store'}});
@@ -14,4 +18,4 @@ export default {async fetch(request: Request,env: Env){
  if(!rendered.ok)return rendered;
  const headers=new Headers(response.headers);for(const [key,value] of rendered.headers)headers.set(key,value);headers.delete('Content-Length');headers.delete('ETag');
  return new Response(request.method==='HEAD'?null:rendered.body,{status:response.status,headers});
-}};
+}
