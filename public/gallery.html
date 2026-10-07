@@ -310,8 +310,14 @@
       }
     }
 
-    document.querySelectorAll('details.album[data-path]').forEach(album=>{
-      album.addEventListener('toggle',()=>{if(album.open) loadAlbum(album)});
+    document.querySelectorAll('details.album').forEach(album=>{
+      album.addEventListener('toggle',event=>{
+        if(event.target!==album || !album.open) return;
+        album.querySelectorAll('details.info-tab').forEach(info=>{
+          if(info.closest('details.album')===album) info.open=true;
+        });
+        if(album.dataset.path) loadAlbum(album);
+      });
     });
 
     function openLightbox(src,alt,trigger){lightboxTrigger=trigger;lightboxImage.src=src;lightboxImage.alt=alt;lightbox.classList.add('open');document.body.style.overflow='hidden';closeButton.focus()}
