@@ -2364,12 +2364,27 @@
           "id": "once-human-9",
           "title": "10-a-wave-from-the-hive.png",
           "type": "image/png"
+        },
+        {
+          "name": "11-new-home-with-a-friend.png",
+          "url": "/galleries/Once%20Human/11-new-home-with-a-friend.png",
+          "id": "once-human-10",
+          "title": "11-new-home-with-a-friend.png",
+          "type": "image/png"
+        },
+        {
+          "name": "12-world-7-new-location.png",
+          "url": "/galleries/Once%20Human/12-world-7-new-location.png",
+          "caption": "You're welcomed to stop by my new location on world 7. Just remember to enter through the garage.",
+          "id": "once-human-11",
+          "title": "12-world-7-new-location.png",
+          "type": "image/png"
         }
       ]
     }
   ],
   "files": {
-    "public/gallery.html": "91c40f7606dfb4c627bf713d45da36a5daf42379",
-    "public/gallery-manifest.json": "c3978e249ef2c7a0fdb71bf34498d744ba170713"
+    "public/gallery.html": "f27f99594bb66690015de1a0828797fad0cbd8c2",
+    "public/gallery-manifest.json": "246976d192bf60587afd4109dea0607c6880b7b7"
   }
 }
