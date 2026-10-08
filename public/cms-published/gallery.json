@@ -2441,28 +2441,7 @@
       "body": "",
       "hidden": false,
       "trash": false,
-      "items": [
-        {
-          "id": "e728c6f8-3949-47da-bccd-e0514f58b7f1.png",
-          "name": "upload-test.png",
-          "type": "image/png",
-          "size": 4619,
-          "url": "https://thisisbeside.org/cms-media/e728c6f8-3949-47da-bccd-e0514f58b7f1.png",
-          "thumbnail": "https://thisisbeside.org/cms-media/c7e58646-a0dc-4784-89c4-605e9495b030.webp",
-          "title": "upload-test.png",
-          "caption": "Synthetic image — temporary caption test"
-        },
-        {
-          "id": "00d59171-079c-4436-892b-0af33a637992.mp4",
-          "name": "upload-test.mp4",
-          "type": "video/mp4",
-          "size": 4644,
-          "url": "https://thisisbeside.org/cms-media/00d59171-079c-4436-892b-0af33a637992.mp4",
-          "thumbnail": "https://thisisbeside.org/cms-media/00d59171-079c-4436-892b-0af33a637992.mp4",
-          "title": "upload-test.mp4",
-          "caption": "Synthetic video — temporary playback test"
-        }
-      ],
+      "items": [],
       "edited": true,
       "description": "Disposable upload and playback test",
       "cover": "https://thisisbeside.org/cms-media/c7e58646-a0dc-4784-89c4-605e9495b030.webp"
@@ -2470,6 +2449,6 @@
   ],
   "files": {
     "public/gallery.html": "3171fe7d53539bd0f54618550aa1f92085971d3c",
-    "public/gallery-manifest.json": "e8c616c4ad7c694a40f7a4aaa829fc1a4871c56e"
+    "public/gallery-manifest.json": "9a9ba62c4bd08c00e72b864166c29ac797e1b7be"
   }
 }

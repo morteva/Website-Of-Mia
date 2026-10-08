@@ -2345,21 +2345,6 @@
         "type": "image/png"
       }
     ],
-    "SWTOR/Control room upload test": [
-      {
-        "name": "upload-test.png",
-        "url": "https://thisisbeside.org/cms-media/e728c6f8-3949-47da-bccd-e0514f58b7f1.png",
-        "caption": "Synthetic image — temporary caption test",
-        "thumbnail": "https://thisisbeside.org/cms-media/c7e58646-a0dc-4784-89c4-605e9495b030.webp",
-        "type": "image/png"
-      },
-      {
-        "name": "upload-test.mp4",
-        "url": "https://thisisbeside.org/cms-media/00d59171-079c-4436-892b-0af33a637992.mp4",
-        "caption": "Synthetic video — temporary playback test",
-        "thumbnail": "https://thisisbeside.org/cms-media/00d59171-079c-4436-892b-0af33a637992.mp4",
-        "type": "video/mp4"
-      }
-    ]
+    "SWTOR/Control room upload test": []
   }
 }
