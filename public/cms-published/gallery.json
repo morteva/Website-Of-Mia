@@ -2434,10 +2434,20 @@
       ],
       "edited": true,
       "description": "Returned to Swtor from over a decade hiatus."
+    },
+    {
+      "id": "8c9fbc26-b3dc-4b8f-9119-22930bc5e31e",
+      "title": "SWTOR/Control room test",
+      "body": "",
+      "hidden": false,
+      "trash": false,
+      "items": [],
+      "edited": true,
+      "description": "Temporary test album. Removed after testing."
     }
   ],
   "files": {
-    "public/gallery.html": "a553daf822009b920c5ae0c981bd8df292999f5b",
-    "public/gallery-manifest.json": "ccb41004d2731bfce569b863394f5bcfa72d83d0"
+    "public/gallery.html": "238d596a81edb16c7e91ce3bf7e3e3f38ed6c1c1",
+    "public/gallery-manifest.json": "7f66f82241968b115d94204ad5b4f7f68259ad77"
   }
 }
