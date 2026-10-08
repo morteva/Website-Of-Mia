@@ -2443,11 +2443,11 @@
       "trash": false,
       "items": [],
       "edited": true,
-      "description": "Temporary regression test"
+      "description": "Temporary regression description changed"
     }
   ],
   "files": {
-    "public/gallery.html": "b48c1a04cb34464be646fb7635427b99fdfd0046",
+    "public/gallery.html": "1a8d30285c523dc9a0ab39f71cf70af6e74d1fcf",
     "public/gallery-manifest.json": "caf35dd644981bef24524b10ecfa53942c77dd56"
   }
 }
