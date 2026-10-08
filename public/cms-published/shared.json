@@ -111,17 +111,30 @@
       "id": "podcast-cover",
       "group": "cover",
       "title": "Podcast artwork",
-      "image": ""
+      "image": "https://thisisbeside.org/cms-media/317252c1-6e5f-46a0-8ff7-5d5e40344020.png",
+      "external": false
+    },
+    {
+      "id": "430b47aa-bfbb-4484-a069-667107b7ff03",
+      "title": "Control room navigation test",
+      "body": "",
+      "hidden": false,
+      "trash": false,
+      "group": "nav",
+      "url": "/gallery",
+      "external": false
     }
   ],
   "files": {
-    "public/gallery.html": "3171fe7d53539bd0f54618550aa1f92085971d3c",
-    "public/hello.html": "f6139de4725bb3567f3ccefec4d87c03271558fd",
-    "public/index.html": "409656a0724160857fc5faf08cb22d4a6da2d958",
-    "public/passions.html": "ecef85a5110c7d48f636aec4e1065ac54b5a8bfb",
-    "public/podcast.html": "80a017aee7747fa13c4fd9c43be731c2abe90671",
-    "public/story.html": "ac1d78453efcee190c4d401f69051f5dc403ede2",
-    "public/videos.html": "a82f4054e7eee76cd0194e7b47028e76c1171223",
-    "public/voice-logs.html": "49a657e2e30818cee59f10bd76b549eee1eb78ca"
+    "public/gallery.html": "6d1efa58f2fe40ead3e0140c165bd059ef067606",
+    "public/hello.html": "b102f893dc8be69f0ceb4e7ed9000609759f4a56",
+    "public/index.html": "a7a498023b21982c6c3b247be9259b3a11179468",
+    "public/passions.html": "cbc95b020f1da6d7b16b56347efabca9665b1e35",
+    "public/podcast.html": "e02a5b899c3761da4a3a4f7292c0e908b46c9946",
+    "public/story.html": "0585d737bc0f90510b212eef355acbe9ae44fb43",
+    "public/videos.html": "c2edffedcabbe870b543cfc4bab0f53366a21330",
+    "public/voice-logs.html": "f09ef4e762bb9e3385b521ab542d255d801ec9c2",
+    "public/youtube-replies.html": "cee5826fd5cffc51bc3843491665bc8ad0db6a40",
+    "public/podcast.xml": "a844b422816af20cf2f6fe105602ad421d2890e1"
   }
 }
