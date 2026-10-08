@@ -39,7 +39,7 @@
     {
       "id": "nav-5",
       "group": "nav",
-      "title": "Beside↗",
+      "title": "Beside",
       "url": "https://thisisbeside.org/",
       "external": true
     },
@@ -60,12 +60,12 @@
       "external": false
     },
     {
-      "id": "card-youtube-replies",
+      "id": "authored-card-0",
       "group": "card",
       "title": "My Best uTube Replies",
-      "label": "site exclusive content",
       "url": "/youtube-replies",
-      "external": false
+      "external": false,
+      "label": "site exclusive content"
     },
     {
       "id": "card-2",
@@ -115,13 +115,13 @@
     }
   ],
   "files": {
-    "public/gallery.html": "7b557f0d7dc61db4bb9e26d32cdd8a9e147e0160",
-    "public/hello.html": "2cb09577e88963c28a7e534ac80bc1028c19f7fa",
-    "public/index.html": "d2abdf66a9226fb1e9915df0c3efcd854521b2b3",
-    "public/passions.html": "0186279476dd2787ce977c34c897a51e06c2f076",
-    "public/podcast.html": "f017c2953b1af1e169df1063b147a59c655706b4",
-    "public/story.html": "7714a4c769a929efd822e9e3b030d05dfeda3966",
-    "public/videos.html": "c7981c7f41a10d159629095d32a829176a213469",
-    "public/voice-logs.html": "2551e318b6bb4b5653891d0893440bcb175bc027"
+    "public/gallery.html": "3171fe7d53539bd0f54618550aa1f92085971d3c",
+    "public/hello.html": "f6139de4725bb3567f3ccefec4d87c03271558fd",
+    "public/index.html": "409656a0724160857fc5faf08cb22d4a6da2d958",
+    "public/passions.html": "ecef85a5110c7d48f636aec4e1065ac54b5a8bfb",
+    "public/podcast.html": "80a017aee7747fa13c4fd9c43be731c2abe90671",
+    "public/story.html": "ac1d78453efcee190c4d401f69051f5dc403ede2",
+    "public/videos.html": "a82f4054e7eee76cd0194e7b47028e76c1171223",
+    "public/voice-logs.html": "49a657e2e30818cee59f10bd76b549eee1eb78ca"
   }
 }
