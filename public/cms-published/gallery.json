@@ -2379,12 +2379,33 @@
           "id": "once-human-11",
           "title": "12-world-7-new-location.png",
           "type": "image/png"
+        },
+        {
+          "id": "9987baaf-6744-40e5-bf32-938c7561aa95.png",
+          "name": "1.png",
+          "type": "image/png",
+          "size": 1908661,
+          "url": "https://thisisbeside.org/cms-media/9987baaf-6744-40e5-bf32-938c7561aa95.png",
+          "thumbnail": "https://thisisbeside.org/cms-media/aa68cb27-1fb3-44a9-88f4-1d7001a6f446.webp",
+          "title": "1.png",
+          "caption": ""
+        },
+        {
+          "id": "2ef6d7f4-a5fb-4b45-9857-823622c97c84.png",
+          "name": "2.png",
+          "type": "image/png",
+          "size": 2093662,
+          "url": "https://thisisbeside.org/cms-media/2ef6d7f4-a5fb-4b45-9857-823622c97c84.png",
+          "thumbnail": "https://thisisbeside.org/cms-media/2f2dfc00-c447-4c76-a0e5-62f4100b60fc.webp",
+          "title": "2.png",
+          "caption": ""
         }
-      ]
+      ],
+      "edited": true
     }
   ],
   "files": {
     "public/gallery.html": "3c9ab89395b655b719a28513530ac43c44c27833",
-    "public/gallery-manifest.json": "246976d192bf60587afd4109dea0607c6880b7b7"
+    "public/gallery-manifest.json": "c34996c87cc2f55f62ee4dd7d53656373a97d619"
   }
 }
