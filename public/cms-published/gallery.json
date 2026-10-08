@@ -2416,7 +2416,7 @@
     },
     {
       "id": "3171fe5b-65bf-4b0e-b714-41ee42c5cf87",
-      "title": "2026 Return",
+      "title": "SWTOR/2026 Return",
       "body": "",
       "hidden": false,
       "trash": false,
@@ -2437,7 +2437,7 @@
     }
   ],
   "files": {
-    "public/gallery.html": "4fafdb841010f4f1d9a82907f2b35c9def3a1075",
-    "public/gallery-manifest.json": "824d66065757f74fb58835c91d6050dac56b3c44"
+    "public/gallery.html": "ce0a9d754cf664dad923c56cec6e022459068092",
+    "public/gallery-manifest.json": "ccb41004d2731bfce569b863394f5bcfa72d83d0"
   }
 }
