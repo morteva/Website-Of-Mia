@@ -2437,7 +2437,7 @@
     },
     {
       "id": "918367b9-2e4c-4c08-9202-b2a83b4f4196",
-      "title": "SWTOR/Control room regression test",
+      "title": "SWTOR/Control room renamed test",
       "body": "",
       "hidden": false,
       "trash": false,
@@ -2447,7 +2447,7 @@
     }
   ],
   "files": {
-    "public/gallery.html": "1a8d30285c523dc9a0ab39f71cf70af6e74d1fcf",
-    "public/gallery-manifest.json": "caf35dd644981bef24524b10ecfa53942c77dd56"
+    "public/gallery.html": "212c4a703883109d531bcd126f6006f5171ef216",
+    "public/gallery-manifest.json": "3b510afef4b05689c5fb1f4523ec98f974f8571a"
   }
 }
