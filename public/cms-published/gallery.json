@@ -131,8 +131,19 @@
           "id": "existing-2-1",
           "type": "image/jpeg",
           "title": "ezgif-6d1799fdd9d84e4d.webp"
+        },
+        {
+          "id": "920b9e3f-0e95-4647-aed7-ad7d40319a88.png",
+          "name": "Black Desert Screenshot 2026.10.07 - 21.31.25.87.png",
+          "type": "image/png",
+          "size": 691435,
+          "url": "https://thisisbeside.org/cms-media/920b9e3f-0e95-4647-aed7-ad7d40319a88.png",
+          "thumbnail": "https://thisisbeside.org/cms-media/7d7e64d3-4a13-4839-899a-dfd04d61ae2a.webp",
+          "title": "Black Desert Screenshot 2026.10.07 - 21.31.25.87.png",
+          "caption": ""
         }
-      ]
+      ],
+      "edited": true
     },
     {
       "id": "album-3",
@@ -2406,6 +2417,6 @@
   ],
   "files": {
     "public/gallery.html": "3c9ab89395b655b719a28513530ac43c44c27833",
-    "public/gallery-manifest.json": "c34996c87cc2f55f62ee4dd7d53656373a97d619"
+    "public/gallery-manifest.json": "78a53680403fea3e0159519f390e4c7a1aa7594f"
   }
 }
