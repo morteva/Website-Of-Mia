@@ -176,7 +176,7 @@
             </span>
           </span>
           </a>
-          <details class="album" data-path="SWTOR/Control room renamed test"><summary><span class="album-title"><small>Temporary regression description changed</small><strong>Control room renamed test</strong></span></summary><div class="album-body"><div class="images-slot"><p class="loading">Open to load images.</p></div></div></details></div>
+          </div>
           </div>
           </details>
 
@@ -296,16 +296,18 @@
           const grid=document.createElement('div');
           grid.className='image-grid';
           for(const item of images){
-            const button=document.createElement('button');
+            const isVideo=item.type?.startsWith('video/')||/\.(mp4|webm)(?:[?#]|$)/i.test(item.url);
+            const button=document.createElement(isVideo?'div':'button');
             button.className='image-button';
             button.type='button';
             button.setAttribute('aria-label',`Open ${item.name}`);
-            const img=document.createElement('img');
-            img.src=item.url;
+            const img=document.createElement(isVideo?'video':'img');
+            img.src=isVideo?item.url:(item.thumbnail||item.url);
             img.alt=item.name.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' ');
-            img.loading='lazy';
+            if(isVideo){img.controls=true;img.preload='metadata';img.style.cssText='width:100%;height:100%;object-fit:contain';button.setAttribute('role','group');button.removeAttribute('aria-label');}
+            else img.loading='lazy';
             button.appendChild(img);
-            button.addEventListener('click',()=>openLightbox(img.src,img.alt,button));
+            if(!isVideo)button.addEventListener('click',()=>openLightbox(item.url,img.alt,button));
             if(item.caption){
               const figure=document.createElement('figure');
               figure.style.margin='0';

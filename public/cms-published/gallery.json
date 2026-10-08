@@ -2434,20 +2434,10 @@
       ],
       "edited": true,
       "description": "Returned to Swtor from over a decade hiatus."
-    },
-    {
-      "id": "918367b9-2e4c-4c08-9202-b2a83b4f4196",
-      "title": "SWTOR/Control room renamed test",
-      "body": "",
-      "hidden": false,
-      "trash": false,
-      "items": [],
-      "edited": true,
-      "description": "Temporary regression description changed"
     }
   ],
   "files": {
-    "public/gallery.html": "212c4a703883109d531bcd126f6006f5171ef216",
-    "public/gallery-manifest.json": "3b510afef4b05689c5fb1f4523ec98f974f8571a"
+    "public/gallery.html": "3256923b773401166013d59d9ea06fb9a283bdc8",
+    "public/gallery-manifest.json": "ccb41004d2731bfce569b863394f5bcfa72d83d0"
   }
 }
