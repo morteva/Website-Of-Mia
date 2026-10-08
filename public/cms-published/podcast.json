@@ -1,21 +1,8 @@
 {
   "section": "podcast",
-  "items": [
-    {
-      "id": "6fa9b33f-6719-45a8-b354-558d60e7c0bf",
-      "title": "Control room synthetic audio test",
-      "body": "Disposable three-second tone. Will be removed after testing.",
-      "hidden": false,
-      "trash": false,
-      "published": "2026-10-08T05:06:53.716Z",
-      "duration": "3",
-      "audio": "https://thisisbeside.org/cms-media/10ef2898-33f4-4620-ae1f-eb75a77aa779.wav",
-      "bytes": 132344,
-      "type": "audio/wav"
-    }
-  ],
+  "items": [],
   "files": {
-    "public/podcast.html": "e02a5b899c3761da4a3a4f7292c0e908b46c9946",
-    "public/podcast.xml": "a844b422816af20cf2f6fe105602ad421d2890e1"
+    "public/podcast.html": "58f64b1d4a794d33ea008c94113e69c2e6a1e763",
+    "public/podcast.xml": "51259e5a0eea45fa686d4c6675213f4e9349a4c0"
   }
 }

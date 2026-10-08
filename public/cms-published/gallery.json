@@ -2434,21 +2434,10 @@
       ],
       "edited": true,
       "description": "Returned to Swtor from over a decade hiatus."
-    },
-    {
-      "id": "6066a4ff-64ab-41d5-9a49-9aedc1914e9a",
-      "title": "SWTOR/Control room upload test",
-      "body": "",
-      "hidden": false,
-      "trash": false,
-      "items": [],
-      "edited": true,
-      "description": "Disposable upload and playback test",
-      "cover": "https://thisisbeside.org/cms-media/c7e58646-a0dc-4784-89c4-605e9495b030.webp"
     }
   ],
   "files": {
-    "public/gallery.html": "6d1efa58f2fe40ead3e0140c165bd059ef067606",
-    "public/gallery-manifest.json": "9a9ba62c4bd08c00e72b864166c29ac797e1b7be"
+    "public/gallery.html": "9634983f437c4498f868ebc864a8fcb5fe25ae0c",
+    "public/gallery-manifest.json": "ccb41004d2731bfce569b863394f5bcfa72d83d0"
   }
 }
