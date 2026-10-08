@@ -2413,10 +2413,31 @@
         }
       ],
       "edited": true
+    },
+    {
+      "id": "3171fe5b-65bf-4b0e-b714-41ee42c5cf87",
+      "title": "2026 Return",
+      "body": "",
+      "hidden": false,
+      "trash": false,
+      "items": [
+        {
+          "id": "510198e7-33c1-4b38-9a9e-855d8aeb7331.png",
+          "name": "Screenshot 2026-10-07 213451.png",
+          "type": "image/png",
+          "size": 2432419,
+          "url": "https://thisisbeside.org/cms-media/510198e7-33c1-4b38-9a9e-855d8aeb7331.png",
+          "thumbnail": "https://thisisbeside.org/cms-media/a4aad8c5-5b7d-4bda-bd74-799f68fc1bdb.webp",
+          "title": "Screenshot 2026-10-07 213451.png",
+          "caption": ""
+        }
+      ],
+      "edited": true,
+      "description": "Returned to Swtor from over a decade hiatus."
     }
   ],
   "files": {
-    "public/gallery.html": "3c9ab89395b655b719a28513530ac43c44c27833",
-    "public/gallery-manifest.json": "78a53680403fea3e0159519f390e4c7a1aa7594f"
+    "public/gallery.html": "4fafdb841010f4f1d9a82907f2b35c9def3a1075",
+    "public/gallery-manifest.json": "824d66065757f74fb58835c91d6050dac56b3c44"
   }
 }
