@@ -317,6 +317,20 @@
             }else grid.appendChild(button);
           }
           slot.appendChild(grid);
+          if(images.length>12){
+            slot.classList.add('album-scroll');
+            slot.tabIndex=0;
+            slot.setAttribute('role','region');
+            slot.setAttribute('aria-label',`${album.dataset.path} pictures — scroll for more`);
+            const sizeWindow=()=>{
+              if(!album.open||!grid.clientWidth)return;
+              const top=grid.getBoundingClientRect().top;
+              const end=Math.max(...Array.from(grid.children).slice(0,12).map(item=>item.getBoundingClientRect().bottom));
+              slot.style.maxHeight=`${Math.ceil(end-top)}px`;
+            };
+            new ResizeObserver(sizeWindow).observe(grid);
+            requestAnimationFrame(sizeWindow);
+          }
         }
         album.dataset.loaded='true';
       }catch(error){
