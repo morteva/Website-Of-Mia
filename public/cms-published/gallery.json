@@ -2434,10 +2434,20 @@
       ],
       "edited": true,
       "description": "Returned to Swtor from over a decade hiatus."
+    },
+    {
+      "id": "918367b9-2e4c-4c08-9202-b2a83b4f4196",
+      "title": "SWTOR/Control room regression test",
+      "body": "",
+      "hidden": false,
+      "trash": false,
+      "items": [],
+      "edited": true,
+      "description": "Temporary regression test"
     }
   ],
   "files": {
-    "public/gallery.html": "a553daf822009b920c5ae0c981bd8df292999f5b",
-    "public/gallery-manifest.json": "ccb41004d2731bfce569b863394f5bcfa72d83d0"
+    "public/gallery.html": "b48c1a04cb34464be646fb7635427b99fdfd0046",
+    "public/gallery-manifest.json": "caf35dd644981bef24524b10ecfa53942c77dd56"
   }
 }
