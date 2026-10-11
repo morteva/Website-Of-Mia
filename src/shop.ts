@@ -16,7 +16,7 @@ function base(env:ShopEnv){
 }
 function ready(env:ShopEnv){return env.SHOP_CHECKOUT_ENABLED==='true'&&!!env.SHOP_ORDERS&&!!env.PAYRAM_API_KEY&&!!base(env);}
 async function provider(env:ShopEnv,path:string,options:RequestInit={}){
- const response=await fetch(base(env)!+path,{...options,redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Content-Type':'application/json','API-Key':env.PAYRAM_API_KEY!,...(env.PAYRAM_GATEWAY_KEY?{'X-Morteva-Gateway':env.PAYRAM_GATEWAY_KEY}:{})}});
+ const response=await fetch(base(env)!+path,{...options,redirect:'manual',signal:AbortSignal.timeout(15000),headers:{'Content-Type':'application/json','API-Key':env.PAYRAM_API_KEY!,...(env.PAYRAM_GATEWAY_KEY?{'X-Morteva-Gateway':env.PAYRAM_GATEWAY_KEY}:{})}});
  if(!response.ok)throw Error('PayRam HTTP '+response.status);return response.json() as Promise<any>;
 }
 export function priceBag(catalog:any,items:any){
