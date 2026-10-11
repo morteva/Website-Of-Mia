@@ -1,4 +1,4 @@
-interface Env { ASSETS: Fetcher; NEWSLETTER: Fetcher; SHOP_ORDERS?: D1Database; PAYRAM_BASE_URL?: string; PAYRAM_API_KEY?: string; PAYRAM_GATEWAY_KEY?: string; SHOP_CHECKOUT_ENABLED?: string; }
+interface Env { ASSETS: Fetcher; NEWSLETTER: Fetcher; SHOP_MEDIA?: R2Bucket; SHOP_ORDERS?: D1Database; PAYRAM_BASE_URL?: string; PAYRAM_API_KEY?: string; PAYRAM_GATEWAY_KEY?: string; SHOP_CHECKOUT_ENABLED?: string; }
 import {handleShop} from './shop.ts';
 import {guardRequest, secureResponse} from './security.ts';
 export default {async fetch(request: Request,env: Env){

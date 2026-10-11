@@ -3,3 +3,4 @@
 
 .shop-category{align-self:end;padding:.85rem 1.2rem;border:1px solid #78505d;border-radius:8px;background:#21131a;color:#f4e9ee}
 #checkout-email-label{display:grid;gap:.5rem;margin:1rem 0;color:#c3b9bf}#checkout-email{width:100%;box-sizing:border-box;background:#100c10;border:1px solid #49303c;border-radius:8px;color:#f4e9ee;padding:.85rem;font:inherit}#check-order{margin-top:1rem}
+ #shipping-details{border:1px solid #7776;border-radius:12px;padding:16px;margin:20px 0;display:grid;gap:12px}#shipping-details[hidden]{display:none}#shipping-details label,#shop-cart>label{display:grid;gap:8px;margin:12px 0}#shipping-details input,#shipping-details select,#buyer-note{width:100%;box-sizing:border-box;background:transparent;color:inherit;border:1px solid #7777;border-radius:8px;padding:12px;font:inherit}#buyer-note{min-height:90px}#cart-breakdown{font-size:.9rem;opacity:.8;margin:14px 0}.receipt-note{white-space:pre-wrap}

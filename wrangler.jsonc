@@ -28,5 +28,6 @@
       "binding": "NEWSLETTER",
       "service": "thisisbeside"
     }
-  ]
+  ],
+  "r2_buckets": [{"binding":"SHOP_MEDIA","bucket_name":"mira-site-media"}]
 }

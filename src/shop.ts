@@ -1,6 +1,9 @@
 // Payment credentials stay on the Worker; browser totals and webhook claims are never authoritative.
+import {handleShopAdmin} from './shop-admin.ts';
 interface ShopEnv {
  ASSETS: Fetcher;
+ NEWSLETTER?: Fetcher;
+ SHOP_MEDIA?: R2Bucket;
  SHOP_ORDERS?: D1Database;
  PAYRAM_BASE_URL?: string;
  PAYRAM_API_KEY?: string;
@@ -19,17 +22,28 @@ async function provider(env:ShopEnv,path:string,options:RequestInit={}){
  const response=await fetch(base(env)!+path,{...options,redirect:'manual',signal:AbortSignal.timeout(15000),headers:{'Content-Type':'application/json','API-Key':env.PAYRAM_API_KEY!,...(env.PAYRAM_GATEWAY_KEY?{'X-Morteva-Gateway':env.PAYRAM_GATEWAY_KEY}:{})}});
  if(!response.ok)throw Error('PayRam HTTP '+response.status);return response.json() as Promise<any>;
 }
-export function priceBag(catalog:any,items:any){
+export function shippingAddress(value:any){
+ const limits:Record<string,number>={name:150,line1:200,line2:200,city:100,region:100,postal:30,country:2};
+ if(!value||typeof value!=='object'||Array.isArray(value))throw Error('Enter your shipping address');
+ const address:any={};for(const [key,max] of Object.entries(limits)){const text=value[key]??'';if(typeof text!=='string'||text.length>max||/[\x00-\x1f]/.test(text))throw Error('Invalid shipping address');address[key]=text.trim();}
+ address.country=address.country.toUpperCase();if(!['name','line1','city','postal'].every(k=>address[k])||! /^[A-Z]{2}$/.test(address.country))throw Error('Complete your shipping address');return address;
+}
+export function priceBag(catalog:any,items:any,addressInput?:any){
  if(catalog.currency!=='USD'||!Array.isArray(catalog.products)||!Array.isArray(items)||!items.length||items.length>50)throw Error('Invalid bag');
- const unique=new Set();let total=0;
+ const unique=new Set();let subtotal=0,shipping=0,tax=0,address:any=null;
  const lines=items.map((item:any)=>{
   if(!item||typeof item.id!=='string'||unique.has(item.id)||!Number.isInteger(item.quantity)||item.quantity<1||item.quantity>99)throw Error('Invalid bag');
   unique.add(item.id);const p=catalog.products.find((p:any)=>p.id===item.id);
   if(!p||p.available===false||typeof p.name!=='string'||!Number.isSafeInteger(p.priceCents)||p.priceCents<=0)throw Error('An item is unavailable');
-  total+=p.priceCents*item.quantity;
-  if(!Number.isSafeInteger(total)||total>100000000)throw Error('Invalid total');
-  return {id:p.id,name:p.name,priceCents:p.priceCents,quantity:item.quantity};
- });return {lines,total};
+  const kind=p.kind||'service';if(!['physical','digital','service'].includes(kind))throw Error('Invalid item');
+  const shippingCents=kind==='physical'?(p.shippingCents||0):0,taxBps=p.taxBps||0;
+  if(!Number.isSafeInteger(shippingCents)||shippingCents<0||!Number.isInteger(taxBps)||taxBps<0||taxBps>10000)throw Error('Invalid item pricing');
+  if(kind==='physical'){address??=shippingAddress(addressInput);if(!Array.isArray(p.shippingCountries)||!p.shippingCountries.includes(address.country))throw Error('Shipping is unavailable for this address');}
+  if(kind==='digital'&&!/^[0-9a-f-]{36}\.(zip|exe|pdf|mp3|m4a|wav|mp4|webm)$/.test(p.downloadId||''))throw Error('Digital delivery unavailable');
+  subtotal+=p.priceCents*item.quantity;shipping+=shippingCents*item.quantity;tax+=Math.round(p.priceCents*item.quantity*taxBps/10000);
+  if(!Number.isSafeInteger(subtotal+shipping+tax)||subtotal+shipping+tax>100000000)throw Error('Invalid total');
+  return {id:p.id,name:p.name,priceCents:p.priceCents,quantity:item.quantity,kind,shippingCents,taxBps,...(kind==='digital'?{downloadId:p.downloadId}:{})};
+ });return {lines,total:subtotal+shipping+tax,subtotal,shipping,tax,address};
 }
 export function usdMicros(value:unknown){
  if(typeof value!=='string'||!/^\d{1,7}(?:\.\d{1,18})?$/.test(value))throw Error('Invalid payment amount');
@@ -69,6 +83,7 @@ async function verifySignature(raw:string,header:string|null,key:string){
 }
 export async function handleShop(request:Request,env:ShopEnv){
  const url=new URL(request.url),path=url.pathname;
+ if(path.startsWith('/api/shop/admin/'))return env.NEWSLETTER?handleShopAdmin(request,env):json({error:'Sign in first.'},401);
  if(path==='/api/shop/config'&&request.method==='GET')return json({enabled:ready(env)});
  if(!env.SHOP_ORDERS||!env.PAYRAM_API_KEY||!base(env))return json({error:'Payments aren’t available yet.'},503);
  if(path==='/api/shop/webhook'&&request.method==='POST'){
@@ -93,10 +108,11 @@ export async function handleShop(request:Request,env:ShopEnv){
   if(!ready(env))return json({error:'Payments aren’t available yet.'},503);
   let input:any;try{input=await request.json();}catch{return json({error:'Invalid request'},400);}
   if(!uuid.test(input?.requestId)||typeof input.email!=='string'||input.email.length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.email))return json({error:'Enter a valid email address.'},400);
-  let priced;try{const response=await env.ASSETS.fetch(new Request(new URL('/shop-catalog.json',url)));if(!response.ok)throw Error();priced=priceBag(await response.json(),input.items);}catch{return json({error:'Your bag changed. Reload the shop and check the items.'},400);}
+  let priced;try{const response=await env.ASSETS.fetch(new Request(new URL('/shop-catalog.json',url)));if(!response.ok)throw Error();priced=priceBag(await response.json(),input.items,input.shipping);}catch(error){return json({error:error instanceof Error?error.message:'Your bag changed. Reload the shop and check the items.'},400);}
+  const buyerNote=input.buyerNote||'';if(typeof buyerNote!=='string'||buyerNote.length>2000)return json({error:'Keep your order note under 2,000 characters.'},400);
   const existing:any=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE id=?').bind(input.requestId).first();
   if(existing){
-   if(existing.email!==input.email||existing.items_json!==JSON.stringify(priced.lines))return json({error:'Start a new checkout.'},409);
+   if(existing.email!==input.email||existing.items_json!==JSON.stringify(priced.lines)||(existing.shipping_json||null)!==(priced.address?JSON.stringify(priced.address):null)||(existing.buyer_note||'')!==buyerNote)return json({error:'Start a new checkout.'},409);
    if(existing.checkout_url)return json({orderId:existing.id,url:existing.checkout_url});
    return json({error:'This checkout is being processed. Do not submit another payment.'},409);
   }
@@ -105,7 +121,7 @@ export async function handleShop(request:Request,env:ShopEnv){
   const client=Array.from(new Uint8Array(digest),n=>n.toString(16).padStart(2,'0')).join('');
   const count:any=await env.SHOP_ORDERS.prepare('SELECT COUNT(*) AS count FROM orders WHERE client_hash=? AND created_at>?').bind(client,Date.now()-3600000).first();
   if(count?.count>=20)return json({error:'Too many checkouts. Please try later.'},429);
-  const inserted=await env.SHOP_ORDERS.prepare("INSERT OR IGNORE INTO orders (id,email,items_json,total_cents,status,created_at,updated_at,client_hash) VALUES (?,?,?,?,'CREATING',?,?,?)").bind(input.requestId,input.email,JSON.stringify(priced.lines),priced.total,Date.now(),Date.now(),client).run();
+  const inserted=await env.SHOP_ORDERS.prepare("INSERT OR IGNORE INTO orders (id,email,items_json,total_cents,status,created_at,updated_at,client_hash,shipping_json,subtotal_cents,shipping_cents,tax_cents,buyer_note) VALUES (?,?,?,?,'CREATING',?,?,?,?,?,?,?,?)").bind(input.requestId,input.email,JSON.stringify(priced.lines),priced.total,Date.now(),Date.now(),client,priced.address?JSON.stringify(priced.address):null,priced.subtotal,priced.shipping,priced.tax,buyerNote).run();
   if(inserted.meta.changes!==1)return json({error:'Checkout already processing.'},409);
   try{
    const payment=await provider(env,'/api/v1/payment',{method:'POST',body:JSON.stringify({customerEmail:input.email,customerID:input.requestId,invoiceID:input.requestId,amountInUSD:priced.total/100,currency:'USDC',network:'BASE'})});
@@ -118,12 +134,23 @@ export async function handleShop(request:Request,env:ShopEnv){
    return json({error:'Checkout could not be opened. Contact Morteva before retrying.'},503);
   }
  }
+ const download=path.match(/^\/api\/shop\/orders\/([a-f0-9-]+)\/download\/([^/]+)$/i);
+ if(download&&uuid.test(download[1])&&request.method==='GET'){
+  const row:any=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE id=?').bind(download[1]).first();
+  if(!row||!paidStates.has(row.status))return json({error:'Payment must be verified before downloading.'},403);
+  const line=JSON.parse(row.items_json).find((p:any)=>p.id===decodeURIComponent(download[2])&&p.kind==='digital');
+  if(!line||!env.SHOP_MEDIA)return json({error:'Download not found'},404);
+  const object=await env.SHOP_MEDIA.get(line.downloadId);if(!object||object.customMetadata?.paidDelivery!=='true')return json({error:'Download unavailable. Contact Morteva.'},404);
+  const name=(object.customMetadata.name||line.name).replace(/[^a-zA-Z0-9._ -]/g,'_');
+  return new Response(object.body,{headers:{'Content-Type':object.httpMetadata?.contentType||'application/octet-stream','Content-Disposition':`attachment; filename="${name}"`,'Content-Length':String(object.size),'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
+ }
  const match=path.match(/^\/api\/shop\/orders\/([a-f0-9-]+)$/i);
  if(match&&uuid.test(match[1])&&request.method==='GET'){
   const row:any=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE id=?').bind(match[1]).first();if(!row)return json({error:'Order not found'},404);
   let status=row.status;
   if(row.reference_id&&!paidStates.has(status)&&Date.now()-row.updated_at>10000){try{status=await reconcile(env,row);}catch(error){console.error('payram verification:',error instanceof Error?error.message:'failed');return json({error:'Payment verification is temporarily unavailable.'},503);}}
-  return json({status,totalCents:row.total_cents,paid:paidStates.has(status)});
+  const paid=paidStates.has(status);
+  return json({status,totalCents:row.total_cents,paid,...(paid?{fulfillment:row.fulfillment_status||'pending',trackingUrl:row.tracking_url||'',deliveryNote:row.customer_note||'',downloads:JSON.parse(row.items_json||'[]').filter((p:any)=>p.kind==='digital').map((p:any)=>({name:p.name,url:'/api/shop/orders/'+row.id+'/download/'+encodeURIComponent(p.id)}))}: {})});
  }
  return json({error:'Not found'},404);
 }

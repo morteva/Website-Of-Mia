@@ -1,0 +1,11 @@
+ALTER TABLE orders ADD COLUMN shipping_json TEXT;
+ALTER TABLE orders ADD COLUMN subtotal_cents INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE orders ADD COLUMN shipping_cents INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE orders ADD COLUMN tax_cents INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE orders ADD COLUMN buyer_note TEXT NOT NULL DEFAULT '';
+ALTER TABLE orders ADD COLUMN fulfillment_status TEXT NOT NULL DEFAULT 'pending';
+ALTER TABLE orders ADD COLUMN tracking_url TEXT NOT NULL DEFAULT '';
+ALTER TABLE orders ADD COLUMN customer_note TEXT NOT NULL DEFAULT '';
+ALTER TABLE orders ADD COLUMN private_notes TEXT NOT NULL DEFAULT '';
+ALTER TABLE orders ADD COLUMN fulfillment_revision INTEGER NOT NULL DEFAULT 0;
+UPDATE orders SET subtotal_cents=total_cents WHERE subtotal_cents=0;
