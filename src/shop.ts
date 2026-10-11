@@ -17,7 +17,7 @@ function base(env:ShopEnv){
 function ready(env:ShopEnv){return env.SHOP_CHECKOUT_ENABLED==='true'&&!!env.SHOP_ORDERS&&!!env.PAYRAM_API_KEY&&!!base(env);}
 async function provider(env:ShopEnv,path:string,options:RequestInit={}){
  const response=await fetch(base(env)!+path,{...options,redirect:'error',signal:AbortSignal.timeout(15000),headers:{'Content-Type':'application/json','API-Key':env.PAYRAM_API_KEY!,...(env.PAYRAM_GATEWAY_KEY?{'X-Morteva-Gateway':env.PAYRAM_GATEWAY_KEY}:{})}});
- if(!response.ok)throw Error('provider');return response.json() as Promise<any>;
+ if(!response.ok)throw Error('PayRam HTTP '+response.status);return response.json() as Promise<any>;
 }
 export function priceBag(catalog:any,items:any){
  if(catalog.currency!=='USD'||!Array.isArray(catalog.products)||!Array.isArray(items)||!items.length||items.length>50)throw Error('Invalid bag');
@@ -55,7 +55,7 @@ export async function handleShop(request:Request,env:ShopEnv){
   if(typeof event.reference_id!=='string')return json({error:'Invalid event'},400);
   const row=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE reference_id=?').bind(event.reference_id).first();
   if(!row)return json({received:true});
-  try{await reconcile(env,row);return json({received:true});}catch{return json({error:'Verification pending'},503);}
+  try{await reconcile(env,row);return json({received:true});}catch(error){console.error('payram verification:',error instanceof Error?error.message:'failed');return json({error:'Verification pending'},503);}
  }
  if(path==='/api/shop/checkout'&&request.method==='POST'){
   if(!ready(env))return json({error:'Payments aren’t available yet.'},503);
@@ -90,7 +90,7 @@ export async function handleShop(request:Request,env:ShopEnv){
  if(match&&uuid.test(match[1])&&request.method==='GET'){
   const row:any=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE id=?').bind(match[1]).first();if(!row)return json({error:'Order not found'},404);
   let status=row.status;
-  if(row.reference_id&&!paidStates.has(status)&&Date.now()-row.updated_at>10000){try{status=await reconcile(env,row);}catch{return json({error:'Payment verification is temporarily unavailable.'},503);}}
+  if(row.reference_id&&!paidStates.has(status)&&Date.now()-row.updated_at>10000){try{status=await reconcile(env,row);}catch(error){console.error('payram verification:',error instanceof Error?error.message:'failed');return json({error:'Payment verification is temporarily unavailable.'},503);}}
   return json({status,totalCents:row.total_cents,paid:paidStates.has(status)});
  }
  return json({error:'Not found'},404);
