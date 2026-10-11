@@ -1,10 +1,12 @@
-interface Env { ASSETS: Fetcher; NEWSLETTER: Fetcher; }
+interface Env { ASSETS: Fetcher; NEWSLETTER: Fetcher; SHOP_ORDERS?: D1Database; PAYRAM_BASE_URL?: string; PAYRAM_API_KEY?: string; PAYRAM_GATEWAY_KEY?: string; SHOP_CHECKOUT_ENABLED?: string; }
+import {handleShop} from './shop.ts';
 import {guardRequest, secureResponse} from './security.ts';
 export default {async fetch(request: Request,env: Env){
  return secureResponse(request,await guardRequest(request)||await handleRequest(request,env));
 }};
 async function handleRequest(request: Request,env: Env){
  const url=new URL(request.url),path=url.pathname;
+ if(path.startsWith('/api/shop/'))return handleShop(request,env);
  if(path==='/cms-admin.html')return new Response(null,{status:302,headers:{Location:'/wmm4','Cache-Control':'no-store'}});
  if(path==='/miamiamia'||path.startsWith('/miamiamia/'))return new Response('Not found',{status:404,headers:{'Cache-Control':'no-store'}});
  if(path==='/wmm4'&&['GET','HEAD'].includes(request.method)){

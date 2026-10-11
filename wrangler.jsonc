@@ -22,6 +22,7 @@
     }
   ],
   "main": "src/worker.ts",
+  "d1_databases": [{"binding":"SHOP_ORDERS","database_name":"morteva-shop-orders","database_id":"1f37a318-f3b1-4f81-a07c-b50e563a6dcf","migrations_dir":"migrations/shop"}],
   "services": [
     {
       "binding": "NEWSLETTER",
