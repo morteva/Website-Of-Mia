@@ -31,11 +31,33 @@ export function priceBag(catalog:any,items:any){
   return {id:p.id,name:p.name,priceCents:p.priceCents,quantity:item.quantity};
  });return {lines,total};
 }
+export function usdMicros(value:unknown){
+ if(typeof value!=='string'||!/^\d{1,7}(?:\.\d{1,18})?$/.test(value))throw Error('Invalid payment amount');
+ const [whole,fraction='']=value.split('.');if(/[^0]/.test(fraction.slice(6)))throw Error('Unsupported payment precision');
+ const amount=Number(whole)*1000000+Number(fraction.slice(0,6).padEnd(6,'0'));
+ if(!Number.isSafeInteger(amount))throw Error('Invalid payment amount');return amount;
+}
+function validateInvoice(result:any,row:any){
+ if(result.referenceID!==row.reference_id||usdMicros(String(result.amountInUSD))!==row.total_cents*10000||result.invoiceID!==row.id)throw Error('Mismatched payment');
+}
+export function verifiedAdditionalPayment(original:any,extra:any,row:any){
+ validateInvoice(original,row);
+ if(!uuid.test(extra.referenceID)||extra.referenceID===row.reference_id||extra.invoiceID!==extra.referenceID||extra.customerID!==row.id||original.customerID!==row.id||extra.externalPlatformID!==original.externalPlatformID||typeof original.depositAddress!=='string'||!/^0x[0-9a-f]{40}$/i.test(original.depositAddress)||extra.depositAddress?.toLowerCase()!==original.depositAddress.toLowerCase()||extra.blockchainSymbol!==original.blockchainSymbol||extra.currencySymbol!==original.currencySymbol||!['ETH','USDC'].includes(original.currencySymbol)||original.blockchainSymbol!=='BASE'||!['PARTIALLY_FILLED','FILLED','OVER_FILLED'].includes(extra.paymentState)||!Number.isInteger(extra.confirmationCurrent)||extra.confirmationCurrent<extra.confirmationRequired||!Number.isInteger(extra.confirmationRequired)||extra.confirmationRequired<1)throw Error('Mismatched additional payment');
+ return usdMicros(extra.filledAmountInUSD);
+}
+async function credit(env:ShopEnv,row:any,reference:string,amount:number){
+ await env.SHOP_ORDERS!.prepare('INSERT INTO order_payment_credits (reference_id,order_id,amount_micros) VALUES (?,?,?) ON CONFLICT(reference_id) DO UPDATE SET amount_micros=MAX(amount_micros,excluded.amount_micros) WHERE order_id=excluded.order_id').bind(reference,row.id,amount).run();
+}
 async function reconcile(env:ShopEnv,row:any){
  const result=await provider(env,'/api/v1/payment/reference/'+encodeURIComponent(row.reference_id));
- if(result.referenceID!==row.reference_id||Math.round(Number(result.amountInUSD)*100)!==row.total_cents||result.invoiceID!==row.id)throw Error('Mismatched payment');
- const status=result.paymentState;
+ validateInvoice(result,row);
+ let status=result.paymentState;
  if(!['OPEN','CANCELLED','PARTIALLY_FILLED','FILLED','OVER_FILLED'].includes(status))throw Error('Invalid payment state');
+ if(typeof result.filledAmountInUSD==='string'&&['PARTIALLY_FILLED','FILLED','OVER_FILLED'].includes(status)){
+  await credit(env,row,row.reference_id,usdMicros(result.filledAmountInUSD));
+  const received:any=await env.SHOP_ORDERS!.prepare('SELECT SUM(amount_micros) AS total FROM order_payment_credits WHERE order_id=?').bind(row.id).first();
+  if(received?.total>=row.total_cents*10000)status=received.total===row.total_cents*10000?'FILLED':'OVER_FILLED';
+ }
  await env.SHOP_ORDERS!.prepare("UPDATE orders SET status=?, updated_at=? WHERE id=? AND status NOT IN ('FILLED','OVER_FILLED')").bind(status,Date.now(),row.id).run();
  return paidStates.has(row.status)?row.status:status;
 }
@@ -53,9 +75,19 @@ export async function handleShop(request:Request,env:ShopEnv){
   const raw=await request.text();if(!await verifySignature(raw,request.headers.get('X-Payram-Signature'),env.PAYRAM_API_KEY))return json({error:'Unauthorized'},401);
   let event;try{event=JSON.parse(raw);}catch{return json({error:'Invalid event'},400);}
   if(typeof event.reference_id!=='string')return json({error:'Invalid event'},400);
-  const row=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE reference_id=?').bind(event.reference_id).first();
-  if(!row)return json({received:true});
-  try{await reconcile(env,row);return json({received:true});}catch(error){console.error('payram verification:',error instanceof Error?error.message:'failed');return json({error:'Verification pending'},503);}
+  let row:any=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE reference_id=?').bind(event.reference_id).first();
+  try{
+   if(!row){
+    if(!uuid.test(event.reference_id))return json({received:true});
+    const extra=await provider(env,'/api/v1/payment/reference/'+encodeURIComponent(event.reference_id));
+    if(extra.referenceID!==event.reference_id||!uuid.test(extra.customerID))return json({received:true});
+    row=await env.SHOP_ORDERS.prepare('SELECT * FROM orders WHERE id=?').bind(extra.customerID).first();
+    if(!row?.reference_id)return json({received:true});
+    const original=await provider(env,'/api/v1/payment/reference/'+encodeURIComponent(row.reference_id));
+    await credit(env,row,event.reference_id,verifiedAdditionalPayment(original,extra,row));
+   }
+   await reconcile(env,row);return json({received:true});
+  }catch(error){console.error('payram verification:',error instanceof Error?error.message:'failed');return json({error:'Verification pending'},503);}
  }
  if(path==='/api/shop/checkout'&&request.method==='POST'){
   if(!ready(env))return json({error:'Payments aren’t available yet.'},503);

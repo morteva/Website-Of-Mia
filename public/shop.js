@@ -30,7 +30,7 @@ $('shop-checkout').addEventListener('click',async()=>{
 async function checkOrder(){
  if(!pending?.id)return;
  try{const response=await fetch('/api/shop/orders/'+encodeURIComponent(pending.id));const result=await response.json();if(!response.ok)throw Error(result.error||'Unable to check payment.');
-  $('order-status').textContent=result.paid?'Payment received. Your order is recorded.':result.status==='PARTIALLY_FILLED'?'Payment received in part. Open your checkout to finish.':result.status==='CANCELLED'?'This payment expired. Contact Morteva if you already sent funds.':'Your payment is pending.';
+  $('order-status').textContent=result.paid?'Payment received. Your order is recorded.':result.status==='PARTIALLY_FILLED'?'Your payment arrived below the order total. Contact Morteva before sending more.':result.status==='CANCELLED'?'This payment expired. Contact Morteva if you already sent funds.':'Your payment is pending.';
   if(result.paid){if(JSON.stringify(bag)===pending.bag){bag={};persist();}pending=null;localStorage.removeItem('morteva-shop-order-v1');$('check-order').hidden=true;}
  }catch(error){$('order-status').textContent=error.message;}
 }
