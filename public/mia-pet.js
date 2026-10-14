@@ -307,7 +307,8 @@
     }, 15000 + Math.random() * 9000);
   }
 
-  sprite.addEventListener('click', () => {
+  sprite.addEventListener('click', async () => {
+    try { await refreshLines(true); } catch (error) { console.warn('MySpace Mia refresh:', error); }
     say(pickLine());
     scheduleNext();
   });
@@ -334,7 +335,8 @@
     root.classList.remove('tm-expanded');
   });
 
-  restore.addEventListener('click', () => {
+  restore.addEventListener('click', async () => {
+    try { await refreshLines(true); } catch (error) { console.warn('MySpace Mia refresh:', error); }
     hidden = false;
     restore.hidden = true;
     root.hidden = false;
@@ -343,15 +345,51 @@
     scheduleNext();
   });
 
+  let refreshPending = null;
+  let refreshedAt = 0;
+  let poolSignature = '';
+  async function refreshLines(force = false) {
+    if (refreshPending) return refreshPending;
+    if (!force && lines.length && Date.now() - refreshedAt < 60000) return;
+    refreshPending = (async () => {
+      const url = new URL(asset('myspace-mia-thoughts.json'));
+      url.searchParams.set('fresh', String(Date.now()));
+      const response = await fetch(url.href, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`MySpace Mia thoughts failed: ${response.status}`);
+      const data = await response.json();
+      const incoming = Array.isArray(data) ? data : data?.lines;
+      if (!Array.isArray(incoming) || !incoming.some(entry => typeof entry === 'string' ? entry.trim() : entry?.text?.trim())) throw new Error('Thought pool is empty or invalid.');
+      const signature = JSON.stringify(incoming);
+      const hadLines = lines.length > 0;
+      if (signature !== poolSignature) {
+        installLines(data);
+        poolSignature = signature;
+        if (hadLines && lastText && !lines.some(entry => entry.text === lastText)) {
+          lastText = '';
+          bubble.hidden = true;
+          clearTimeout(bubbleTimer);
+          if (!hidden && !root.hidden) say(pickLine());
+        }
+      }
+      refreshedAt = Date.now();
+    })();
+    try { await refreshPending; } finally { refreshPending = null; }
+  }
+
+  function refreshQuietly(force = false) {
+    refreshLines(force).catch(error => console.warn('MySpace Mia refresh:', error));
+  }
+  window.addEventListener('focus', () => refreshQuietly(true));
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) refreshQuietly(true);
+  });
+  window.setInterval(() => { if (!document.hidden) refreshQuietly(); }, 60000);
+
   Promise.all([
-    fetch(asset('myspace-mia-thoughts.json?v=20261001-mia-250'), { cache: 'force-cache' }).then((r) => {
-      if (!r.ok) throw new Error(`MySpace Mia thoughts failed: ${r.status}`);
-      return r.json();
-    }),
+    refreshLines(true),
     img.decode?.().catch(() => {}) || Promise.resolve()
   ])
-    .then(([data]) => {
-      installLines(data);
+    .then(() => {
       restore.hidden = !hidden;
       root.hidden = hidden;
       if (!hidden) {

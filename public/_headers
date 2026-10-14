@@ -3,3 +3,8 @@
   Cache-Control: public, max-age=31536000, immutable
 /site-progress.json
   Cache-Control: no-store
+
+/myspace-mia-thoughts.json
+  Cache-Control: no-store
+/mia-pet.js
+  Cache-Control: no-cache

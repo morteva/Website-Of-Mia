@@ -7,7 +7,7 @@
     if (window.__miaPetLoaderAdded) return;
     window.__miaPetLoaderAdded = true;
     const script = document.createElement('script');
-    script.src = '/mia-pet.js?v=myspace-anime-20261001-r3';
+    script.src = '/mia-pet.js?v=myspace-fresh-20261014-r1';
     script.defer = true;
     document.head.appendChild(script);
   }
