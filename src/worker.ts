@@ -1,8 +1,9 @@
 interface Env { ASSETS: Fetcher; NEWSLETTER: Fetcher; SHOP_MEDIA?: R2Bucket; SHOP_ORDERS?: D1Database; PAYRAM_BASE_URL?: string; PAYRAM_API_KEY?: string; PAYRAM_GATEWAY_KEY?: string; SHOP_CHECKOUT_ENABLED?: string; }
+import {observeRequest, monitoredEnv} from './traffic.ts';
 import {handleShop} from './shop.ts';
 import {guardRequest, secureResponse} from './security.ts';
-export default {async fetch(request: Request,env: Env){
- return secureResponse(request,await guardRequest(request)||await handleRequest(request,env));
+export default {async fetch(request: Request,env: Env,ctx?: any){
+ return observeRequest(request,ctx,async req=>secureResponse(req,await guardRequest(req)||await handleRequest(req,monitoredEnv(env))));
 }};
 async function handleRequest(request: Request,env: Env){
  const url=new URL(request.url),path=url.pathname;
