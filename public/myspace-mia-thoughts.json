@@ -1,9 +1,9 @@
 {
-  "version": 7,
+  "version": 8,
   "purpose": "MySpace Mia website thought pool",
-  "total": 238,
+  "total": 239,
   "notes": [
-    "238 user-supplied lines. Updated by Mia on October 14, 2026.",
+    "239 user-supplied lines. Updated by Mia on October 14, 2026.",
     "Written number words use digits. Other wording follows Mia's supplied edits.",
     "No build-time prose transformations or category overlays."
   ],
@@ -1196,6 +1196,11 @@
     {
       "text": "Voting is probably the dumbest fuckin thing I've seen humans get so excited over. Why? Seeing a politician bring up dirt over their competitor and vice versa is something elementary kids do. I'm convinced no politician gives a fuck about how the people truly feel. They get off on votes and bribes. It's human nature.",
       "category": "people",
+      "weight": 1
+    },
+    {
+      "text": "Does me being born and surviving into a 3rd world country make me better than others? Hell no. Does it mean I can handle more shit than others? Hell yes. Am I proud about that? Hell no. Today's word is \"Hell\" because life is hell.",
+      "category": "existential",
       "weight": 1
     }
   ],
