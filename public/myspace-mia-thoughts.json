@@ -1,9 +1,9 @@
 {
-  "version": 6,
+  "version": 7,
   "purpose": "MySpace Mia website thought pool",
-  "total": 237,
+  "total": 238,
   "notes": [
-    "237 user-supplied lines. Updated by Mia on October 14, 2026; removals use the original 250-line numbering.",
+    "238 user-supplied lines. Updated by Mia on October 14, 2026.",
     "Written number words use digits. Other wording follows Mia's supplied edits.",
     "No build-time prose transformations or category overlays."
   ],
@@ -1191,6 +1191,11 @@
     {
       "text": "Being a GM and hoping to make friends are 2 entirely different roads that never collide in the end.",
       "category": "mmo_leadership",
+      "weight": 1
+    },
+    {
+      "text": "Voting is probably the dumbest fuckin thing I've seen humans get so excited over. Why? Seeing a politician bring up dirt over their competitor and vice versa is something elementary kids do. I'm convinced no politician gives a fuck about how the people truly feel. They get off on votes and bribes. It's human nature.",
+      "category": "people",
       "weight": 1
     }
   ],
