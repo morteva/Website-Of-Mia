@@ -1,9 +1,9 @@
 {
-  "version": 8,
+  "version": 9,
   "purpose": "MySpace Mia website thought pool",
-  "total": 239,
+  "total": 240,
   "notes": [
-    "239 user-supplied lines. Updated by Mia on October 14, 2026.",
+    "240 user-supplied lines. Updated by Mia on October 14, 2026.",
     "Written number words use digits. Other wording follows Mia's supplied edits.",
     "No build-time prose transformations or category overlays."
   ],
@@ -1201,6 +1201,11 @@
     {
       "text": "Does me being born and surviving into a 3rd world country make me better than others? Hell no. Does it mean I can handle more shit than others? Hell yes. Am I proud about that? Hell no. Today's word is \"Hell\" because life is hell.",
       "category": "existential",
+      "weight": 1
+    },
+    {
+      "text": "Honestly I fucking hate racism, and I try my damnest to accept everyone, but it gets difficult when a certain people point, laugh, and act very disgusted towards you when you're just trying to live your life.",
+      "category": "people",
       "weight": 1
     }
   ],
