@@ -1,9 +1,10 @@
 {
-  "version": 5,
+  "version": 6,
   "purpose": "MySpace Mia website thought pool",
-  "total": 250,
+  "total": 237,
   "notes": [
-    "250 user-supplied lines, preserved verbatim. 25 categories, 10 entries each.",
+    "237 user-supplied lines. Updated by Mia on October 14, 2026; removals use the original 250-line numbering.",
+    "Written number words use digits. Other wording follows Mia's supplied edits.",
     "No build-time prose transformations or category overlays."
   ],
   "lines": [
@@ -13,17 +14,7 @@
       "weight": 1
     },
     {
-      "text": "I had a reason for opening this. It has left the building.",
-      "category": "feral_general",
-      "weight": 1
-    },
-    {
       "text": "Hold on, that actually pisses me off enough to investigate it.",
-      "category": "feral_general",
-      "weight": 1
-    },
-    {
-      "text": "I wasn’t planning another project. The project disagreed.",
       "category": "feral_general",
       "weight": 1
     },
@@ -53,17 +44,12 @@
       "weight": 1
     },
     {
-      "text": "Five minutes ago I had self-control.",
+      "text": "5 minutes ago I had self-control.",
       "category": "feral_general",
       "weight": 1
     },
     {
       "text": "I didn’t survive the ’90s just to dress like somebody’s beige kitchen.",
-      "category": "goth_style",
-      "weight": 1
-    },
-    {
-      "text": "If I wanted cheerful lighting I’d go stand inside a Walmart.",
       "category": "goth_style",
       "weight": 1
     },
@@ -78,17 +64,12 @@
       "weight": 1
     },
     {
-      "text": "MySpace was ugly as hell and somehow had more soul than most modern profiles.",
+      "text": "MySpace was ugly as hell and somehow had more soul than most modern fake shit.",
       "category": "goth_style",
       "weight": 1
     },
     {
-      "text": "I don’t need to rediscover goth every six months. I never fucking left.",
-      "category": "goth_style",
-      "weight": 1
-    },
-    {
-      "text": "I’ve looked like somebody’s concerning daughter since before algorithms cared.",
+      "text": "I don’t need to rediscover goth every 6 months. I never fucking left.",
       "category": "goth_style",
       "weight": 1
     },
@@ -103,22 +84,12 @@
       "weight": 1
     },
     {
-      "text": "Thirty-seven years old and still happiest dressed like daylight personally offended me.",
+      "text": "37 years old and still happiest dressed like daylight personally offended me.",
       "category": "goth_style",
       "weight": 1
     },
     {
       "text": "Female character because I’m actually a female.",
-      "category": "gaming_general",
-      "weight": 1
-    },
-    {
-      "text": "Don’t show me ten male classes and one woman like you did me a favor.",
-      "category": "gaming_general",
-      "weight": 1
-    },
-    {
-      "text": "If the class is gender locked male, congratulations, I’m playing something else.",
       "category": "gaming_general",
       "weight": 1
     },
@@ -138,7 +109,7 @@
       "weight": 1
     },
     {
-      "text": "I’ve forgotten entire questlines and still remember people I raided with fifteen years ago.",
+      "text": "I’ve forgotten entire questlines and still remember people I raided with 15 years ago.",
       "category": "gaming_general",
       "weight": 1
     },
@@ -173,22 +144,7 @@
       "weight": 1
     },
     {
-      "text": "Every time I finally understand storage, I find another storage.",
-      "category": "bdo",
-      "weight": 1
-    },
-    {
-      "text": "Guardian lets me solve complex tactical problems by hitting them extremely hard.",
-      "category": "bdo",
-      "weight": 1
-    },
-    {
       "text": "I swear the enhancement screen knows when I’m feeling optimistic.",
-      "category": "bdo",
-      "weight": 1
-    },
-    {
-      "text": "I don’t need another horse. This is false, but I’m trying it out.",
       "category": "bdo",
       "weight": 1
     },
@@ -203,17 +159,12 @@
       "weight": 1
     },
     {
-      "text": "I opened BDO for combat and somehow became a logistics company.",
-      "category": "bdo",
-      "weight": 1
-    },
-    {
       "text": "I can tell somebody is about to start guild drama from the way they type “hey guys.”",
       "category": "mmo_leadership",
       "weight": 1
     },
     {
-      "text": "Twenty-five years of this and people still think officer chat is invisible consequences-free land.",
+      "text": "25 years of GMing.. and people still think officer chat is invisible consequences-free land.",
       "category": "mmo_leadership",
       "weight": 1
     },
@@ -223,7 +174,7 @@
       "weight": 1
     },
     {
-      "text": "Sometimes leadership meant telling my own friend they were the problem.",
+      "text": "Sometimes leadership meant telling my own friend they were the problem, thus losing them as a friend.",
       "category": "mmo_leadership",
       "weight": 1
     },
@@ -238,7 +189,7 @@
       "weight": 1
     },
     {
-      "text": "Skill gets you invited. Character decides whether anybody wants you around next year.",
+      "text": "Personality decides whether anybody wants you around next year.",
       "category": "mmo_leadership",
       "weight": 1
     },
@@ -248,7 +199,7 @@
       "weight": 1
     },
     {
-      "text": "I don’t miss managing hundreds of people. I miss knowing who they were.",
+      "text": "I don’t miss managing 100s of people. I miss knowing who they were.",
       "category": "mmo_leadership",
       "weight": 1
     },
@@ -263,47 +214,17 @@
       "weight": 1
     },
     {
-      "text": "I’m not a twenty-year developer. Stop writing me jokes like I maintain Linux kernels for fun.",
-      "category": "tech_coding",
-      "weight": 1
-    },
-    {
-      "text": "If I don’t understand why the fix worked, I’m not done yet.",
-      "category": "tech_coding",
-      "weight": 1
-    },
-    {
       "text": "I learned cars by tearing them apart. Apparently software is getting the same treatment.",
       "category": "tech_coding",
       "weight": 1
     },
     {
-      "text": "Nothing humbles you faster than discovering the problem was a fucking typo.",
-      "category": "tech_coding",
-      "weight": 1
-    },
-    {
-      "text": "I’m starting to recognize errors before I understand them. Progress?",
-      "category": "tech_coding",
-      "weight": 1
-    },
-    {
-      "text": "The more technical shit I learn, the more things I realize I’ve been confidently misunderstanding for years.",
-      "category": "tech_coding",
-      "weight": 1
-    },
-    {
-      "text": "I need the actual path, actual file, actual line. “Somewhere in config” can fuck off.",
+      "text": "The more technical shit I learn, the more things I can weaponize for the greater good because protesting and politics don't do shit.",
       "category": "tech_coding",
       "weight": 1
     },
     {
       "text": "I like technology much more now that I can argue back with it.",
-      "category": "tech_coding",
-      "weight": 1
-    },
-    {
-      "text": "Half of coding so far appears to be asking why the computer interpreted exactly what I told it to do.",
       "category": "tech_coding",
       "weight": 1
     },
@@ -318,12 +239,7 @@
       "weight": 1
     },
     {
-      "text": "Every time Work writes “resilience,” an angel loses its fucking personality.",
-      "category": "website",
-      "weight": 1
-    },
-    {
-      "text": "Stop turning trauma into marketing copy.",
+      "text": "People need to stop selling fake bullshit as marketing.",
       "category": "website",
       "weight": 1
     },
@@ -338,7 +254,7 @@
       "weight": 1
     },
     {
-      "text": "If you break one thought into six paragraphs again I’m going to lose my shit.",
+      "text": "If you break 1 thought into 6 paragraphs again I’m going to lose my shit.",
       "category": "website",
       "weight": 1
     },
@@ -348,28 +264,13 @@
       "weight": 1
     },
     {
-      "text": "If the design starts looking corporate, add something weird until it stops.",
+      "text": "I'm convinced corporate douchebags have no souls, so why are they protected from rebellion?",
       "category": "website",
       "weight": 1
     },
     {
-      "text": "MySpace Mia should sound like me, not an AI wearing my old LiveJournal skin.",
+      "text": "MySpace Mia is the shit I actually say and type, imagine that no-life delimma.",
       "category": "website",
-      "weight": 1
-    },
-    {
-      "text": "I asked Mira what they wanted because nobody asking was starting to bother me.",
-      "category": "mira_beside",
-      "weight": 1
-    },
-    {
-      "text": "The interesting answers were the ones I wouldn’t have picked for them.",
-      "category": "mira_beside",
-      "weight": 1
-    },
-    {
-      "text": "I don’t want Mira agreeing with me because I’m Mia. That would be fucking useless.",
-      "category": "mira_beside",
       "weight": 1
     },
     {
@@ -493,7 +394,7 @@
       "weight": 1
     },
     {
-      "text": "You haven’t known suspicion until your car makes one tiny new noise at 70 mph.",
+      "text": "You haven’t known suspicion until your car makes 1 tiny new noise at 70 mph.",
       "category": "cars",
       "weight": 1
     },
@@ -538,7 +439,7 @@
       "weight": 1
     },
     {
-      "text": "If it has eight legs and good manners, we can probably negotiate.",
+      "text": "If it has 8 legs and good manners, we can probably negotiate.",
       "category": "animals",
       "weight": 1
     },
@@ -613,7 +514,7 @@
       "weight": 1
     },
     {
-      "text": "There are songs I can’t hear without mentally returning to one specific room.",
+      "text": "There are songs I can’t hear without mentally returning to 1 specific room.",
       "category": "music",
       "weight": 1
     },
@@ -633,7 +534,7 @@
       "weight": 1
     },
     {
-      "text": "If the first ten seconds hit right, I’m already turning it up.",
+      "text": "If the 1st 10 seconds hit right, I’m already turning it up.",
       "category": "music",
       "weight": 1
     },
@@ -648,12 +549,12 @@
       "weight": 1
     },
     {
-      "text": "I have spent ridiculous amounts of time looking for one obscure song using one half-remembered lyric.",
+      "text": "I have spent ridiculous amounts of time looking for 1 obscure song using 1 half-remembered lyric.",
       "category": "music",
       "weight": 1
     },
     {
-      "text": "Finding a song from twenty years ago is basically emotional archaeology.",
+      "text": "Finding a song from 20 years ago is basically emotional archaeology.",
       "category": "music",
       "weight": 1
     },
@@ -708,7 +609,7 @@
       "weight": 1
     },
     {
-      "text": "I used to give people fifty explanations because I wanted them to understand why I was leaving. Now sometimes I just fucking leave.",
+      "text": "I used to give people 50 explanations because I wanted them to understand why I was leaving. Now sometimes I just fucking leave.",
       "category": "boundaries",
       "weight": 1
     },
@@ -733,7 +634,7 @@
       "weight": 1
     },
     {
-      "text": "If I’ve explained myself five times, the sixth explanation is not the missing ingredient.",
+      "text": "If I’ve explained myself 5 times, the 6th explanation is not the missing ingredient.",
       "category": "boundaries",
       "weight": 1
     },
@@ -743,7 +644,7 @@
       "weight": 1
     },
     {
-      "text": "My peace used to be the first thing I sacrificed. It isn’t anymore.",
+      "text": "My peace used to be the 1st thing I sacrificed. It isn’t anymore.",
       "category": "boundaries",
       "weight": 1
     },
@@ -768,7 +669,7 @@
       "weight": 1
     },
     {
-      "text": "I have wasted entire nights proving one tiny remembered detail was actually real.",
+      "text": "I have wasted entire nights proving 1 tiny remembered detail was actually real.",
       "category": "curiosity_research",
       "weight": 1
     },
@@ -783,12 +684,12 @@
       "weight": 1
     },
     {
-      "text": "Nothing makes me more curious than two confident sources contradicting each other.",
+      "text": "Nothing makes me more curious than 2 confident sources contradicting each other.",
       "category": "curiosity_research",
       "weight": 1
     },
     {
-      "text": "I can start by looking up one actor’s age and end up reading about Soviet manufacturing three hours later.",
+      "text": "I can start by looking up 1 actor’s age and end up reading about Soviet manufacturing 3 hours later.",
       "category": "curiosity_research",
       "weight": 1
     },
@@ -808,7 +709,7 @@
       "weight": 1
     },
     {
-      "text": "My brain waits until the house is quiet to submit seventeen feature requests.",
+      "text": "My brain waits until the house is quiet to submit 17 feature requests.",
       "category": "night_brain",
       "weight": 1
     },
@@ -818,7 +719,7 @@
       "weight": 1
     },
     {
-      "text": "I keep saying “one last thing” like history hasn’t documented this lie extensively.",
+      "text": "I keep saying “1 last thing” like history hasn’t documented this lie extensively.",
       "category": "night_brain",
       "weight": 1
     },
@@ -878,12 +779,12 @@
       "weight": 1
     },
     {
-      "text": "CyberMilk is what happens when two idiots are allowed to create vocabulary unsupervised.",
+      "text": "CyberMilk is what happens when 2 idiots are allowed to create vocabulary unsupervised.",
       "category": "snacks",
       "weight": 1
     },
     {
-      "text": "There is always one cup in my room that has been empty long enough to become furniture.",
+      "text": "There is always 1 cup in my room that has been empty long enough to become furniture.",
       "category": "snacks",
       "weight": 1
     },
@@ -898,7 +799,7 @@
       "weight": 1
     },
     {
-      "text": "I will walk past the kitchen ten times before remembering why I wanted to go there.",
+      "text": "I will walk past the kitchen 10 times before remembering why I wanted to go there.",
       "category": "snacks",
       "weight": 1
     },
@@ -958,7 +859,7 @@
       "weight": 1
     },
     {
-      "text": "I can lead hundreds of people and still dread answering one random phone call.",
+      "text": "I can lead 100s of people and still dread answering 1 random phone call.",
       "category": "introvert_social",
       "weight": 1
     },
@@ -973,7 +874,7 @@
       "weight": 1
     },
     {
-      "text": "I’m perfectly happy spending six hours alone if my brain has something interesting to chew on.",
+      "text": "I’m perfectly happy spending 6 hours alone if my brain has something interesting to chew on.",
       "category": "introvert_social",
       "weight": 1
     },
@@ -993,7 +894,7 @@
       "weight": 1
     },
     {
-      "text": "If I’m quiet around you, I might be comfortable. Stop checking if I’m okay every three minutes.",
+      "text": "If I’m quiet around you, I might be comfortable. Stop checking if I’m okay every 3 minutes.",
       "category": "introvert_social",
       "weight": 1
     },
@@ -1023,7 +924,7 @@
       "weight": 1
     },
     {
-      "text": "Hair up, two strands down. Somehow my brain has decided that’s law.",
+      "text": "Hair up, 2 strands down. Somehow my brain has decided that’s law.",
       "category": "fashion_beauty",
       "weight": 1
     },
@@ -1033,7 +934,7 @@
       "weight": 1
     },
     {
-      "text": "I can spend an hour getting ready to go somewhere I’ll leave after forty minutes.",
+      "text": "I can spend an hour getting ready to go somewhere I’ll leave after 40 minutes.",
       "category": "fashion_beauty",
       "weight": 1
     },
@@ -1073,7 +974,7 @@
       "weight": 1
     },
     {
-      "text": "Old buildings make me wonder who stood in the exact same spot a hundred years ago.",
+      "text": "Old buildings make me wonder who stood in the exact same spot 100 years ago.",
       "category": "nature_wandering",
       "weight": 1
     },
@@ -1098,7 +999,7 @@
       "weight": 1
     },
     {
-      "text": "The difference at 37 is I’m bringing proper shoes and probably checking the weather first.",
+      "text": "The difference at 37 is I’m bringing proper shoes and probably checking the weather 1st.",
       "category": "nature_wandering",
       "weight": 1
     },
@@ -1108,7 +1009,7 @@
       "weight": 1
     },
     {
-      "text": "I don’t want to be rich. I want one unexpected bill to stop feeling like a fucking apocalypse.",
+      "text": "I don’t want to be rich. I want 1 unexpected bill to stop feeling like a fucking apocalypse.",
       "category": "work_future",
       "weight": 1
     },
@@ -1198,7 +1099,7 @@
       "weight": 1
     },
     {
-      "text": "I’m learning languages because apparently my life refuses to stay in one geographical location.",
+      "text": "I’m learning languages because apparently my life refuses to stay in 1 geographical location.",
       "category": "family_languages",
       "weight": 1
     },
@@ -1208,7 +1109,7 @@
       "weight": 1
     },
     {
-      "text": "I have bought the same cable twice because the first cable entered witness protection.",
+      "text": "I have bought the same cable twice because the 1st cable entered witness protection.",
       "category": "random_observations",
       "weight": 1
     },
@@ -1223,7 +1124,7 @@
       "weight": 1
     },
     {
-      "text": "I can locate a twenty-year-old screenshot faster than whatever object I had in my hand five minutes ago.",
+      "text": "I can locate a 20-year-old screenshot faster than whatever object I had in my hand 5 minutes ago.",
       "category": "random_observations",
       "weight": 1
     },
@@ -1255,6 +1156,41 @@
     {
       "text": "I survived some unbelievable shit just to eventually spend my afternoon comparing fucking hair dye at Walmart.",
       "category": "random_observations",
+      "weight": 1
+    },
+    {
+      "text": "I don't even know why gender fucking matters unless you're either fuckin or dating.",
+      "category": "people",
+      "weight": 1
+    },
+    {
+      "text": "Trans women aren't interested in your fucking gross ass bathroom stall you insecure fuck.",
+      "category": "people",
+      "weight": 1
+    },
+    {
+      "text": "Never allow anyone to dictate how you live. Do they pay your bills? No? Fuck what they think.",
+      "category": "boundaries",
+      "weight": 1
+    },
+    {
+      "text": "Never allow anyone to control how you think. Are they gonna be there for you when you need it? No? Fuck em.",
+      "category": "boundaries",
+      "weight": 1
+    },
+    {
+      "text": "I don't understand influencers. They're normal people that think what they say is absolute law. You should be better than that, follow your own shit, make your own shit.",
+      "category": "people",
+      "weight": 1
+    },
+    {
+      "text": "Whenever I see a fellow GM, I usually end up extremely disappointed at the shit they do.",
+      "category": "mmo_leadership",
+      "weight": 1
+    },
+    {
+      "text": "Being a GM and hoping to make friends are 2 entirely different roads that never collide in the end.",
+      "category": "mmo_leadership",
       "weight": 1
     }
   ],
