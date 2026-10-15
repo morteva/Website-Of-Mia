@@ -14,3 +14,9 @@ test('private responses never cache and same-origin previews remain permitted',(
   assert.equal(r.headers.get('X-Frame-Options'),'SAMEORIGIN');
   assert.match(r.headers.get('Content-Security-Policy'),/frame-ancestors 'self'/);
 });
+test('only the control room permits same-origin microphone access, even with backend deny headers',()=>{
+ for(const path of ['/wmm4','/wmm4/preview/podcast','/','/podcast']){
+  const response=secureResponse(new Request('https://morteva.com'+path),new Response('',{headers:{'Permissions-Policy':'camera=(), microphone=(), geolocation=()'}}));
+  assert.equal(response.headers.get('Permissions-Policy'),path==='/wmm4'?'camera=(), microphone=(self), geolocation=()':'camera=(), microphone=(), geolocation=()');
+ }
+});

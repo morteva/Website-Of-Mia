@@ -29,7 +29,9 @@ export function secureResponse(request: Request, response: Response): Response {
   headers.set('X-Content-Type-Options', 'nosniff');
   headers.set('X-Frame-Options', headers.get('X-Frame-Options') || 'SAMEORIGIN');
   headers.set('Referrer-Policy', headers.get('Referrer-Policy') || 'strict-origin-when-cross-origin');
-  headers.set('Permissions-Policy', headers.get('Permissions-Policy') || 'camera=(), microphone=(), geolocation=()');
+  // Only the top-level control room can ask for the owner's microphone.
+  const controlRoom = new URL(request.url).pathname === '/wmm4' && ['GET', 'HEAD'].includes(request.method);
+  headers.set('Permissions-Policy', controlRoom ? 'camera=(), microphone=(self), geolocation=()' : (headers.get('Permissions-Policy') || 'camera=(), microphone=(), geolocation=()'));
   headers.set('Strict-Transport-Security', 'max-age=31536000');
   if (headers.get('Content-Type')?.includes('text/html') && !headers.has('Content-Security-Policy')) {
     headers.set('Content-Security-Policy', "base-uri 'self'; object-src 'none'; frame-ancestors 'self'");
