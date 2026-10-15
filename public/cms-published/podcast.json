@@ -3,8 +3,8 @@
   "items": [
     {
       "id": "e1d48de0-5b49-43df-a1b2-2a593884f20d",
-      "title": "New recording",
-      "body": "",
+      "title": "test",
+      "body": "test2",
       "published": "2026-10-15T16:30:47.366Z",
       "hidden": false,
       "trash": false,
@@ -15,7 +15,7 @@
     }
   ],
   "files": {
-    "public/podcast.html": "cea04c29a7a6c95b23b24ed2406745686ed2a99c",
-    "public/podcast.xml": "288e7cff8a06f0f99ab665675b9b106e1f92fd37"
+    "public/podcast.html": "0ea9dcdd97b7b77d1e56b33b1e18bdc6c4cbc521",
+    "public/podcast.xml": "d142efc09866c634afeb234a5a12d008c4f76d21"
   }
 }
