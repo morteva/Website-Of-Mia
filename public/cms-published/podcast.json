@@ -1,8 +1,21 @@
 {
   "section": "podcast",
-  "items": [],
+  "items": [
+    {
+      "id": "e1d48de0-5b49-43df-a1b2-2a593884f20d",
+      "title": "New recording",
+      "body": "",
+      "published": "2026-10-15T16:30:47.366Z",
+      "hidden": false,
+      "trash": false,
+      "audio": "https://thisisbeside.org/cms-media/6ae781d6-7fa6-4b0a-aece-fe4ccc91cc81.webm",
+      "bytes": 1359,
+      "type": "audio/webm",
+      "duration": "4"
+    }
+  ],
   "files": {
-    "public/podcast.html": "58f64b1d4a794d33ea008c94113e69c2e6a1e763",
-    "public/podcast.xml": "51259e5a0eea45fa686d4c6675213f4e9349a4c0"
+    "public/podcast.html": "cea04c29a7a6c95b23b24ed2406745686ed2a99c",
+    "public/podcast.xml": "288e7cff8a06f0f99ab665675b9b106e1f92fd37"
   }
 }
