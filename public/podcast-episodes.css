@@ -1,0 +1,8 @@
+/* Shared presentation for every CMS-uploaded podcast episode, present and future. */
+.voice-log-list > article > h2 {
+  color: #d8b4fe;
+}
+.voice-log-list > article > p {
+  font-weight: 700;
+  font-style: italic;
+}
