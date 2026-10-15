@@ -1,4 +1,11 @@
 /* Shared presentation for every CMS-uploaded podcast episode, present and future. */
+.voice-logs-head h1 .podcast-coming-soon {
+  display: block;
+  margin-top: .25em;
+  color: #ff2c4f;
+  font: inherit;
+  letter-spacing: inherit;
+}
 .voice-log-list > article > h2 {
   color: #d8b4fe;
 }
