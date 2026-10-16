@@ -115,12 +115,12 @@
     }
   ],
   "files": {
-    "public/gallery.html": "9634983f437c4498f868ebc864a8fcb5fe25ae0c",
+    "public/gallery.html": "f13d0e11bacdd19b3a5fbb249f04887ad15d72e4",
     "public/hello.html": "f6139de4725bb3567f3ccefec4d87c03271558fd",
-    "public/index.html": "409656a0724160857fc5faf08cb22d4a6da2d958",
-    "public/passions.html": "ecef85a5110c7d48f636aec4e1065ac54b5a8bfb",
-    "public/podcast.html": "0ea9dcdd97b7b77d1e56b33b1e18bdc6c4cbc521",
-    "public/story.html": "ac1d78453efcee190c4d401f69051f5dc403ede2",
+    "public/index.html": "07d32f339c2226b8081ad1ed79699a7a7c60b4e8",
+    "public/passions.html": "d48a215616f357e999209c25ae282578b59a3e47",
+    "public/podcast.html": "72c0faed737cb1fcf1768d62962b74d792caa223",
+    "public/story.html": "1419b4df82751a399ee3ebc61b77329380e9fb9b",
     "public/videos.html": "a82f4054e7eee76cd0194e7b47028e76c1171223",
     "public/voice-logs.html": "49a657e2e30818cee59f10bd76b549eee1eb78ca",
     "public/youtube-replies.html": "849a07b4c96538956fcbb5a885f08efcd5bcb84a",
