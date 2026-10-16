@@ -14,8 +14,7 @@ for file in "$stage/.morteva-payram-mainnet/"* "$stage/.morteva-payram-backups/d
 image=$(docker inspect morteva-payram-mainnet --format '{{.Image}}')
 # No ports, network, production volumes or PayRam application. Only an ephemeral PostgreSQL cluster.
 docker run -d --name "$name" --network none --read-only --tmpfs /tmp:rw,nosuid,nodev,size=768m --entrypoint /bin/bash "$image" -c 'sleep 300' >/dev/null
-docker cp "$stage/.morteva-payram-backups/database.dump" "$name:/tmp/backup.dump"
-docker exec "$name" chmod 644 /tmp/backup.dump
+docker exec -i "$name" sh -c 'cat > /tmp/backup.dump; chmod 644 /tmp/backup.dump' < "$stage/.morteva-payram-backups/database.dump"
 docker exec -u postgres "$name" /bin/bash -c '
 set -euo pipefail
 export PATH=/usr/lib/postgresql/17/bin:$PATH
