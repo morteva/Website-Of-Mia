@@ -33,3 +33,7 @@ Before shop, payment, paid media, fulfillment or backup work, read [SHOP-ARCHITE
 - Ambiguous invoice creation requires reconciliation before retry. Never fabricate paid state. Paid downloads require paid-order and private-object checks.
 - Check the running service rather than assuming a saved local proxy configuration is current. Check backup age and task result. Enabled flags, mock tests and historical receipts do not prove a new purchase, card checkout, delivery or recoverable backup.
 - Documentation audits authorize no transfers, refunds, wallet changes or production-data edits. Record unresolved access and verification limits honestly.
+
+## Private login design
+
+Mia deliberately leaves the /wmm4 login field labels and submit-button text blank. Preserve that design. Do not add visible password/authenticator labels, login instructions or button text during accessibility, usability or bug audits unless Mia explicitly requests them.
