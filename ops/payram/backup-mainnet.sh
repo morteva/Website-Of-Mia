@@ -17,6 +17,7 @@ test -s "$stage/database.dump"
 docker exec -i morteva-payram-mainnet pg_restore --list < "$stage/database.dump" >/dev/null
 mkdir -p "$stage/.morteva-payram-mainnet" "$stage/.morteva-payram-backups"
 cp "$root/container.env" "$root/public.conf" "$root/tunnel.env" "$stage/.morteva-payram-mainnet/"
+if [ -d "$root/uploads" ]; then cp -a "$root/uploads" "$stage/.morteva-payram-mainnet/"; fi
 mv "$stage/database.dump" "$stage/.morteva-payram-backups/"
 tar -czf "$stage/latest.tar.gz" -C "$stage" .morteva-payram-mainnet .morteva-payram-backups
 tar -tzf "$stage/latest.tar.gz" >/dev/null
