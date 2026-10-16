@@ -36,4 +36,4 @@ Before shop, payment, paid media, fulfillment or backup work, read [SHOP-ARCHITE
 
 ## Private login design
 
-Mia deliberately leaves the /wmm4 login field labels and submit-button text blank. Preserve that design. Do not add visible password/authenticator labels, login instructions or button text during accessibility, usability or bug audits unless Mia explicitly requests them.
+Mia deliberately leaves the /wmm4 login field labels, remember-PC checkbox text and submit-button text blank. Preserve that design. Do not add visible password/authenticator labels, login instructions or button text during accessibility, usability or bug audits unless Mia explicitly requests them.
