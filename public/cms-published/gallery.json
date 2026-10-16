@@ -82,8 +82,19 @@
           "id": "existing-0-10",
           "type": "image/jpeg",
           "title": "10928309218.jpg"
+        },
+        {
+          "id": "f8aa5c80-4708-4940-88dc-733c9ea68115.png",
+          "name": "wmm4-audit-20261016.png",
+          "type": "image/png",
+          "size": 4042,
+          "url": "https://thisisbeside.org/cms-media/f8aa5c80-4708-4940-88dc-733c9ea68115.png",
+          "thumbnail": "https://thisisbeside.org/cms-media/9d64c6af-ece2-414e-a8c2-49ee7be237aa.webp",
+          "title": "wmm4-audit-20261016.png",
+          "caption": ""
         }
-      ]
+      ],
+      "edited": true
     },
     {
       "id": "album-1",
@@ -2456,6 +2467,6 @@
   ],
   "files": {
     "public/gallery.html": "f13d0e11bacdd19b3a5fbb249f04887ad15d72e4",
-    "public/gallery-manifest.json": "21a43adf7d7557081817b9b02ed6a92b07aa8d45"
+    "public/gallery-manifest.json": "ee009e0543e04d1b04dbf676b6d03e9b37efc151"
   }
 }
