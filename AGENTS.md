@@ -23,3 +23,13 @@ Standing instruction from Mia, October 14, 2026. Preserve these rules whenever c
 - Verify the Cloudflare build and deployed commit, the exact pool URL requested by the widget, cache headers, open-tab refresh behavior, and the actual displayed bubble. A correct live JSON file alone is not proof that the displayed widget updated.
 - Preserve and run test/myspace-freshness.test.mjs when these paths change. It covers fresh requests, exact displayed text, open-tab refresh, click refresh, hidden state and recovery after a failed request. Use a real-browser regression check for changes affecting displayed behavior.
 - A tab already running old widget code may need one reload when shipping a widget-code fix. Subsequent pool-only updates must refresh through the rules above without requiring another manual reload, once deployment completes and the network is available.
+
+## Shop and PayRam
+
+Before shop, payment, paid media, fulfillment or backup work, read [SHOP-ARCHITECTURE.md](SHOP-ARCHITECTURE.md), PAYMENTS.md and current source in both online repositories. It records the complete source flow, live audit, historical setup and unverified gaps. Update it when verified behavior changes.
+
+- Use connected online GitHub. Preserve both D1 databases, private R2, PayRam PostgreSQL/encryption keys and wallet state. Never publish secrets, customer details, private receipt IDs or paid files.
+- Keep server-side pricing, immutable orders, checkout idempotency, raw webhook HMAC, authenticated provider verification and duplicate-safe additional-deposit credits. An original partial PayRam invoice can legitimately have a paid combined-credit shop order.
+- Ambiguous invoice creation requires reconciliation before retry. Never fabricate paid state. Paid downloads require paid-order and private-object checks.
+- Check the running service rather than assuming a saved local proxy configuration is current. Check backup age and task result. Enabled flags, mock tests and historical receipts do not prove a new purchase, card checkout, delivery or recoverable backup.
+- Documentation audits authorize no transfers, refunds, wallet changes or production-data edits. Record unresolved access and verification limits honestly.
