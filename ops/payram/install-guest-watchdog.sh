@@ -1,13 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 test "$(id -u)" = 0
-mkdir -p /etc/systemd/system/vboxadd-service.service.d
-cat > /etc/systemd/system/vboxadd-service.service.d/payram-recovery.conf <<'UNIT'
-[Unit]
-# Vendor unit conflicts with the clock sync service. Both must coexist.
-Conflicts=
-Conflicts=shutdown.target
-UNIT
+# Dependency lists such as Conflicts cannot be cleared in a drop-in.
+# Preserve the vendor service and remove only the clock-sync conflict.
+fragment=$(systemctl show vboxadd-service -p FragmentPath --value)
+stage=$(mktemp)
+sed 's/ systemd-timesyncd.service//g' "$fragment" > "$stage"
+install -m 644 "$stage" /etc/systemd/system/vboxadd-service.service
+rm -f -- "$stage" /etc/systemd/system/vboxadd-service.service.d/payram-recovery.conf
 cat > /usr/local/sbin/payram-guest-watchdog <<'SCRIPT'
 #!/bin/bash
 set -euo pipefail
